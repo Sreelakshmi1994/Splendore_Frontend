@@ -1,0 +1,77 @@
+<div *ngIf="issLoading" class="overlay">
+<mat-progress-spinner class="spinner" [color]="color" [mode]="mode" [value]="value">
+</mat-progress-spinner>
+</div>
+<div class="main-content">
+<div class="container-fluid">
+<div class="row" *ngIf="!Entry_View">
+        <div class="col-md-12">
+                <div class="card mt-2 mb-2">
+                  <div class="card-body">
+                    <div class="row">
+
+        <div class="col-md-5 row">
+                <label class="col-md-4 label-down-alighn-supler-prhse-mstr-down ml-0" style="text-align: right;">From</label>
+                <mat-form-field class="col-md-8" style="    height: 38px;">
+                <input matInput [matDatepicker]="dp" placeholder="" [(ngModel)]="Search_FromDate">
+                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                <mat-datepicker #dp></mat-datepicker>
+                </mat-form-field>
+        </div>
+
+        <div class="col-md-5 row">
+                <label class="col-md-4 label-down-alighn-supler-prhse-mstr-down ml-0" style="text-align: right;">To</label>
+                <mat-form-field  class="col-md-8" style="    height: 38px;">
+                <input matInput [matDatepicker]="dp1" placeholder="" [(ngModel)]="Search_ToDate">
+                <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                <mat-datepicker #dp1></mat-datepicker>
+                </mat-form-field>
+        </div>
+
+        <div class="col-md-2 bg-icons" style="    display: flex;">
+                <button mat-raised-button type="submit" (click)="Search_DayBook_Report()" class="btn btn-danger pull-right button-to-crect-margin change-colour-button mt-0 mb-0"><i class="fa fa-search" aria-hidden="true"></i></button>
+                <button style="background-color: #0ab33c;" mat-raised-button type="submit"  [hidden]="Export_View==false" (click)="Export()"class="other-button-style btnflot pull mr-1"><i></i>EXPORT</button>  
+ 
+       
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+<div class="col-md-12">
+<div class="card card-plain mb-0">
+        <div class="card-body">
+        <div class="table-responsive">
+        <cdk-virtual-scroll-viewport [style.height.px]="myInnerHeight" itemSize="90" >
+                <table class="table table-hover">
+                <thead class="thead">
+                <th>Date</th>
+                <th>From Party</th> 
+                <th>Voucher No</th>
+                <th>Voucher Type</th>
+                <th>To Party</th>
+                <th>Description</th>
+                <th>Status</th>
+                </thead>
+                <ng-container *cdkVirtualFor="let DayBook1 of DayBook_Report_Data; let i = index">
+                <tr>
+                <td>{{DayBook1["Entry_Date"]}}</td>
+                <td>{{DayBook1["From_Party_Name"]}}</td> 
+                <td>{{DayBook1["Voucher_No"]}}</td> 
+                <td>{{DayBook1["Voucher_Type_Name"]}}</td> 
+                <td>{{DayBook1["To_Party_Name"]}}</td> 
+                <td>{{DayBook1["Description1"]}}</td> 
+                <td>{{DayBook1["Status"]}}</td> 
+
+                </tr>
+                </ng-container>
+                </table>
+        </cdk-virtual-scroll-viewport>
+        </div>
+        </div>
+
+</div>
+<label class="entry-num">Entries : {{Total_Entries}}</label>
+</div>
+</div>
+</div>

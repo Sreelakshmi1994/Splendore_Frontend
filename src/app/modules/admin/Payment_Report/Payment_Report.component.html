@@ -1,0 +1,139 @@
+<div *ngIf="issLoading" class="overlay">
+  <mat-progress-spinner class="spinner" [color]="color" [mode]="mode" [value]="value">
+  </mat-progress-spinner>
+</div>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row" *ngIf="!Entry_View">
+      <div class="col-md-12">
+        <div class="card mt-2 mb-2">
+          <div class="card-body">
+            <div class="row" style="align-items: center;">
+
+      <div _ngcontent-xmy-c9="" class="col-md-1" style="    display: flex;
+      justify-content: end;
+      padding-right: 0;
+  ">
+        <div _ngcontent-xmy-c9="" class="form-check algyn-checkbx-lead-serch-scton chck-bxes-dwn-alyn-pymnt-vcher" style="margin-top: 0; top: 0;">
+          <label _ngcontent-xmy-c9="" class="form-check-label ml-0">
+            <input type='checkbox' class="form-check-input" placeholder='Search...' [(ngModel)]="Look_In_Date" />
+            <span _ngcontent-xmy-c9="" class="form-check-sign"><span _ngcontent-xmy-c9="" class="check"></span>
+            </span></label>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <label class="col-md-4 label-down-alighn-supler-prhse-mstr-down ml-0" style="text-align: right;">From</label>
+        <mat-form-field>
+          <input matInput [matDatepicker]="dp1" placeholder="" [(ngModel)]="Search_FromDate">
+          <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+          <mat-datepicker #dp1></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-3">
+        <label class="col-md-4 label-down-alighn-supler-prhse-mstr-down ml-o" style="text-align: right;">TO</label>
+        <mat-form-field>
+          <input matInput [matDatepicker]="dp2" placeholder="" [(ngModel)]="Search_ToDate">
+          <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+          <mat-datepicker #dp2></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4">
+        <label class="col-md-4 label-down-alighn-supler-prhse-mstr-down ml-0" style="text-align: right;">PV No</label>
+        <mat-form-field class="col-md-8 led-srch-sctn-nput-tb">
+          <input matInput type="number" [(ngModel)]="Voucher_No_search" name="Voucher_No_search">
+        </mat-form-field>
+      </div>
+
+
+      <div class="col-md-4">
+        <label class="col-md-3 label-down-alighn-supler-prhse-mstr-down ml-0" style="text-align: right;">From </label>
+        <input type="text" [matAutocomplete]="auto2" [(ngModel)]="FromAccount_Search"
+          (click)="From_Accounts_Typeahead($event)" (keyup)="From_Accounts_Typeahead($event)"
+          class="col-md-9 for-input-selct-tblelst mb-0" />
+        <mat-autocomplete #auto2="matAutocomplete" [displayWith]="display_FromAccount">
+          <mat-option *ngIf="isLoading">
+            <mat-spinner diameter="500"></mat-spinner>
+          </mat-option>
+          <ng-container *ngIf="!isLoading">
+            <mat-option *ngFor="let FromAccount of From_Client_Accounts_Data" [value]="FromAccount">
+              <span>{{FromAccount.Client_Accounts_Name}}-{{FromAccount.Address1}}-{{FromAccount.Mobile}}</span>
+            </mat-option>
+          </ng-container>
+        </mat-autocomplete>
+
+      </div>
+
+      <div class="col-md-4">
+        <label class="col-md-2 label-down-alighn-supler-prhse-mstr-down ml-0" style="text-align: right;">To </label>
+        <input type="text" [matAutocomplete]="auto3" [(ngModel)]="ToAccount_Search" (click)="Accounts_Typeahead($event)"
+          (keyup)="Accounts_Typeahead($event)" class="col-md-10 for-input-selct-tblelst mb-0" />
+        <mat-autocomplete #auto3="matAutocomplete" [displayWith]="display_FromAccount">
+          <mat-option *ngIf="isLoading">
+            <mat-spinner diameter="500"></mat-spinner>
+          </mat-option>
+          <ng-container *ngIf="!isLoading">
+            <mat-option *ngFor="let FromAccount1 of Client_Accounts_Data" [value]="FromAccount1">
+              <span>{{FromAccount1.Client_Accounts_Name}}-{{FromAccount1.Address1}}-{{FromAccount1.Mobile}}</span>
+            </mat-option>
+          </ng-container>
+        </mat-autocomplete>
+      </div>
+
+      <div class="col-md-1 bg-icons d-flex">
+        <button mat-raised-button type="submit" (click)="Search_Payment_Voucher()"
+          class="btn btn-danger button-to-crect-margin pull-right change-colour-button"><i class="fa fa-search"
+            aria-hidden="true"></i></button>
+            <button   mat-raised-button type="submit"  [hidden]="Export_View==false" (click)="Export()"  class="btn btn-danger button-to-crect-margin pull-right change-colour-button">EXPORT</button>   
+       
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      <div class="col-md-12">
+        <div class="card card-plain mb-0">
+
+          <div class="card-body">
+            <div class="table-responsive" [style.height.px]="myInnerHeight"
+            style="overflow-y: scroll; ">
+              <table class="table table-hover">
+                <thead class="thead">
+                  <th>
+                    Date
+                  </th>
+                  <th>
+                    To
+                  </th>
+                  <th>
+                    Address
+                  </th>
+                  <th>
+                    Amount
+                  </th>
+                  <th>
+                    PV No
+                  </th>
+                </thead>
+                <tbody class="bk_tb_bg" *ngFor="let Payment_Voucher1 of Payment_Voucher_Data; let i = index">
+                  <!-- <td style="padding-left:5px;">{{ i+1 }}</td> -->
+                  <td>{{Payment_Voucher1["Search_Date"]}}</td>
+                  <!-- <td>{{Payment_Voucher1["FromAccount_Name"]}}</td>  -->
+                  <td>{{Payment_Voucher1["ToAccount_Name"]}}</td>
+                  <td>{{Payment_Voucher1["Address1"]}}</td>
+                  <td>{{Payment_Voucher1["Amount"]}}</td>
+                  <td>{{Payment_Voucher1["Voucher_No"]}}</td>
+                
+                </tbody>
+              </table>
+            </div>
+          </div>
+         
+        </div>
+        <label class="entry-num ml-0">Entries : {{Total_Entries}}</label>
+        <label class="entry-num">Amount: {{Total_Amounts}}</label>
+      </div>
+    </div>
+  </div>

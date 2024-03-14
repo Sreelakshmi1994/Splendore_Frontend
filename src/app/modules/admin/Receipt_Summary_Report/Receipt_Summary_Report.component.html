@@ -1,0 +1,314 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>                                     
+
+
+<div *ngIf="issLoading" class="overlay" 
+
+style="margin-top: 21%;margin-left:46% ;
+background-color: transparent;"
+[style.left.px]="spinleft">
+	
+	
+
+    <img src="/assets/img/spinner.gif" width="100px" >
+
+</div>
+
+
+
+
+<div *ngIf="Report_View " class="main-content new-margin-T pb-0" >
+  <div class="">
+      <div class="col-md-12 pl-0 pr-0 mt-2" style="border: 1">
+       <div class="dt-card mb-0 pb-1 pt-1 mr-8">
+        <div lass="dt-card__body mb-4 mt-2">
+          <div class="mb-0">           
+            <div class="form-row">
+          
+          
+              <!-- <label class="col-md-1 col-sm-0 col-form-label text-sm-right mt-2">Fees </label>
+              <div class="col-md-3 col-lg-2 mb-1 mt-2">
+                <select
+                [(ngModel)]="Fees_Data_"
+                name="Fees_.Fees_Id"
+                required
+                class="form-control p-0 pl-1"
+              >
+                <option *ngFor="let Fee of Fees_Array" [ngValue]="Fee">
+                  {{ Fee.Fees_Name }}
+                </option>
+              </select>
+            </div>
+           -->
+  
+            <label class="col-md-0 col-sm-0 col-form-label  text-sm-right mt-2 x-tra-label">Received On</label>  
+          
+          <div _ngcontent-xmy-c9="" class="ew-7 lead-search-section-date-alighn label-down-alighn-stk-ad-mstr-prhse-rte x-tra">
+            <div _ngcontent-xmy-c9="" class="form-check algyn-checkbx-lead-serch-scton margin-down-tocrect-lead-chckbox-date-front-section">
+              <label _ngcontent-xmy-c9="" class="form-check-label">
+                <input type='checkbox'class="form-check-input" placeholder='Search...' [(ngModel)]="Look_In_Date" />
+                <span _ngcontent-xmy-c9="" class="form-check-sign" style="margin-top:15px;
+                margin-left: -13px;"><span _ngcontent-xmy-c9="" class="check"></span>
+                </span>
+                <!-- <label class="">Created</label> -->
+              </label>              
+            </div>
+            <!-- <label class="for-down-title-tabs-personal-details">Created</label> -->
+          </div>
+      
+        
+          
+        <label class="col-md-0 col-sm-0 col-form-label text-sm-right mt-2">From</label>
+        <div class="col-md-3 col-lg-1 mb-1 mt-2 ew-4 ew-4x">
+            <!-- <input type="date" class="form-control p-0 pl-1" placeholder="From"[(ngModel)]="Search_FromDate" name="Search_FromDate" > -->
+            <mat-form-field class=" form-control mrgn-crct-input-text-div-tre-prt-sles1 " 
+            style="padding-top: 9px!important;">
+                <input matInput [matDatepicker]="dp11" placeholder="" [(ngModel)]="Search_FromDate" name="Search_FromDate" > 
+                <mat-datepicker-toggle matSuffix [for]="dp11"></mat-datepicker-toggle>
+                <mat-datepicker #dp11></mat-datepicker>
+                </mat-form-field>
+        </div> 
+    
+        
+        <!-- <div class="col-new2"></div> -->
+      
+<div class="row col-md-4">
+        <label class="col-md-1 col-sm-0 col-form-label text-sm-right mt-2">To</label>
+        <div class="col-md-7 col-lg-5 mb-1 mt-2 ew-4 ew-4x">
+            <!-- <input type="date" class="form-control p-0 pl-1" placeholder="To"  [(ngModel)]="Search_ToDate" name="Search_ToDate"> -->
+            <mat-form-field class=" form-control mrgn-crct-input-text-div-tre-prt-sles1" 
+      style="padding-top: 9px!important;">
+      <input matInput [matDatepicker]="dpdate0" placeholder=""   [(ngModel)]="Search_ToDate" name="Search_ToDate"> 
+      <mat-datepicker-toggle matSuffix [for]="dpdate0"></mat-datepicker-toggle>
+      <mat-datepicker #dpdate0></mat-datepicker>
+      </mat-form-field>
+    </div>
+    
+ 
+        
+        <div class="col-md-6" style="display: flex;
+        align-items: center;">
+                
+                <!-- <button mat-raised-button type="submit"  (click)="Search_More_Options()"class="btn btn-danger change-colour-button buton-save-search-edit"><i class="fa fa-caret-down" aria-hidden="true"></i></button> -->
+               
+                
+                <!-- <button mat-raised-button type="submit" id="Registration_Report" (click)="View_Back()" class="other-button-style btnflot pull-right mr-1 mt-2">Back</button> -->
+                <button mat-raised-button style="background-color: #4bc859 !important;" type="submit" [hidden]="Export_View==false" (click)="Export()"class="other-button-style btnflot pull-right  mt-2 mr-2"><i></i>EXPORT</button>
+                <button mat-raised-button type="submit" id="Registration_Report" (click)="Search_Lead_button1()" class="other-button-style btnflot pull-right  mt-2 mr-2"><i></i>Search</button>
+             
+              </div>
+              </div>
+    
+                  
+                                          
+                
+            <!-- <div class="row col-md-4">
+              <label class="col-md-3 label-to-crect-all-names-to-divs label-crect-journal-entry-voucher-no label-down-alighn-oter-carge-tal-gst-prhse-mstr-down-new-stcn">Amount</label>
+              <select [(ngModel)]="Fees_Amount_Search" id="Department_" required  class="col-md-9 input-allighn-to-crect-wole-paddings">
+              <option *ngFor="let Amounts of Fees_Receipt_Data" [ngValue]="Department_T">{{Amounts.Amount}}</option>
+              </select> 
+            </div> -->
+  
+           
+              <label class="col-md-1 col-sm-0 col-form-label text-sm-right mt-2"> Collected By</label>
+              <div class="col-md-1 col-sm-3 mb-1 mt-2">
+              <select [(ngModel)]="Collected_By_" id="Collected_By_" required  class="form-control p-0 pl-1 ">
+              <option *ngFor="let User_T of Collected_By_Data" [ngValue]="User_T">{{User_T.Users_Name}}</option>
+              </select>  
+            </div>
+        
+  
+          <!-- <div  class="col-md-4">
+            <label class="col-md-3 label-crect-journal-entry-voucher-no"> Description</label>
+            <select [(ngModel)]="Fees_Description_Search" required class="col-md-9 input-allighn-to-crect-wole-paddings ng-valid ng-dirty ng-touched">
+            <option *ngFor="let Descriptions of Fees_Receipt_Data" [ngValue]="Descriptions">{{Descriptions.Descriptions}}</option>
+            </select> 
+          </div>            -->
+          
+          <!-- <div class="col-md-4 row">
+            <label class="col-md-0 col-sm-0 col-form-label  text-sm-right mt-2 x-tra-label" style="visibility: hidden;">Received On</label>  
+          
+            <div _ngcontent-xmy-c9="" class="ew-7 lead-search-section-date-alighn label-down-alighn-stk-ad-mstr-prhse-rte x-tra"  style="visibility: hidden;">
+              <div _ngcontent-xmy-c9="" class="form-check algyn-checkbx-lead-serch-scton margin-down-tocrect-lead-chckbox-date-front-section">
+                <label _ngcontent-xmy-c9="" class="form-check-label">
+                  <input type='checkbox'class="form-check-input" placeholder='Search...' [(ngModel)]="Look_In_Date" />
+                  <span _ngcontent-xmy-c9="" class="form-check-sign" style="margin-top:15px;
+                  margin-left: -13px;"><span _ngcontent-xmy-c9="" class="check"></span>
+                  </span>
+               
+                </label>              
+              </div>
+          
+            </div>
+            </div> -->
+          
+     
+    
+
+
+        
+          
+    
+          <label class="col-md-1 col-sm-0 col-form-label text-sm-right mt-2"> To Account</label>
+            <div class="col-md-2 col-sm-3 mb-1 mt-2 ew-13 ew-13x">
+              <select
+							[(ngModel)]="To_Account_"
+							name="To_Account_"
+							required
+							class="form-control p-0 pl-1"
+						>
+							<option
+								*ngFor="let To_Account of To_Account_Data"
+								[ngValue]="To_Account"
+							>
+								{{ To_Account.Client_Accounts_Name }}
+							</option>
+						</select>
+       
+                
+  </div>    
+      </div>
+      </div>
+
+      </div>
+
+    </div>  
+    </div>
+
+
+      <div class="col-md-12 p-0 mt-2" style="border: 1">
+        <div class="dt-card mb-0 pb-1 mr-8 "[style.height.px]="myInnerHeight"
+        style="overflow-y: scroll"
+        id="profile" >  
+    <!-- <div class="card card-plain"> -->
+      <div class="card-body card-body-for-searchedit-lead-section">
+      <div class="table-responsive"  >
+      <table class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format" style="width: 100% !important; font-size: 15px;">
+        <thead>
+          <th>
+            No
+          </th>
+          <th>
+            Receipt Date
+          </th>
+          <th>
+            Entered Date
+            </th>
+            <th>
+              Student 
+            </th>
+            <th>
+              Fees
+            </th>
+            <th>
+              Amount
+            </th>
+          <th>
+            Collected By
+          </th>
+
+          <th>
+            To Account
+            </th>
+         
+          <th class="change-width-header-table-remar">
+            Description
+          </th>
+        </thead>
+        <tbody *ngFor="let Lead of Fees_Receipt_Search; let i = index">
+          <tr>
+            <td style="width: 50px !important;">
+            {{i+1}}
+            </td>
+            <td style="width: 150px !important;">
+            {{Lead["Entry_date"]}}
+            </td>
+            <td style="width: 150px !important;">
+              {{Lead["Actual_Entry_date"]}}
+              </td>
+              <!-- <td style="width: 150px !important;">
+                {{Lead["Student_Name"]}}
+                </td> -->
+
+                <td><a target="_blank" [routerLink]="['/Student']" (click)="Edit_Student_Notification(Lead.Student_Id,i)" 
+                  style="color: #357bfd; font-weight: 800;">{{ Lead["Student_Name"] }}</a></td>
+
+
+
+                <td style="width: 150px !important;">
+                  {{Lead["Fees_Name"]}}
+                  </td>
+                  <td style="width: 100px !important;">             
+                    {{Lead["Amount"]}} 
+                  </td>
+            <td style="width: 150px !important;">
+              {{Lead["User_Name"]}}
+              </td>
+
+                <td style="width: 150px !important;">
+                  {{Lead["To_Account_Name"]}}
+                  </td>
+              <td style="width: 150px !important;">
+                {{Lead["Comment"]}}
+                </td>
+
+              
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      </div>
+    <!-- </div> -->
+   
+    </div>
+  </div>
+  
+ 
+
+  <label >Total Entries :<b>{{Total_Entries}}</b></label> 
+
+  </div>
+  </div>
+
+
+
+<div *ngIf="View_Graph">
+              
+  <div class="container-fluid3">
+    <div class="col-md-12 pl-3 pr-9 mt-0" style="border: 1">
+      <div class="dt-card mb-0 pb-1 " style="background-color: #ffff;">         
+      <div class="form-row"  style="margin-left: 1px;"> 
+ 
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="cardnew ">
+          <div class="card-headernew">
+            <h4 class=""><b>Receipt Summary</b></h4>
+          </div>
+        <div class="card card-chart" style="background-color:transparent;border: none;">
+        </div>
+        <google-chart #chart  [title]='Enquiry_Source_title' [type]="Enquiry_Source_type" [data]="Branchwise_data" [columnNames]="Branchwise_columnNames" [options]="Enquiry_Source_options" 
+        [width]="width" [height]="height">
+       </google-chart>
+        </div>
+      </div>
+
+
+      <div class="col-lg-6 col-md-6 col-sm-4">
+        <div class="cardnew ">
+          <div class="card-headernew">
+            <h4 class=""><b>Receipt Summary</b></h4>
+          </div>
+        <div class="card card-chart" style="background-color:transparent;border: none;">
+      </div>
+      <google-chart #chart [title]='Enquiry_Source_title' [type]="Type_PIe" [data]="Branchwise_data" [columnNames]="Branchwise_columnNames" [options]="Enquiry_Source_options" 
+      [width]="width" [height]="height">
+                    
+      </google-chart>
+      </div>
+    </div>
+
+  </div>
+  </div>
+</div>
+</div>
+</div>

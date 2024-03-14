@@ -1,0 +1,137 @@
+.statusicon
+{
+  background-color: green;
+  border: none;
+  color: white;
+  padding: 7px 7px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius:10px;
+}
+.statusicon:hover
+{
+    background-color: green;
+}
+.formItemlabel {
+  /* display: block; */
+  text-align: center;
+  /* line-height: 150%; */
+  font-size: .85em;
+  font-weight: 600!important;color: #ffff!important;
+  margin-top: 42px;
+}
+/* 
+.two { color: rgb(42, 11, 219) ; } 
+.Four { color:green; } 
+.three { color: rgb(255, 0, 0); } 
+.six { color:rgba(12, 11, 12, 0.842); }
+.Five { color: rgb(165, 2, 151); } */
+
+.three { color:  rgb(6 ,158 ,193);} 
+.two { color:green; } 
+.one { color: rgb(231, 153, 7); } 
+.four {  color: rgb(245, 153, 153); }
+
+
+.threebg{
+  /* background-color: rgb(245, 153, 153); */
+  border-radius: 26px;
+  background-color:  rgb(231 , 253 ,255);
+  border-color:   rgb(231, 253 , 255);
+  box-shadow:none !important;
+
+  position: relative;
+  padding: 9px 14px 7px 14px;
+  margin: 0.3125rem 1px;
+  min-width: auto;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-decoration: none;
+  text-transform: uppercase;
+  vertical-align: middle;
+  letter-spacing: 0;
+  cursor: pointer;     
+  border: 0;
+  outline: 0;     
+ 
+  }
+
+  .twobg{
+    /* background-color: rgb(245, 153, 153); */
+    border-radius: 26px;
+    background-color:  rgb(210, 249, 216);
+    border-color:  rgb(210, 249, 216);
+    box-shadow:none !important;
+  
+    position: relative;
+    padding: 9px 14px 7px 14px;
+    margin: 0 1px;
+    min-width: auto;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-decoration: none;
+    text-transform: uppercase;
+    vertical-align: middle;
+    letter-spacing: 0;
+    cursor: pointer;     
+    border: 0;
+    outline: 0;  
+    width: 100px;   
+   
+    }
+    .onebg{
+      /* background-color: rgb(245, 153, 153); */
+      border-radius: 26px;
+      background-color:  rgb(248, 234, 207); 
+      border-color:   rgb(248, 234, 207); 
+      box-shadow:none !important;
+    
+      position: relative;
+      padding: 9px 14px 7px 14px;
+      margin: 0 1px;
+      min-width: auto;
+      font-size: 0.75rem;
+      font-weight: 400;
+      line-height: 1.42857143;
+      text-decoration: none;
+      text-transform: uppercase;
+      vertical-align: middle;
+      letter-spacing: 0;
+      cursor: pointer;     
+      border: 0;
+      outline: 0;  
+      width: 100px;   
+     
+      }
+      .fourbg{
+        /* background-color: rgb(245, 153, 153); */
+        border-radius: 26px;
+        background-color:  rgb(249, 210, 210);
+        border-color:  rgb(249, 210, 210);
+        box-shadow:none !important;
+      
+        position: relative;
+        padding: 9px 14px 7px 14px;
+        margin: 0.3125rem 1px;
+        min-width: auto;
+        font-size: 0.75rem;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-decoration: none;
+        text-transform: uppercase;
+        vertical-align: middle;
+        letter-spacing: 0;
+        cursor: pointer;     
+        border: 0;
+        outline: 0;     
+       
+        }
+
+        ::ng-deep .mat-form-field{
+          border: 1px solid #ced4da !important;
+          padding-left: 10px !important;
+          padding-top: 5px;
+    padding-bottom: 5px;
+        }

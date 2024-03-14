@@ -1,0 +1,21 @@
+
+.fw-600{
+    font-weight: 600;
+}
+::ng-deep .mat-input-element:disabled {
+    color: #000;
+}
+input{
+    padding-left: 15px !important;
+    border: solid 1px #ced4da;
+   
+}
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    margin-top: 5px;
+}
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    margin-top: 5px;
+}
+::ng-deep input.mat-input-element {
+   border: none !important;
+}

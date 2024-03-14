@@ -1,0 +1,316 @@
+<div *ngIf="issLoading" class="overlay">
+<mat-progress-spinner class="spinner" [color]="color" [mode]="mode" [value]="value">
+</mat-progress-spinner>
+</div>
+
+<div  id='Topdiv'></div>
+<div  id='Bottomdiv'></div>
+<div class="main-content screenfixed "  >
+<div class="container-fluid">
+<div class="row" *ngIf="Entry_View">
+<div class="col-xl-12 pl-0 mt-1" >
+
+<div class="profilecard mb-0">
+
+
+<div class="dt-card__body mt-0 pl-0"  id="profile"  *ngIf="profile_View"  >
+<form class="mb-0">
+<div class="container-fluidprofile" style="width: 100%;    margin-left: 0;
+padding-left: 3px;">
+    <div class="dt-card mt-1">
+    <div class="dt-card__body mt-0" style="margin-left: 2%;" >
+
+  
+    <!-- <div class="form-row  mb-2  ">
+        <label class="col-md-1 col-sm-0 col-form-label text-sm-right">Student Phone No<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+        <div class="col-md-4 col-sm-4 mb-1">
+        <input type="text"  class="form-control"  id="Student_Search_" name="Student_Search_"  
+        [matAutocomplete]="auto_phone"
+        [(ngModel)]="Student_Search_" (click)="Search_Student_Phonenumber_Typeahead($event)"
+        (keyup)="Search_Student_Phonenumber_Typeahead($event)" /></div>  
+        <mat-autocomplete #auto_phone="matAutocomplete" [displayWith]="display_phone">
+            <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+            <ng-container *ngIf="!issLoading">
+            <mat-option *ngFor="let phone_T of Student_Data_Filter" [value]="phone_T">
+            <span>{{phone_T.Phone}}</span>
+            </mat-option>
+            </ng-container>
+        </mat-autocomplete>   -->
+        <div class="form-row  mb-2">
+        <label class="col-md-1 col-sm-0 col-form-label text-sm-right" style="text-align: right;">Registration No<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+        <div class="col-md-2 col-sm-4 mb-1">
+        <input type="text"  class="form-control"  id="Student_Search_" name="Student_Search_"  
+        [matAutocomplete]="auto_reg3"
+        [(ngModel)]="Student_Search_" (click)="Search_Student_Reg_Typeahead($event)"
+        (keyup)="Search_Student_Reg_Typeahead($event)" /></div>  
+        <mat-autocomplete #auto_reg3="matAutocomplete" [displayWith]="display_reg">
+            <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+            <ng-container *ngIf="!issLoading">
+            <mat-option *ngFor="let Reg_T of Student_Data_Filter" [value]="Reg_T">
+            <span>{{Reg_T.Registration_No}} - {{Reg_T.Student_Name}}</span>
+            </mat-option>
+            </ng-container>
+        </mat-autocomplete>  
+
+    <!-- <div class="col-md-1 col-sm-1"></div>        
+   <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Books No </label>
+   <div class="col-md-3 col-sm-3 mb-1">
+   <input type="text"  class="form-control"  id="Books_Search_" name="Books_Search_"  [matAutocomplete]="auto_Booksno"
+   [(ngModel)]="Books_Search_" (click)="Search_BooksNo_Issued_Typeahead($event)"(keyup)="Search_BooksNo_Issued_Typeahead($event)" /></div>  
+   <mat-autocomplete #auto_Booksno="matAutocomplete" [displayWith]="display_BooksNoIssued">
+       <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+       <ng-container *ngIf="!issLoading">
+       <mat-option   *ngFor="let Booksno of BooksNoIssued_Data_Filter" [value]="Booksno">
+       <span>{{Booksno.Books_No}}</span>
+
+       </mat-option>
+       </ng-container>
+   </mat-autocomplete>
+ -->
+
+
+        <label class="col-md-1 col-sm-0 col-form-label text-sm-right" style="text-align: right;">Books No <span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+        <div class="col-md-3 col-sm-4 mb-1">
+        <input type="text"  class="form-control"  id="Books_Search_" name="Books_Search_"  [matAutocomplete]="auto_Booksno"
+        [(ngModel)]="Books_Search_" (click)="Search_BooksNo_Issued_Typeahead($event)"
+        (keyup)="Search_BooksNo_Issued_Typeahead($event)" /></div>  
+        <mat-autocomplete #auto_Booksno="matAutocomplete" [displayWith]="display_BooksNoIssued">
+            <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+            <ng-container *ngIf="!issLoading">
+            <mat-option *ngFor="let Booksno of BooksNoIssued_Data_Filter" [value]="Booksno">
+            <!-- <span>{{Booksno.Books_No}}</span> -->
+            <span><div (click)="Get_Books_Name(Booksno)">{{Booksno.Books_No}} - {{Booksno.Books_Name}}</div></span> 
+            </mat-option>
+            </ng-container>
+        </mat-autocomplete> 
+
+
+
+
+        <div class="col-md-3" style="    display: flex;
+        align-items: center;"> 
+                          
+            <button (click)="Save_Books_Issued()" [hidden]="BookIssue_Save==false" id="Save_Button" mat-raised-button type="submit" class="save-button-style pull-right mr-1 ml-1" style="margin-right: -19px !important;
+            margin-bottom: 5px;
+        ">Save</button> 
+            <button (click)="Close_Click()" mat-raised-button type="submit" class="close-button-style pull-right  ml-4 " style="
+            margin-bottom: 5px;
+        ">Close</button>  
+        
+            </div>
+    </div>
+
+   
+
+
+   
+    
+ 
+
+
+<!-- "Close_Click()" -->
+
+    </div>
+    <!-- <div class="form-row  mb-2">
+    <div class="col-md-11"> 
+    <button (click)="Close_Click()" mat-raised-button type="submit" class="close-button-style pull-right  ml-4 ">Close</button>                   
+    <button (click)="Save_Books_Issued()" [hidden]="BookIssue_Save==false" id="Save_Button" mat-raised-button type="submit" class="save-button-style pull-right mr-1 ml-1" style="margin-right: -19px !important;">Save</button> 
+  
+
+    </div>
+    </div> -->
+    </div>
+</div>
+</form>
+</div>
+
+
+
+
+
+
+
+</div>
+</div>    
+</div>
+
+<div class="row" *ngIf="!Entry_View" >
+<div class="col-md-12 pl-0 pr-0 mt-2 mb-0">
+<div class="dt-card mb-2 pb-1">         
+<div class="dt-card__body mt-1 mb-0 pb-0">
+<form class="mb-0">     
+<!-- <div class="container-fluidprofile"> -->
+<div class="form-row  mb-0">
+<!-- <label class="col-md-0 col-sm-0 col-form-label text-sm-right mr-0">Branch</label>                          
+<div class="col-md-3 col-sm-3 mb-1">
+<input type="text" name="Agent_Name_Search" [(ngModel)]="Agent_Name_Search" class="form-control" placeholder="">
+</div> -->
+
+<!-- 
+ <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Registration Number</label>
+        <div class="col-md-2 col-sm-4 mb-1">
+        <input type="text"  class="form-control"  id="Reg_Typeaheadsearch" name="Reg_Typeaheadsearch"  
+        [matAutocomplete]="auto_reg1"
+        [(ngModel)]="Reg_Typeaheadsearch" (click)="Search_Student_Reg_Typeahead($event)"
+        (keyup)="Search_Student_Reg_Typeahead($event)" /></div>  
+        <mat-autocomplete #auto_reg1="matAutocomplete" [displayWith]="display_reg">
+            <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+            <ng-container *ngIf="!issLoading">
+            <mat-option *ngFor="let Reg_T of Student_Data_Filter" [value]="Reg_T">
+            <span>{{Reg_T.Registration_No}}</span>
+            </mat-option>
+            </ng-container>
+        </mat-autocomplete>   -->
+
+
+        
+
+
+ <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Registration No</label>                          
+   <div class="col-md-2 col-sm-4 mb-1">
+        <input type="text" name="Registration_No_" [(ngModel)]="Registration_No_" class="form-control" placeholder="">
+        </div> 
+
+        <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Book No </label>                         
+        <div class="col-md-3 col-sm-3 mb-1">
+        <input type="text" name="Books_No_ " [(ngModel)]="Books_No_ " class="form-control" placeholder="">
+        </div>
+
+
+<!-- 
+<label class="col-md-0 col-sm-0 col-form-label text-sm-right">Book No </label>
+<div class="col-md-4 col-sm-5 mb-1">
+<input type="text"  class="form-control"  id="BooksNo_Typeaheadsearch" name="BooksNo_Typeaheadsearch"  [matAutocomplete]="auto_Books1"
+[(ngModel)]="BooksNo_Typeaheadsearch" (click)="Search_BooksNo_Typeahead($event)"(keyup)="Search_BooksNo_Typeahead($event)" /></div>  
+<mat-autocomplete #auto_Books1="matAutocomplete" [displayWith]="display_BooksNo">
+    <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+    <ng-container *ngIf="!issLoading">
+    <mat-option *ngFor="let Books of Books_Data_Filter" [value]="Books_N">
+    <span>{{Books.Books_No}}</span>
+    </mat-option>
+    </ng-container>
+</mat-autocomplete>   -->
+
+<!-- 
+ <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Books No </label>
+        <div class="col-md-3 col-sm-3 mb-1">
+        <input type="text"  class="form-control"  id="BooksNo_Typeaheadsearch" name="BooksNo_Typeaheadsearch"  [matAutocomplete]="auto_Booksno1"
+        [(ngModel)]="BooksNo_Typeaheadsearch" (click)="Search_BooksNo_Typeahead($event)"(keyup)="Search_BooksNo_Typeahead($event)" /></div>  
+        <mat-autocomplete #auto_Booksno1="matAutocomplete" [displayWith]="display_BooksNo">
+            <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+            <ng-container *ngIf="!issLoading">
+            <mat-option *ngFor="let Booksno of BooksNo_Data_Filter" [value]="Booksno">
+            <span>{{Booksno.Books_No}}</span>
+            </mat-option>
+            </ng-container>
+        </mat-autocomplete>   -->
+
+
+        
+         <label class="col-md-0 col-sm-0 col-form-label text-sm-right ">Search By</label>
+        <div class="col-md-1 col-sm-2 mb-1 rw4">
+         <select
+             [(ngModel)]="Search_By_"
+             class="form-control p-0 pl-1"
+             name="custimertype"
+             id="custimertype"
+            
+         >
+             <option value=0>Issue</option>
+             <option value=1>Return </option>
+          
+        
+             
+         </select>
+        </div> 
+
+
+<div class="col-md-3 col-sm-2 mt-0" >                    
+<button (click)="Search_BooksIssued_Report()"  mat-raised-button type="submit" class="other-button-style pull-left mr-1">Search</button>
+<button (click)="Create_New()"   mat-raised-button type="submit"  class="save-button-style pull-left mr-1 ">Book Issue</button>
+
+</div>
+
+</div>
+</form>
+</div>
+</div>        
+</div> 
+
+
+<div class="col-md-12  mt-1" style="border: 1;padding-left: 2px;
+padding-right: 2px;
+">
+<div class="dt-card mb-0 pb-1 " style="background-color: white;"  >  
+
+<div class="card-body card-body-for-searchedit-lead-section">
+<div class="table-responsive" [style.height.px]="myInnerHeight" style="overflow-y: scroll;">
+<table class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format" >
+
+    <thead>
+       
+        <th> Student Name</th>
+        <th> Registration No</th>
+        <th> Book Name</th>
+        <th >Book No</th>
+          
+        <th >Rack No</th>
+        <th>Author Name</th>
+        <th>Issued Date & Time</th>
+        <th>Returned Date & Time</th>
+        <th>Status</th>
+        
+      
+        <!-- <th >Student Phone No</th> -->
+        <!-- <th >Return Date</th> -->
+        <th></th>
+        <th [hidden]="BookIssue_Edit==false">Edit</th>
+        <th [hidden]="BookIssue_Delete==false">Delete</th>
+      
+    </thead>
+<tbody  *ngFor="let Books_Report_Data_T of BooksIssued_Report_Data; let i = index" >
+    <tr>
+       
+        <td class="col-md-2">{{Books_Report_Data_T["Student_Name"]}}</td>
+        <td class="col-md-2">{{Books_Report_Data_T["Registration_No"]}}</td>
+        <td class=" col-md-4 icon-pointer">{{Books_Report_Data_T["Books_Name"]}}</td>
+        <td  class="col-md-1">{{Books_Report_Data_T["Books_No"]}}</td> 
+        <td  class="col-md-2">{{Books_Report_Data_T["Rack_No"]}}</td>
+        <td class="col-md-2">{{Books_Report_Data_T["Authors"]}}</td>
+        <td  class="col-md-3">{{Books_Report_Data_T["Books_Issued_EntryDate"]}}</td>
+        <td  class="col-md-3">{{Books_Report_Data_T["Actual_Return_Date"]}}</td>
+        <td class="col-md-2">{{Books_Report_Data_T["Return_Status"]}}</td>
+        <!-- <td  class="col-md-3">{{Books_Report_Data_T["Phone"]}}</td> -->
+        <!-- <td  class="col-md-3">{{Books_Report_Data_T["Return_Promise_Date_t"]}}</td> -->
+        <td  class="td-padding">
+            <!-- <button  *ngIf="Books_Report_Data_T['Return_Status'] === 'Issue'" (click)="BookIssued_Return(Books_Report_Data_T.Books_Issued_Id,i)"   mat-raised-button type="submit"  class="save-button-style pull-left mr-1 ">Return</button> -->
+            <button *ngIf="Books_Report_Data_T['Return_Status'] === 'Return'" (click)="cancelReturn(Books_Report_Data_T.Books_Issued_Id)" mat-raised-button type="button" class="save-button-style pull-left mr-1"> Cancel Return</button>
+       
+  
+        </td>
+        <td  class="td-padding" [hidden]="BookIssue_Edit==false">
+        <span class="icon-background2 mr-1"     (click)="Edit_Books(Books_Report_Data_T,i)" > <mat-icon class="text-green small" >edit</mat-icon></span>
+        </td>
+        <td class="td-padding" [hidden]="BookIssue_Delete==false"> 
+        <span class="icon-background3 mr-1"   (click)="Delete_Books(Books_Report_Data_T.Books_Issued_Id,i)"  > <mat-icon class="text-red small" >close</mat-icon></span>
+        </td>
+    
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+</div>

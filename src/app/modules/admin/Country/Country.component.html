@@ -1,0 +1,199 @@
+
+<div *ngIf="issLoading" class="overlay" 
+style="margin-top: 21%;margin-left:46% ;
+background-color: transparent;"
+[style.left.px]="spinleft">
+<img src="/assets/img/spinner.gif" width="100px" >
+</div>
+     <div class="main-content screenfixed new-margin-T">
+     <div class="container-fluid2">
+     
+     
+     <div class="row" *ngIf="Entry_View">
+     
+       <div class="col-md-12 pl-0 pr-0 pt-2">
+         <div class="dt-card mb-0 pb-1 pt-4">         
+             <div class="dt-card__body mb-0 pb-0">
+                 <form class="mb-0">           
+                 <div class="form-row">
+                     <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Country Name<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+                     <div class="col-md-3 col-sm-3 mb-2">
+                         <input type="text" class="form-control" [(ngModel)]="Country_.Country_Name"  name="Country_.Country_Name"   placeholder="">
+                        
+                     </div>
+                     
+                     <div class="col-md-4 col-lg-3 mt-0">    
+               
+                          <!-- <button (click)="Save_Country()" *ngIf="Country_Save" mat-raised-button type="submit" class="save-button-style pull-left mr-1">Save</button> -->
+                          <button (click)="Save_Country()" mat-raised-button type="submit" class="save-button-style pull-left mr-1">Save</button>
+                          <button (click)="Close_Click()" mat-raised-button type="submit" class="close-button-style pull-left mr-1 ">Close</button> 
+                         </div>
+                 </div>
+             </form>
+             </div>
+         </div>        
+       </div> 
+     
+     
+     
+     </div>
+     
+     <div class="row mt-2" *ngIf="Front_end_View">
+      <div class="col-md-12 pl-0 pr-0 pt-0 mb-2">
+       <div class="dt-card mb-0 pb-1 pt-3">         
+           <div class="dt-card__body mb-0 pb-0">
+               <form class="mb-0">           
+               <div class="form-row" style="padding-left: 10px;">
+                   <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Country Name</label>
+                   <div class="col-md-3 col-sm-3 mb-2">
+                       <input type="text" class="form-control" [(ngModel)]="Country_Name_Search" name="Country_Name"  placeholder="">
+                      
+                   </div>
+                   
+                   <div class="col-md-4 col-lg-4 mt-0">                    
+                        <button (click)="Search_Country()" mat-raised-button type="submit"  class="other-button-style pull-left mr-1">Search</button>
+                        <button (click)="Create_New()" mat-raised-button type="submit" class="save-button-style pull-left mr-1 ">Create New</button>
+   
+                       </div>
+               </div>
+           </form>
+           </div>
+       </div>        
+     </div> 
+     
+     
+     
+     
+     
+     <div class="col-md-12 pl-0 pr-0 mt-0"  [style.height.px]="myInnerHeight" itemSize="10">
+       <div class="dt-module">            
+           <div class="dt-module__container" >
+               <!-- style="overflow: scroll;"[style.height.px]="myTotalHeight" -->
+               <div class="dt-module__content ps-custom-scrollbar">
+                   <div class="dt-module__content-inner pl-0 pr-0 card-body set-height-scroll-bar-wole-block">   
+                       <div class="dt-module__list pl-0 pr-0" [style.height.px]="myInnerHeight"
+                       style="overflow-y: scroll"
+                       id="profile">
+                           <!-- <div class="card-body set-height-scroll-bar-wole-block"> -->
+                           <div class="dt-module__list-item pb-2 pt-2" *ngFor="let Country_ of Country_Data; let i = index"> 
+                               <div class="dt-module__list-item-content">
+                                   <div class="user-detail">
+   
+                                       <span class="icon-background2 mr-1" *ngIf="Country_Edit" (click)="Edit_Country(Country_,i)" > <mat-icon class="text-green small" >edit</mat-icon></span>
+                                       <span class="icon-background3 mr-1" *ngIf="Country_Delete" (click)="Delete_Country(Country_.Country_Id,i)" > <mat-icon class="text-red small" >close</mat-icon></span>
+           
+   
+                                                                  
+                                       <span class="user-name">{{Country_["Country_Name"]}}</span>
+                                       <span class="dt-separator-v">&nbsp;</span>
+                                   <button (click)="Add_Checklist(Country_,i)"   mat-raised-button type="submit"  class="save-button-style pull-left mr-1 ">Checklist</button>
+                                     
+                                   </div>
+                                 
+                               </div>                                
+                           </div>
+                          
+                   
+   
+                        
+                       </div>
+                   </div>
+                  
+               </div>
+            
+           </div>
+          
+         </div>
+     </div>  
+     
+     </div>
+
+
+
+     <div class="row" *ngIf="Checklist_View">
+       <div class="col-md-12 mt-2 pl-0">
+       <div class="dt-card mb-3 pb-1 mt-1">         
+       <div class="dt-card__body mt-1 mb-0 pb-0">
+       <form class="mb-0">           
+       <div class="form-row" style="padding-left: 10px;">
+           <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Country</label>
+           <div class="col-md-2 col-sm-2 mb-2">
+           <input readonly type="text" class="form-control" [(ngModel)]="Country_.Country_Name" name="Country_.Country_Name"  placeholder="">
+           </div>
+       <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Checklist<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+       <div class="col-md-3 col-sm-3 mb-2">
+       <input type="text" class="form-control" [(ngModel)]="Checklist_.Checklist_Name" name="Checklist_.Checklist_Name"  placeholder="">
+       </div>
+
+
+       
+           <label for="normal-input-4" class="col-md-0 col-sm-0 col-form-label text-sm-right" style="background: transparent;">Checklist Type<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+           <div class="col-md-2 col-sm-9">
+               <!-- <select [(ngModel)]="User_Type_" name="User_Type_" required class="form-control" id="normal-input-4">
+                   <option *ngFor="let User_Type_T of User_Type_Data" [ngValue]="User_Type_T">{{User_Type_T.User_Type_Name}}</option>
+                   </select> -->
+   
+                   <select name="Checklist_Type" [(ngModel)]="Checklist_.Checklist_Type" required class="form-control p-0 pl-1" id="normal-input-4" >
+                     <option value="1">Pre visa</option>
+                     <!-- <option value="2">Pre Admission</option> -->
+                     </select>
+           </div>
+       
+   
+   
+   
+       <div class="col-md-2 col-sm-2 mt-0"> 
+      <button  (click)="Save_Checklist()" id="Save_Button" mat-raised-button type="submit" class="save-button-style pull-left mr-1">Save</button>                      
+      <button (click)="Close_Click_checklist()" mat-raised-button type="submit" class="close-button-style pull-left mr-1 ">Close</button>                   
+       </div>
+       </div>
+
+       </form>
+       </div>
+       </div>
+       <div class="dt-card__heading">
+           <!-- <h4><b style="color: #3f6ad8;">District </b></h4> -->
+             </div>
+   <div class="col-md-12  mt-0 p-0" style="border: 1"  >
+       <div class="container-import mr-0 pr-0 pl-0 ml-0" > 
+       <div class="dt-card mb-0 pb-1 " style="background-color: #ffff;" >  
+       <div class="table-responsive"  [style.height.px]="myInnerHeight" style="overflow: scroll;height: 300px;overflow-x: hidden!important;">
+       <table class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format">
+       <thead>
+       <th>Checklist</th>  
+       <th>Checklist Type</th> 
+       <th >Edit</th>
+       <th >Delete</th>
+       <th></th>
+       </thead>
+       <tbody  *ngFor="let Checklist_ of Country_Data1; let i = index">          
+       <tr>
+       <td>{{Checklist_["Checklist_Name"]}}</td> 
+       <td>{{Checklist_["Checklist_Type_Name"]}}</td>            
+       <td >
+       <span class="icon-background2 mr-1"   (click)="Edit_Checklist(Checklist_,i)" > <mat-icon class="text-green small" >edit</mat-icon></span>
+       </td>
+       <td class="td-padding"> 
+       <span class="icon-background3 mr-1"   (click)="Delete_Checklist(Checklist_.Checklist_Id,i)" > <mat-icon class="text-red small" >close</mat-icon></span>
+       </td>
+       </tr>
+       </tbody>
+        </table>
+       </div>
+       </div>
+       </div>
+   </div>
+       </div>        
+     
+   </div>
+
+
+
+
+
+
+
+
+
+     </div>
+       

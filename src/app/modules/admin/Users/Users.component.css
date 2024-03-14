@@ -1,0 +1,20 @@
+.tab-icon{
+    background: #419ed5;
+    color: #fff;
+    margin: 15px 13px;
+    transition: all .5s ease-in-out;
+    border: solid 1px transparent;
+}
+.tab-icon{
+    color: #419ed5;
+    background-color: #fff;
+    /* border: solid 1px #419ed5; */
+    margin: 15px 13px;
+}
+/* .tab-student-entry li .active{
+    background-color: red;
+} */
+.custom-tab-user .nav-link.active{
+    background: red;
+    color: #fff;
+}

@@ -1,0 +1,284 @@
+
+
+<div *ngIf="issLoading" class="overlay" [style.left.px]="spinleft" style="margin-top: 25%;background-color: transparent;">
+    <!-- <mat-progress-spinner class="spinner" [color]="color" [mode]="mode" [value]="value">style="margin-top: 20%;margin-left: 40%;"
+    </mat-progress-spinner> -->
+    <img src="/Grand1_assets/img/spinner.gif" width="100px" >
+    </div>
+    <div class="main-content"   style="position: fixed; width: 100%!important;" >
+    <div class="container-fluid">
+    <div class="row" *ngIf="Entry_View">   
+        <!-- <div class="col-md-12  mt-2" style="border: 1" >
+            <div class="dt-card-New">
+                <div class="card-body">
+            <div class="mb-0">          
+                <div class="form-row  mb-2 mt-2 ">
+                  <label class="col-md-0 col-sm-0 col-form-label text-sm-right">From Date</label>                          
+                    <div class="col-md-2 col-sm-2 mb-1 ">
+                        <input type="date" [(ngModel)]="Attendance_Master_.From_Date" name="Attendance_Master_.From_Date"  class="form-control"  placeholder="">
+                    </div>
+                    <label class="col-md-0 col-sm-0 col-form-label text-sm-right">To Date</label>                          
+                    <div class="col-md-2 col-sm-2 mb-1 ">
+                        <input type="date" [(ngModel)]="Attendance_Master_.To_Date" name="Attendance_Master_.To_Date"  class="form-control"  placeholder="">
+                    </div>
+                  
+                </div>
+                <div class="form-group form-row"><h4><b>Excel format</b></h4><b style="color:#000;margin-top: -4px;">,Column names are case sesitive </b> &nbsp;
+                    <img src="Grand1_assets/img/Attendence.png" class="img-fluid login-logo-to-corect mb-2 ml-6" alt="Responsive image"/><br>     
+                    <button type="submit"  style="height: 35px!important" id="Download" class="other-button-style btnflot pull-right ml-2 " name="Download_Button"><a style="color: white;" href="Grand1_assets/img/Attendence.xlsx" download>Download Excel Format</a></button> 
+                </div>  
+              
+                <div class="col-md-4 col-sm-0 pl-2 mb-1"> 
+                    <div class="col-md-0"> 
+                    <button class="other-button-style   pull-left mr-1 mb-2  pl-2 pr-2"  type="button" style="background-color: #5d6071;margin-top: -43px!important;"  (click)="fileInput4.click()"><span>Import File</span>
+                      <input #fileInput4 type="file" name="File"  [(ngModel)]="File" (change)="incomingfile($event)" style="display:none;"  placeholder="Upload file" accept=".xlsx" /> </button>
+                      <div class="col-md-0"> {{Display_File_Name_}} </div>
+                      </div>
+                     </div>
+                     
+                     
+            </div>
+            </div>
+            </div>        
+            </div> -->
+     
+            <div class="col-md-12 mt-2">
+                <div class="dt-card-New" style="height: 57%!important; padding-top: 0px!important;    background-color: #fff;
+                background-clip: border-box;
+                border: 1px
+            px
+             solid #eeeeee;
+                border-radius: 0.25rem;
+                padding: 20px 0;">
+                <div class="card-body" style="    background-color: #fff;
+                background-clip: border-box;
+                border: 1px solid #eeeeee;
+                border-radius: 0.25rem;
+                padding: 20px 0;">
+                <div class="row">
+                <div class="col-md-12" style="padding-left: 0px!important;">
+                    <div class="form-group form-row">
+                        <label for="normal-input-4" class="col-md-1 col-sm-0 col-form-label text-sm-right" style="text-align: right;">From Date</label>
+                        <div class="col-md-2 col-sm-2 mr-2">
+                            <input type="date" [(ngModel)]="Attendance_Master_.From_Date" name="Attendance_Master_.From_Date"  class="form-control"  placeholder="">
+                        </div>
+                    
+                    <!-- <div class="form-group form-row"> -->
+                        <label for="normal-input-4" class="col-md-1 col-sm-0 col-form-label text-sm-right" style="text-align: right;">To Date</label>
+                        <div class="col-md-2 col-sm-2 mr-2">
+                            <input type="date" [(ngModel)]="Attendance_Master_.To_Date" name="Attendance_Master_.To_Date"  class="form-control"  placeholder="">
+                        </div>
+                    <!-- </div> -->
+                    <!-- <label class="col-md-0 col-sm-0 col-form-label text-sm-right mr-0">Store <span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+                    <div class="col-md-2 col-sm-2 mb-2">
+                        <input Input type="text"  class="form-control" [matAutocomplete]="autoc3" placeholder="" [(ngModel)]="Search_Store_Inner_"  name="Search_Store_Inner_"  
+                         (click)="Search_Store_Typeahead($event)" (keyup)="Search_Store_Typeahead($event)">
+                        </div> 
+                        <mat-autocomplete #autoc3="matAutocomplete" [displayWith]="display_Store">
+                            <mat-option *ngIf="issLoading">
+                                <mat-spinner diameter="500"></mat-spinner>
+                            </mat-option>
+                            <ng-container *ngIf="!issLoading">
+                                <mat-option *ngFor="let Store_T of Store_Type_Data_Filter" [value]="Store_T">
+                                    <span name="Store_T.Store_Name">{{Store_T.Store_Name}}</span>
+                                </mat-option>
+                            </ng-container>
+                        </mat-autocomplete>   -->
+                    <!-- <div class="form-group form-row">
+                        <label for="normal-input-4" class="col-md-3 col-sm-3 col-form-label text-sm-right">Choose File<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span> </label>
+                        <div class="col-md-2 col-sm-3">
+                        <input #fileInput4 type="file" name="File"  [(ngModel)]="File" (change)="incomingfile($event)"  class="form-control" placeholder="">
+                        <div class="col-md-0"> {{Display_File_Name_}} </div>
+                    </div>
+                        <button class="close-button-style btnflot mr-0" style="height: 31px!important;" type="submit"  (click)="fileInput4.click()">Import</button>
+                    </div>   -->
+                    <button class="choose-button-style mt-0 mr-2" type="button" style="height:36px !important;" (click)="fileInput4.click()">
+                        <span>Choose file</span></button>       
+                    <div class="col-md-2 col-sm-2">
+                        <input #fileInput4 type="file" name="File" [(ngModel)]="File" (change)="incomingfile($event)" style="border: none;" readonly   
+                        class="form-control"/>
+                        <input type="text" name ="Display_File_Name_" [(ngModel)]="Display_File_Name_" class="form-control" placeholder="">                
+                    </div>
+
+                    <div class="col-md-2" style="display: flex; justify-content: start;align-items: center;">
+                      
+                            <button mat-raised-button type="submit"  id="Save_Button" class="save-button-style pull-right mr-1" (click)="Save_Attendance_Master_Admin()" style="
+                               margin: 3px 0 16px 0;
+                        ">Save</button>
+                            <button mat-raised-button type="submit"class="close-button-style pull-right mr-1 mb-2 " (click)="Close_Click()" style="
+                            margin: 0px 0 16px 0;
+                        ">Close</button>
+                     
+                    </div> 
+
+
+
+                </div>
+                </div> 
+          
+                </div>
+                </div>
+                <div class="clearfix"></div>
+                </div>
+                </div>
+        
+            <div class="col-md-12  mt-2" style="border: 1;">
+                <div class="dt-card mb-0 pb-1" style="background-color: white;" >  
+                <div class="card-body card-body-for-searchedit-lead-section">
+                <!--  <div class="table-responsive"  [style.height.px]="myInnerHeight" > >
+                    <table class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format"  style="width: 130% !important;"> 
+                    <thead> -->
+                     <div class="table-responsive"  [style.height.px]="myInnerHeight"
+                     style="overflow-y: scroll; ">  
+                        <div [@listAnimation]="Attendance_Details_Data.length">
+                        <table class="table table-hover table-for-sale-search-section-diary">
+                        <thead class="grid_hdr_wrp">
+                        <!-- <th [hidden]="Attendance_Master_Edit==false" >Edit</th>
+                        <th [hidden]="Attendance_Master_Dlete==false" >Delete</th> -->
+                    
+                       <th>EMPLOYEE CODE</th>
+                       <th>EMPLOYEE NAME</th>
+                       <th>PRESENT DAYS</th>
+                       <th>ABSENT DAYS</th>
+                    </thead>
+                    <tbody  *ngFor="let Attendance_Details_Data_d of Attendance_Details_Data; let i = index" >
+                    <tr>
+                   <!-- class="td-padding" // for large column spacing -->
+                    
+                        <td  class="col-md-1">{{Attendance_Details_Data_d["Employee_Code"]}}</td>          
+                        <td  class="col-md-2">{{Attendance_Details_Data_d["Employee_Name"]}}</td>
+                        <td  class="col-md-1">{{Attendance_Details_Data_d["Present_Days"]}}</td>
+                        <td  class="col-md-1">{{Attendance_Details_Data_d["Absent_Days"]}}</td>
+                       
+                     
+                    </tr>
+                    </tbody>
+                    </table>
+                </div>
+                </div>
+             
+                <!-- </div> -->
+                <!-- <div class="row"  style="text-align: center;">
+                    <div class="col-md-12 buttons-next-previous">
+                    <button mat-raised-button type="submit" (click)="previous_Click()"  class="btn btn-danger change-colour-button buttons-next-previous-edit-portion p-2" style="background: none;"><i class="fa fa-chevron-left" aria-hidden="true" style="color:#5f6368;"></i></button>
+                    <button mat-raised-button type="submit"  (click)="Next_Click()" class="btn btn-danger change-colour-button buttons-next-previous-edit-portion p-2" style="background: none;"><i class="fa fa-chevron-right" aria-hidden="true" style="color: #5f6368;"></i></button>
+                    </div>
+                </div> -->
+                </div>
+                </div>
+                </div>  
+
+   
+
+
+    </div>
+<div class="row" *ngIf="!Entry_View">
+<div class="col-md-12   mt-2 mb-2">  
+<div class="dt-card-search mb-0 pb-0" >         
+<div class="dt-card__body mt-1 mb-0 pb-0" style="    background-color: #fff;
+background-clip: border-box;
+border: 1px solid #eeeeee;
+border-radius: 0.25rem;
+padding: 20px 0;">
+<form class="mb-0">    
+<div class="form-row  mb-2">
+<label class="col-md-1 col-sm-0 col-form-label text-sm-right mr-0" style="text-align: right;">From Date</label>                          
+<div class="col-md-2 col-sm-2 mb-1 mr-2">
+ <input type="date"  name ="Search_FromDate" [(ngModel)]="Search_FromDate" class="form-control" placeholder=""> 
+</div>                
+<div class="form-row  mb-2"></div>      
+<label class="col-md-1 col-sm-0 col-form-label text-sm-right mr-0" style="text-align: right !important;">To Date</label>
+<div class="col-md-2 col-sm-2 mb-1 mr-2">
+    <input type="date"  name ="Search_ToDate" [(ngModel)]="Search_ToDate" class="form-control" placeholder="">
+</div> 
+<div class="form-row  mb-2"></div> 
+<!-- <label class="col-md-0 col-sm-0 col-form-label text-sm-right mr-0">Store </label>
+<div class="col-md-2 col-sm-2 mb-2">
+    <input Input type="text"  class="form-control" [matAutocomplete]="autoc3" placeholder="" [(ngModel)]="Search_Store_"  name="Search_Store_"  
+     (click)="Search_Store_Typeahead($event)" (keyup)="Search_Store_Typeahead($event)">
+    </div> 
+    <mat-autocomplete #autoc3="matAutocomplete" [displayWith]="display_Store">
+        <mat-option *ngIf="issLoading">
+            <mat-spinner diameter="500"></mat-spinner>
+        </mat-option>
+        <ng-container *ngIf="!issLoading">
+            <mat-option *ngFor="let Store_T of Store_Type_Data_Filter" [value]="Store_T">
+                <span name="Store_T.Store_Name">{{Store_T.Store_Name}}</span>
+            </mat-option>
+        </ng-container>
+    </mat-autocomplete>    -->
+<!-- <label class="col-md-0 col-sm-0 col-form-label text-sm-right mr-0">Store</label>
+<div class="col-md-2 col-sm-2 mb-2">
+    <input Input type="text"  class="form-control" [matAutocomplete]="autoc3" placeholder="" [(ngModel)]="Search_Store_"  name="Search_Store_"  
+     (click)="Search_Store_Typeahead($event)" (keyup)="Search_Store_Typeahead($event)">
+    </div> 
+    <mat-autocomplete #autoc3="matAutocomplete" [displayWith]="display_Store">
+        <mat-option *ngIf="issLoading">
+            <mat-spinner diameter="500"></mat-spinner>
+        </mat-option>
+        <ng-container *ngIf="!issLoading">
+            <mat-option *ngFor="let Store_T of Store_Type_Data_Filter" [value]="Store_T">
+                <span name="Store_T.Store_Name">{{Store_T.Store_Name}}</span>
+            </mat-option>
+        </ng-container>
+    </mat-autocomplete> -->
+<div class="col-md-2 col-sm-2 mt-0" >                    
+<button (click)="Search_Attendance_Master_Import()"  mat-raised-button type="submit" class="other-button-style pull-left mr-1">Search</button>
+<button (click)="Create_New()"   mat-raised-button type="submit"  class="save-button-style pull-left mr-1 ">Import</button>
+</div>
+</div>
+</form>
+</div>
+</div>        
+</div> 
+<div class="col-md-12  mt-2" style="border: 1;">
+<div class="dt-card cardalt2 mb-0 pb-1" style="background-color: white;" >  
+<div class="card-body card-body-for-searchedit-lead-section">
+<!--  <div class="table-responsive"  [style.height.px]="myInnerHeight" > >
+    <table class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format"  style="width: 130% !important;"> 
+    <thead> -->
+     <div class="table-responsive"  style="background-color: white;" [style.height.px]="myInnerHeight"
+     style="overflow-y: scroll; ">  
+        <div [@listAnimation]="Attendance_Master_Data.length">
+        <table class="table table-hover table-for-sale-search-section-diary">
+        <thead class="grid_hdr_wrp">
+  
+        <!-- <th >SL NO</th>     -->      
+        <!-- <th >STORE NAME</th>       -->
+        <th>FROM DATE</th>
+        <th>TO DATE</th>
+        <th>EDIT</th>
+        <th>DELETE</th>
+     
+
+    </thead>
+    <tbody  *ngFor="let Attendance_Master_Data_d1 of Attendance_Master_Data; let i = index" >
+    <tr>
+     
+        <!-- <td  class="td-padding">{{Attendance_Master_Data_d1["Slno"]}}</td>           -->
+        <!-- <td  class="col-md-1">{{Attendance_Master_Data_d1["Attendance_Date"]}}</td> -->
+        <!-- <td  class="col-md-1">{{Attendance_Master_Data_d1["Store_Name"]}}</td>    -->
+        <td  class="col-md-1">{{Attendance_Master_Data_d1["From_Date_Search"]}}</td>
+        <td  class="col-md-1">{{Attendance_Master_Data_d1["To_Date_Search"]}}</td>
+        <!-- <td  class="col-md-1">{{Attendance_Master_Data_d1["Upload_File"]}}</td> -->
+        <td   class="col-md-1"> <span class="icon-background2 mr-1" [hidden]="Attendance_Master_Edit==false"   (click)="Edit_Attendance_Master(Attendance_Master_Data_d1,i)" > <mat-icon class="text-green small" >edit</mat-icon></span></td>
+        <td  class="col-md-1"> <span class="icon-background3 mr-1" [hidden]="Attendance_Master_Dlete==false"  (click)="Delete_Attendance_Master(Attendance_Master_Data_d1.Attendance_Master_Id,i)" > <mat-icon class="text-red small" >close</mat-icon></span> </td>    
+     
+    </tr>
+    </tbody>
+    </table>
+</div>
+</div>
+<!-- </div> -->
+<!-- <div class="row"  style="text-align: center;">
+    <div class="col-md-12 buttons-next-previous">
+    <button mat-raised-button type="submit" (click)="previous_Click()"  class="btn btn-danger change-colour-button buttons-next-previous-edit-portion p-2" style="background: none;"><i class="fa fa-chevron-left" aria-hidden="true" style="color:#5f6368;"></i></button>
+    <button mat-raised-button type="submit"  (click)="Next_Click()" class="btn btn-danger change-colour-button buttons-next-previous-edit-portion p-2" style="background: none;"><i class="fa fa-chevron-right" aria-hidden="true" style="color: #5f6368;"></i></button>
+    </div>
+</div> -->
+</div>
+</div>
+</div>   
+ </div>
+</div>
+

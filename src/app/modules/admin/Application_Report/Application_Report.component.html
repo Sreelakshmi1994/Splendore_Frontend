@@ -1,0 +1,571 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+
+<div *ngIf="issLoading" class="overlay">
+	<mat-progress-spinner
+		class="spinner"
+		[color]="color"
+		[mode]="mode"
+		[value]="value"
+	>
+	</mat-progress-spinner>
+</div>
+
+<div class="main-content screenfixed new-margin-T pb-0" *ngIf="Search_Div">
+	<div class="container-fluid1 mt-2">
+		<!-- container-grapht -->
+
+		<div class="col-md-12 pl-3 pr-8" style="border: 1">
+			<div class="dt-card mb-0 pb-1">
+				<div class="dt-card__body mb-1 mt-0">
+					<div class="mb-0">
+						<div class="form-row pb-1">
+							<!-- <label class="col-md-1 col-sm-1 col-form-label text-sm-right" style="margin-top: 14px;padding-left: 0px;margin-right: -82px;" >Search By</label> -->
+							<div class="col-md-3 row">
+							<label
+								class=" col-md-4 col-form-label text-sm-right mt-1 x-tra-label"
+								
+								>Applied Date</label
+							>
+							<div class="ew-7 mb-1">
+								<div
+									_ngcontent-xmy-c9=""
+									class="col-md-1 lead-search-section-date-alighn label-down-alighn-stk-ad-mstr-prhse-rte x-tra"
+								>
+									<div
+										_ngcontent-xmy-c9=""
+										class="form-check algyn-checkbx-lead-serch-scton margin-down-tocrect-lead-chckbox-date-front-section"
+									>
+										<label _ngcontent-xmy-c9="" class="form-check-label">
+											<input
+												type="checkbox"
+												class="form-check-input"
+												placeholder="Search..."
+												[(ngModel)]="Look_In_Date"
+											/>
+											<span
+												_ngcontent-xmy-c9=""
+												class="form-check-sign"
+												style="margin-top: 4px; margin-left: -15px"
+												><span _ngcontent-xmy-c9="" class="check"></span>
+											</span>
+											<!-- <label class="">Created</label> -->
+										</label>
+									</div>
+									<!-- <label class="for-down-title-tabs-personal-details">Created</label> -->
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 row">
+							<label
+								class="col-md-4 col-form-label text-sm-right mt-1"
+								>From</label
+							>
+							<div class="col-md-3 col-lg-8 mt-1 mb-1 ew-4">
+								<!-- <input type="date" class="form-control p-0 pl-1 mt-2" placeholder="From"[(ngModel)]="Search_FromDate" name="Search_FromDate" > -->
+								<mat-form-field
+									class=" form-control mrgn-crct-input-text-div-tre-prt-sles1 "
+									style="padding-top: 9px !important"
+								>
+									<input
+										matInput
+										[matDatepicker]="dp1"
+										placeholder=""
+										[(ngModel)]="Search_FromDate"
+										name="Search_FromDate"
+									/>
+									<mat-datepicker-toggle
+										matSuffix
+										[for]="dp1"
+									></mat-datepicker-toggle>
+									<mat-datepicker #dp1></mat-datepicker>
+								</mat-form-field>
+							</div>
+							</div>
+							<div class="col-md-3 row">
+
+							<label class="col-md-4 col-form-label text-sm-right mt-1"
+								>To</label
+							>
+							<div class="col-md-3 col-lg-8 mt-1 mb-1 ew-4">
+								<!-- <input type="date" class="form-control p-0 pl-1 mt-2" placeholder="To"  [(ngModel)]="Search_ToDate" name="Search_ToDate"> -->
+								<mat-form-field
+									class=" form-control mrgn-crct-input-text-div-tre-prt-sles1 "
+									style="padding-top: 9px !important"
+								>
+									<input
+										matInput
+										[matDatepicker]="dpdate"
+										placeholder=""
+										[(ngModel)]="Search_ToDate"
+										name="Search_ToDate"
+									/>
+									<mat-datepicker-toggle
+										matSuffix
+										[for]="dpdate"
+									></mat-datepicker-toggle>
+									<mat-datepicker #dpdate></mat-datepicker>
+								</mat-form-field>
+							</div>
+</div>
+
+
+
+							
+							<!-- <label
+								class=" col-form-label text-sm-right mt-1 x-tra-label"
+								style="padding-left: 6px"
+								>Active</label
+							>
+							<div class="ew-7 mb-1 ew-11">
+								<div
+									_ngcontent-xmy-c9=""
+									class="col-md-1 lead-search-section-date-alighn label-down-alighn-stk-ad-mstr-prhse-rte x-tra"
+								>
+									<div
+										_ngcontent-xmy-c9=""
+										class="form-check algyn-checkbx-lead-serch-scton margin-down-tocrect-lead-chckbox-date-front-section"
+									>
+										<label _ngcontent-xmy-c9="" class="form-check-label">
+											<input
+												type="checkbox"
+												class="form-check-input"
+												placeholder="Search..."
+												[(ngModel)]="Active_In"
+											/>
+											<span
+												_ngcontent-xmy-c9=""
+												class="form-check-sign"
+												style="margin-top: 4px; margin-left: -19px"
+												><span _ngcontent-xmy-c9="" class="check"></span>
+											</span>
+											
+										</label>
+									</div>
+									</div>
+							</div> -->
+
+							<!-- <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Branch</label>
+                  <div class="col-md-2 col-sm-2 mb-1">
+                  <select [(ngModel)]="Search_Branch" required class="form-control p-0 pl-1">
+                    <option *ngFor="let Branch_T of Branch_Data" [ngValue]="Branch_T">{{Branch_T.Branch_Name}}</option>
+                    </select>
+                    </div> -->
+					<div class="col-md-3 row">
+							<label class="col-md-4 col-sm-0 mt-1 col-form-label text-sm-right"
+								>By Staff</label
+							>
+							<div class="col-md-3 col-lg-8 mt-1 mb-1 ew-9">
+								<select [(ngModel)]="Collected_By_" id="Collected_By_" required  class="form-control p-0 pl-1 ">
+									<option *ngFor="let User_T of Collected_By_Data" [ngValue]="User_T">{{User_T.Users_Name}}</option>
+									</select>  
+							</div>
+							
+
+							<!-- <label class="col-md-0 col-sm-0 mt-1 col-form-label text-sm-right"
+								>Branch</label
+							>
+							<div class="col-md-3 col-lg-2 mt-1 mb-1">
+								<select
+									[(ngModel)]="Search_Branch"
+									required
+									class="form-control p-0 pl-1"
+								>
+									<option
+										*ngFor="let Branch_T of Branch_Data"
+										[ngValue]="Branch_T"
+									>
+										{{ Branch_T.Branch_Name }}
+									</option>
+								</select>
+							</div> -->
+						</div>
+						<div class="col-md-3 row">
+							
+							<label
+								class="col-md-4 col-form-label text-sm-right"
+								style="font-size: 14px !important"
+								>Status</label
+							>
+							<div class="col-md-4 col-lg-8 ew-10">
+								
+								<select
+							[(ngModel)]="Application_Status_"
+							name="Application_Status_"
+							required
+							class="form-control p-0 pl-1"
+						>
+							<option *ngFor="let Application_Status_1 of Application_Status_Data" [ngValue]="Application_Status_1">
+								{{ Application_Status_1.Application_Status_Name }}
+							</option>
+						</select>
+							</div>
+							</div>
+							<div class="col-md-3 row">
+
+							<label
+							class="col-form-label text-sm-right col-md-4"
+							style="font-size: 14px !important"
+							>Intake</label
+						>
+						<div class="col-md-3 col-lg-8">
+							<select
+						[(ngModel)]="Intake_Mode_"
+						name="Intake_Mode_"
+						required
+						class="form-control p-0 pl-1"
+					>
+						<option
+							*ngFor="let Intake_Mode_T of Intake_Mode_Data"
+							[ngValue]="Intake_Mode_T"
+						>
+							{{ Intake_Mode_T.Intake_Name }}
+						</option>
+					</select>
+						</div>
+						</div>
+
+						
+						
+
+						<div class="col-md-3 row">
+
+
+
+
+
+
+
+							<label
+							class="col-form-label text-sm-right col-md-4"
+							style="font-size: 14px !important"
+							>Year</label
+						>
+						<div class="col-md-3 col-lg-8">
+							<select
+						[(ngModel)]="Intake_Year_Mode_"
+						name="Intake_Year_Mode_"
+						required
+						class="form-control p-0 pl-1"
+					>
+						<option
+							*ngFor="let Intake_Year_Mode_T of Intake_Year_Mode_Data"
+							[ngValue]="Intake_Year_Mode_T"
+						>
+							{{ Intake_Year_Mode_T.Intake_Year_Name }}
+						</option>
+					</select>
+						</div>
+						</div>
+
+
+
+
+
+
+
+
+
+						<div class="col-md-3 row">
+							<label
+								class="col-md-2 col-lg-4 text-sm-right col-form-label"
+								style="
+									font-size: 14px !important;
+									
+								"
+								>Country</label
+							>
+							<div class="col-md-9 col-lg-8 mt-1">
+								<input
+									Input
+									type="text"
+									class="form-control"
+									[matAutocomplete]="autoc3"
+									placeholder=""
+									[(ngModel)]="Application_Country_"
+									name="Application_Country_"
+									id="Application_Country_"
+									(click)="Search_Country_Typeahead($event)"
+									(keyup)="Search_Country_Typeahead($event)"
+								/>
+							</div>
+							<mat-autocomplete
+								#autoc3="matAutocomplete"
+								[displayWith]="display_Country"
+							>
+								<mat-option *ngIf="issLoading">
+									<mat-spinner diameter="500"></mat-spinner>
+								</mat-option>
+								<ng-container *ngIf="!issLoading">
+									<mat-option
+										*ngFor="let Country_T of Country_Data_Filter"
+										[value]="Country_T"
+									>
+										<span name="Country_T.Country_Name">{{
+											Country_T.Country_Name
+										}}</span>
+									</mat-option>
+								</ng-container>
+							</mat-autocomplete>
+						</div>
+						
+	
+	
+	
+						<div class="col-md-3 row">
+							<label
+								class="col-md-3 col-lg-4 text-sm-right col-form-label"
+								style="font-size: 14px !important"
+							>
+								University
+							</label>
+							<div class="col-md-5 col-lg-8 mt-1" >
+								<input
+									Input
+									type="text"
+									class="form-control"
+									[matAutocomplete]="autoc4"
+									placeholder=""
+									[(ngModel)]="Application_University_"
+									name="Application_University_"
+									(click)="Search_Application_University_Typeahead($event)"
+									(keyup)="Search_Application_University_Typeahead($event)"
+								/>
+							</div>
+							<mat-autocomplete
+								#autoc4="matAutocomplete"
+								[displayWith]="display_Application_University"
+							>
+								<mat-option *ngIf="issLoading">
+									<mat-spinner diameter="500"></mat-spinner>
+								</mat-option>
+								<ng-container *ngIf="!issLoading">
+									<mat-option
+										*ngFor="let Application_University_T1 of Application_University_Data_Filter"
+										[value]="Application_University_T1"
+									>
+										<span name="Application_University_T1.Application_University_Name">{{
+											Application_University_T1.Application_University_Name
+										}}</span>
+									</mat-option>
+								</ng-container>
+							</mat-autocomplete>
+						</div>
+	
+
+						<div class="col-md-3 row">
+							<label
+								class="col-md-2 col-lg-4 text-sm-right col-form-label"
+								style="font-size: 14px !important"
+								>Course</label
+							>
+							<div class="col-md-5 col-lg-8 mt-1">
+								<input
+									Input
+									type="text"
+									class="form-control"
+									[matAutocomplete]="autoc5"
+									placeholder=""
+									[(ngModel)]="Application_Course_"
+									name="Application_Course_"
+									(click)="Search_Application_Course_Typeahead($event)"
+									(keyup)="Search_Application_Course_Typeahead($event)"
+								/>
+							</div>
+		
+							<mat-autocomplete
+								#autoc5="matAutocomplete"
+								[displayWith]="display_Application_Course_1"
+							>
+								<mat-option *ngIf="issLoading">
+									<mat-spinner diameter="500"></mat-spinner>
+								</mat-option>
+								<ng-container *ngIf="!issLoading">
+									<mat-option
+										*ngFor="let Application_Course_T of Application_Course_Data_Filter"
+										[value]="Application_Course_T"
+									>
+										<span name="Application_Course_T.Application_Course_Name">{{
+											Application_Course_T.Application_Course_Name
+										}}</span>
+									</mat-option>
+								</ng-container>
+							</mat-autocomplete>
+						</div>
+						<div class="col-md-3"></div>
+	
+						<div class="col-md-3 row mr-2 pr-4" style="    display: flex;
+						justify-content: end;">
+								<div class="col-md-0 col-md-0 mrgnT-mob">
+									<button
+									(click)="Export()"
+									[hidden]="Export_View == false"
+									mat-raised-button
+									type="submit"
+									class="other-button-style btnflot pull-right mr-5 mt-2 tab-padding export-btn"
+									style="height: 36px !important;background-color: #4bc859 !important;"
+								>
+									Export
+								</button>
+								<button
+									(click)="Search_Lead_button()"
+									id="Registration_Report"
+									mat-raised-button
+									type="submit"
+									style="background-color: #0caef7"
+									class="other-button-style btnflot pull-right mr-1 mt-2 tab-padding"
+									style="height: 36px !important"
+								>
+									Search
+								</button>
+								
+							  </div>
+							  </div>
+							  </div>
+						
+
+						<div class="col-md-0 col-md-0">
+							<!-- <button id="Registration_Report" (click)="View_Back()"  mat-raised-button type="submit"  class="other-button-style btnflot pull-right mr-1 mt-2 ">Back</button> -->
+
+							<!-- <button  name="" _ngcontent-gdi-c11="" (click)="Search_Enquriy_Summary()"[hidden]="Summary_Sub==true"  class="btn btn-danger change-colour-button buton-save-search-edit">
+                    Data
+                     </button> -->
+						</div>
+
+						<!-- <label class="col-md-0 col-sm-0 ml-1 col-form-label text-sm-right">Department</label>                           
+                <div class="col-md-3 col-sm-3 ml-2 mb-1">
+                  <select [(ngModel)]="Department_Search" id="Department_" required  class="form-control p-0 pl-1 ">
+                    <option *ngFor="let Department_T of Department_Data" [ngValue]="Department_T">{{Department_T.Department_Name}}</option>
+                    </select> 
+                </div>   -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- <div class="row">
+  <div class="col-md-12 whole-portion-edit-section-lead-part" [style.height.px]="myInnerHeight" > -->
+		<div class="col-md-12 mt-2 pl-3 pr-8" style="border: 1">
+			<div class="dt-card mb-0 pb-1" style="background-color: #ffff">
+				<!-- <div class="card card-plain"> -->
+				<div class="card-body card-body-for-searchedit-lead-section" style="padding: 10px;">
+					<div
+						class="table-responsive"
+						style="overflow-y: scroll"
+						[style.height.px]="myTotalHeight"
+					>
+						<table
+							class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format"
+							style="width: 100% !important; font-size: 15px;"
+						>
+							<thead>
+								<th>No</th>
+
+								<th style="width:200px">Student</th>
+								<th>Mobile</th>
+
+								<!-- <th>Branch</th> -->
+
+								<th>Applied On</th>
+								<th>Country</th>
+								<th>Intake</th>
+								<th>Intake Year</th>
+								<th style="width:300px">University</th>
+								<th style="width:300px">Course</th>
+								<th>Status</th>
+
+								<!-- <th>Activation Status</th> -->
+
+								<th>Staff</th>
+								<th>Fees</th>
+								<th>Fees Paid</th>
+								<th style="width: 300px;">Remark</th>
+								
+							</thead>
+							<tbody *ngFor="let Lead of Student_Data_Search; let i = index">
+								<tr>
+									<td>
+										{{ i + 1 }}
+									</td>
+
+									<!-- <td>
+										{{ Lead["Student"] }}
+									</td> -->
+
+									<td><a target="_blank" [routerLink]="['/Student']" (click)="Edit_Student_Notification(Lead.Student_Id,i)" 
+										style="color: #357bfd; font-weight: 800;">{{ Lead["Student"] }}</a></td>
+
+
+									<td style="width: 120px !important">
+										{{ Lead["Mobile"] }}
+									</td>
+
+									<!-- <td>
+          {{Lead["File_No"]}}
+          </td> -->
+									<!-- <td>
+										{{ Lead["Branch"] }}
+									</td> -->
+
+									<td style="width: 160px !important">
+										<div>{{ Lead["Applied_Date"] }}</div>
+									</td>
+									<td>
+										{{ Lead["Country"] }}
+									</td>
+									<td>
+										{{ Lead["Intake"] }}
+									</td>
+									<td>
+										{{ Lead["Intake_Year"] }}
+									</td>
+									<td>
+										{{ Lead["University"] }}
+									</td>
+									<td>
+										{{ Lead["Course"] }}
+									</td>
+									<td>
+										{{ Lead["Application_Status_Name"] }}
+									</td>
+									
+									<!-- <td>
+										{{ Lead["Activation_Status"] }}
+									</td> -->
+									<td>
+										{{ Lead["User"] }}
+									</td>
+									<td>
+										{{ Lead["Fees"] }}
+									</td>
+
+									<td >
+
+									<span *ngIf="Lead.Fees_Paid>=0">
+									
+									{{ Lead["Fees_Paid"] }}</span>
+										
+									</td>
+
+									
+									<td style="width: 200px !important">
+										{{ Lead["Remark"] }}
+									</td>
+									
+
+									<!-- <td>
+      <button _ngcontent-jry-c5="" _ngcontent-gxp-c5="" aria-describedby="cdk-describedby-message-0" cdk-describedby-host="" class="aligyn-crect-deprtnment btn btn-primary btn-link btn-sm btn-just-icon mat-raised-button" mat-raised-button="" mattooltip="Edit Task" ng-reflect-message="Edit Task" ng-reflect-position="above" type="button"><span class="mat-button-wrapper"><span _ngcontent-jry-c5="" class="mat-button-wrapper"><i _ngcontent-jry-c5="" _ngcontent-gxp-c5="" class="material-icons" (click)="Edit_Lead(Lead.Lead_Id,i)" >edit</i></span><div _ngcontent-jry-c5="" class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div><div _ngcontent-jry-c5="" class="mat-button-focus-overlay"></div></span><div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div><div class="mat-button-focus-overlay" ></div></button>
+  </td> -->
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+				<!-- </div> -->
+			</div>
+			<label 
+					>Total Entries:<b>{{ Total_Data }}</b></label
+				>
+		</div>
+	</div>
+</div>

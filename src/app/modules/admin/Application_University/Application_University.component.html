@@ -1,0 +1,481 @@
+<!-- <div *ngIf="issLoading" class="overlay">
+    <mat-progress-spinner class="spinner" [color]="color" [mode]="mode" [value]="value">
+    </mat-progress-spinner>
+</div>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row" *ngIf="Entry_View">
+            <div class="col-md-12">
+                <nav class="navbar navbar-inverse tab-nav">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <ul class="tab-list">
+                                <li class="pl-5 pr-5 current-tab"><a class="navbar-brand mb-4 tab-active" (click)="Tab_Click(1)" onclick="addActive(this)">PROFILE </a></li>
+                                <li *ngIf="Student_Id_Edit>0" class="pl-5 pr-5"><a class="navbar-brand mb-4 " (click)="Tab_Click(2)" onclick="addActive(this)">Applications</a></li>
+                               
+                            </ul>                   
+                        </div>
+                    </div>
+                </nav>
+
+                <div  *ngIf="profile_View">
+                    <div id="profile">
+                <form>
+                    <div class="row">
+                        
+                        <div class="col-md-6">
+                            <label class="col-md-3 alighn-title-search-section-tab-lead-per-details">Application_University<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+                            <mat-form-field class="col-md-9 ">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Application_University_Name" name="Application_University_.Application_University_Name" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                          
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-down-alighn-supler-prhse-mstr-down" style="top:0px;">Country<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+                            <select [(ngModel)]="Country_" name="Country_" required class="col-md-9 margin-lh-rh-to-crect-textbox select-user-block" style="max-width:70%;margin-left: 2%;">
+                            <option *ngFor="let Country_T of Country_Data" [ngValue]="Country_T">{{Country_T.Country_Name}}</option>
+                            </select>
+                        </div> 
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-down-alighn-supler-prhse-mstr-down" style="top:0px;">Status<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+                            <select [(ngModel)]="Status_" name="Application_University_Status_" required class="col-md-9 margin-lh-rh-to-crect-textbox select-user-block" style="max-width:70%;margin-left: 2%;">
+                            <option *ngFor="let Status_T of Status_Data" [ngValue]="Status_T">{{Status_T.Status_Name}}</option>
+                            </select>
+                        </div>       
+
+
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">About</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.About" name="Application_University_.About" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">About1</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.About1" name="Application_University_.About1" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                          
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">About2</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.About2" name="Application_University_.About2" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                          
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Location</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Location" name="Application_University_.Location" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                          
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Address</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Address" name="Application_University_.Address" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                          
+                        </div>
+                        
+
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Founded In</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Founded_In" name="Application_University_.Founded_In" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                          
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Institution Type</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Institution_Type" name="Application_University_.Institution_Type" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                          
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Cost Of Living</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Cost_Of_Living" name="Application_University_.Cost_Of_Living" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                          
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Tution Fee</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Tution_Fee" name="Application_University_.Tution_Fee" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                          
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Application Fee</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Application_Fee" name="Application_University_.Application_Fee" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                          
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Type Of Accomodation</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Type_Of_Accomodation" name="Application_University_.Type_Of_Accomodation" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                          
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Contact Number</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Contact_Number" name="Application_University_.Contact_Number" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                          
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Email</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Email" name="Application_University_.Email" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                          
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Web</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Web" name="Application_University_.Web" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                          
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Fb</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Fb" name="Application_University_.Fb" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                          
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Linkedin</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Linkedin" name="Application_University_.Linkedin" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Twitter</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Twitter" name="Application_University_.Twitter" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Googlemap</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Googlemap" name="Application_University_.Googlemap" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Sub Heading1</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Sub_Heading1" name="Application_University_.Sub_Heading1" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Sub Heading2</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Sub_Heading2" name="Application_University_.Sub_Heading2" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Sub Heading3</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Sub_Heading3" name="Application_University_.Sub_Heading3" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">School Rank</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.School_Rank" name="Application_University_.School_Rank" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Video Link</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Video_Link" name="Application_University_.Video_Link" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Sub Heading Colored</label>
+                            <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings input-allighn-typer-head-all-divs-matinputs">
+                                <input matInput type="text" [(ngModel)]="Application_University_.Sub_Heading_Colored" name="Application_University_.Sub_Heading_Colored" class="input-text-item-group-diary" 
+                                style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="veh-uplod-imge" style="height: 75px;">
+                            <label class="col-md-3 label-crect-journal-entry-company">Banner Image</label>
+                            <input type="file" id="btnUpload" value="Upload" name="Photo" [(ngModel)]="File" (change)="File_Change($event)"
+                                class="upload"  />
+                        </div>
+
+                        <div  >
+                            <div class="veh-uplod-imge" style="height: 75px;">
+                                   <label class="col-md-3 label-crect-journal-entry-company">Application_University Images</label>
+                                   <input type="file" id="btnUpload" value="Upload" name="Photo" [(ngModel)]="Application_University_File" (change)="Application_University_File_Change($event)" class="upload" multiple />
+                               </div> 
+                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6 down-alighn-label-all">
+                                <button mat-raised-button type="submit"[hidden]="Application_University_Save==false" id="Save_Button" class="btn btn-danger pull-right" (click)="Save_Application_University()">Save</button>
+                                <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="Close_Click()">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+                    </div>
+                    </div>
+                 </div>
+        </div>
+        <div class="row" *ngIf="!Entry_View">
+            <div class="col-md-12">
+                <div class="card">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-4 alighyn-div-margin-search-item-group">
+                                <label class="col-md-3 alighn-title-search-section-tab-lead-per-details">Application_University</label>
+                                <mat-form-field class="col-md-7 ">
+                                    <input matInput type="text" [(ngModel)]="Application_University_Name_Search" name="Search_Name" 
+                                    style="border: 1px solid #949494 !important;padding: 8px 3px !important;">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="col-md-3 label-down-alighn-supler-prhse-mstr-down" style="top:0px;">Country<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+                                <select [(ngModel)]="Country_Search" name="Country_Search" required class="col-md-3 margin-lh-rh-to-crect-textbox select-user-block" style="max-width:70%;margin-left: 2%;">
+                                <option *ngFor="let Country_T of Country_Data" [ngValue]="Country_T">{{Country_T.Country_Name}}</option>
+                                </select>
+                            </div> 
+                            <div class="col-md-3">
+                                <label class="col-md-3 label-down-alighn-supler-prhse-mstr-down" style="top:0px;">Status<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+                                <select [(ngModel)]="Status_Search" name="Application_University_Status1_" required class="col-md-3 margin-lh-rh-to-crect-textbox select-user-block" style="max-width:70%;margin-left: 2%;">
+                                <option *ngFor="let Status_T of Status_Data" [ngValue]="Status_T">{{Status_T.Status_Name}}</option>
+                                </select>
+                            </div> 
+                           
+                            <div class="col-md-2">
+                                <button mat-raised-button type="submit" (click)="Search_Application_University()" class="btn btn-danger"> <i class="fa fa-search" aria-hidden="true"></i></button> 
+                                <button mat-raised-button type="submit" (click)="Create_New()" class="btn btn-danger"> <i class="fa fa-plus" aria-hidden="true"></i> </button> 
+                             </div>
+                           
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-12 card-body">
+                <div class="card-plain set-height-scroll-bar-wole-block" style="overflow-y: hidden;">
+                    <div class="table-responsive">
+                       
+                        <div class="row grid_header"  style="background-color: #ebeef0;color: black;">
+                            <div class="col-md-2">Sl No </div>
+                            <div class="col-md-2"> Application_University  </div>
+                            <div class="col-md-1"> Edit</div>
+                            <div class="col-md-1"> Delete  </div>
+                        </div>
+                        <cdk-virtual-scroll-viewport [style.height.px]="myInnerHeight" itemSize="90" >
+
+   
+                            <ng-container *cdkVirtualFor="let Application_University1 of Application_University_Data; let i = index">
+                                    <div class="row grid_data">
+                                            <div class="col-md-2">{{ i+1 }}</div>
+                                            <div class="col-md-2">{{Application_University1["Application_University_Name"]}}</div>
+                                            <div class="col-md-1" (click)="Edit_Application_University(Application_University1,i)">
+                                                <button _ngcontent-gdi-c11="" [hidden]="Application_University_Edit==false" class="btn btn-danger2" mattooltip="Edit Task" type="button" aria-describedby="cdk-describedby-message-1"
+                                                         cdk-describedby-host=""ng-reflect-position="above" ng-reflect-message="Edit Task"><span class="mat-button-wrapper"><i _ngcontent-gdi-c11="" class="material-icons" 
+                                                          >edit</i></span><div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" 
+                                                        ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div><div class="mat-button-focus-overlay"></div>
+                                                </button>  
+                                            </div>
+                                            <div class="col-md-1"  (click)="Delete_Application_University(Application_University1.Application_University_Id,i)"> 
+                                                    <button _ngcontent-gdi-c11="" [hidden]="Application_University_Delete==false"class="btn btn-danger1" mattooltip="Remove" type="button" aria-describedby="cdk-describedby-message-1" 
+                                                            cdk-describedby-host=""ng-reflect-position="above" ng-reflect-message="Remove"><span class="mat-button-wrapper"><i _ngcontent-gdi-c11="" class="material-icons" 
+                                                             >close</i></span><div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" 
+                                                            ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div><div class="mat-button-focus-overlay"  ></div>
+                                                    </button>          
+                                            </div>
+                                    </div>
+                            </ng-container> 
+                        </cdk-virtual-scroll-viewport>
+                    </div>
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <label class="entry-num">Entries : {{Total_Entries}}</label>
+            </div>  
+        </div>
+    </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <!-- <div *ngIf="issLoading" class="overlay" 
+style="margin-top: 21%;margin-left:46% ;
+background-color: transparent;"
+[style.left.px]="spinleft">
+<img src="/assets/img/spinner.gif" width="100px" >
+</div> -->
+
+<div *ngIf="issLoading" class="overlay">
+	<mat-progress-spinner
+	class="spinner"
+	[color]="color"
+	[mode]="mode"
+	[value]="value"
+	>
+	</mat-progress-spinner>
+	</div>
+    
+      <div class="main-content screenfixed new-margin-T">
+      <div class="container-fluid2">
+      
+      
+      <div class="row" *ngIf="Entry_View">
+      
+        <div class="col-md-12 pl-0 pr-0 pt-2">
+          <div class="dt-card mb-0 pb-1 pt-4">         
+              <div class="dt-card__body mb-0 pb-0">
+                  <form class="mb-0">           
+                  <div class="form-row">
+                      <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Application University Name<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+                      <div class="col-md-3 col-sm-3 mb-2">
+                          <input type="text" class="form-control" [(ngModel)]="Application_University_.Application_University_Name"  name="Application_University_.Application_University_Name"   placeholder="">
+                         
+                      </div>
+                      
+                      <div class="col-md-4 col-lg-4 mt-0">    
+                        <button (click)="Save_Application_University()" mat-raised-button type="submit" class="save-button-style pull-left mr-1">Save</button>
+                        <button (click)="Close_Click()" mat-raised-button type="submit" class="close-button-style pull-left mr-1 ">Close</button> 
+                          
+                          </div>
+                  </div>
+              </form>
+              </div>
+          </div>        
+        </div> 
+      
+      
+      
+      </div>
+      
+      <div class="row mt-2" *ngIf="!Entry_View">
+       <div class="col-md-12 pl-0 pr-0 pt-0 mb-2">
+        <div class="dt-card mb-0 pb-1 pt-3">         
+            <div class="dt-card__body mb-0 pb-0">
+                <form class="mb-0">           
+                <div class="form-row" style="padding-left: 10px;">
+                    <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Application University Name</label>
+                    <div class="col-md-4 col-lg-3 mb-2">
+                        <input type="text" class="form-control" [(ngModel)]="Application_University_Name_Search" name="Application_University_Name"  placeholder="">
+                       
+                    </div>
+                    
+                    <div class="col-md-4 col-lg-4 mt-0">                    
+                         <button (click)="Search_Application_University()" mat-raised-button type="submit"  class="other-button-style pull-left mr-1">Search</button>
+                         <button (click)="Create_New()" mat-raised-button type="submit" class="save-button-style pull-left mr-1 ">Create New</button>
+    
+                        </div>
+                </div>
+            </form>
+            </div>
+        </div>        
+      </div> 
+      
+      
+      
+      
+      
+      <div class="col-md-12 pl-0 pr-0 mt-0"  [style.height.px]="myInnerHeight" itemSize="10">
+        <div class="dt-module">            
+            <div class="dt-module__container" >
+                <!-- style="overflow: scroll;"[style.height.px]="myTotalHeight" -->
+                <div class="dt-module__content ps-custom-scrollbar">
+                    <div class="dt-module__content-inner pl-0 pr-0 card-body set-height-scroll-bar-wole-block">   
+                        <div class="dt-module__list pl-0 pr-0" [style.height.px]="myInnerHeight"
+                        style="overflow-y: scroll"
+                        id="profile">
+                            <!-- <div class="card-body set-height-scroll-bar-wole-block"> -->
+                            <div class="dt-module__list-item pb-2 pt-2" *ngFor="let Application_University_ of Application_University_Data; let i = index"> 
+                                <div class="dt-module__list-item-content">
+                                    <div class="user-detail">
+    
+                                        <span class="icon-background2 mr-1" (click)="Edit_Application_University(Application_University_,i)" > <mat-icon class="text-green small" >edit</mat-icon></span>
+                                        <span class="icon-background3 mr-1" (click)="Delete_Application_University(Application_University_.Application_University_Id,i)" > <mat-icon class="text-red small" >close</mat-icon></span>
+            
+    
+                                                                   
+                                        <span class="user-name">{{Application_University_["Application_University_Name"]}}</span>
+                                      
+                                    </div>
+                                  
+                                </div>                                
+                            </div>
+                           
+                    
+    
+                         
+                        </div>
+                    </div>
+                   
+                </div>
+             
+            </div>
+           
+          </div>
+      </div>  
+      
+      </div>
+      </div>
+        

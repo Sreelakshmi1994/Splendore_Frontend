@@ -1,0 +1,332 @@
+<!-- <div *ngIf="issLoading" class="overlay">
+    <mat-progress-spinner class="spinner" [color]="color" [mode]="mode" [value]="value">
+    </mat-progress-spinner>
+    </div> -->
+    <!-- <div *ngIf="issLoading" [style.left.px]="spinleft" [style.top.px]="myTotalHeight/2"  class="overlay"   >        
+        <img src="assets/img/spinner.gif"  width="50px" >
+        </div>    -->
+        <div *ngIf="issLoading" class="overlay">
+            <mat-progress-spinner
+            class="spinner"
+            [color]="color"
+            [mode]="mode"
+            [value]="value"
+            >
+            </mat-progress-spinner>
+            </div>
+    <div  id='Topdiv'></div>
+<div class="main-content" style="padding: -10px 0px 0px 0px;">
+    <div class="container-fluid" style=" z-index: 1; position: fixed !important;   padding-left: 0px;padding-right: 0px;margin-left: 0px;">      
+        <!-- <div class=""  *ngIf="Entry_View"  > -->
+            <!-- <button    mat-raised-buttons class="navbar-toggler btn-rht-mda-qury" type="button"
+            (click)=Close_Click()  style="float: left!important; margin-left: 6px;">        
+             <span class=" material-icons icon-background2 mr-1" style="color:#ffff; float: left;     width: 32px;
+             height: 28px;
+             background-color: #3fa0d3;"> arrow_back</span> </button>   -->
+
+            
+
+             <!-- <label  class="" style="font-weight: 600!important;color: #ffff!important;margin-top: 42px;" [style.margin-left.px]="myfinallabelwidth"><b>Leave</b></label>  -->
+            <!-- </div>  -->
+            <!-- <div class=""  *ngIf="!Entry_View" style="margin-top: -30px;background-color: #5a5a90;height: 80px!important;" >
+                 <label   class="" style=" font-weight: 600!important;color: #ffff!important;margin-top: 42px;" [style.margin-left.px]="myInnerWidth"> <b>Leave</b></label> 
+                </div> -->
+</div>
+</div> 
+  <div class="col-md-12 pl-0" *ngIf="!Entry_View" >
+    <div class="dt-module__content ps-custom-scrollbar" >
+        <div class="card-body " [style.height.px]="myInnerHeight"
+        style="overflow-y: scroll;     overflow-y: scroll;
+        height: 779px;
+        margin: 0 35px;
+        border: solid 1px #e9e9ef;
+        padding-right: 20px;" >
+
+                <label class="col-md-1 col-sm-1 col-form-label text-sm-right">Status </label>                      
+                <div class="col-md-4 col-sm-4 mb-1" >
+                <select [(ngModel)]="Leave_Request_Status_" name="Leave_Request_Status_" required class="form-control p-0 pl-1">
+                <option *ngFor="let Leave_Request_Status_T2 of Leave_Request_Status_Data" 
+                [ngValue]="Leave_Request_Status_T2">{{Leave_Request_Status_T2.Leave_Request_Status_Name}}</option>
+                </select>
+                </div> 
+
+        <div class="col-md-12">   
+
+         <button class="mat-button applybtns mb-1" color="primary" style="float: right;font-size: 18px!important;    background: #9ae736;
+                    margin-left: 10px;
+                color: #fff;
+                height: 35px;
+    width: 105px;
+    border-radius: 18px;
+                border: none;
+                border-radius: 17px;
+                font-size: 14px !important;
+                margin-bottom: 25px !important;
+            " 
+                type="submit" (click)=Search_Leave_Request() >Search</button> 
+
+                <button class="mat-button applybtns mb-1" color="primary" style="float: right;font-size: 18px!important;    background: #499fd2;
+                color: #fff;
+                height: 35px;
+    width: 105px;
+    border-radius: 18px;
+                border: none;
+                border-radius: 17px;
+                font-size: 14px !important;
+                margin-bottom: 25px !important;
+            " 
+                type="submit" (click)=Apply_Leave() >Apply Leave</button>   
+            </div>
+            <div>
+                <div class="card horizontal cardbg mb-2  pt-1 pb-1" style="padding: 0;" *ngFor="let Leave_Request1 of Leave_Request_Data; let i = index" >          
+                    <div class="card-stacked" style="padding-left: 15px;">
+                        <div class="card-body pb-0 pt-1 mt-1"  >
+                            <div class="d-flex flex-wrap mb-0" >
+                               
+                                     <div class="pr-1 material-icons iconsoutlinecalender" style="    margin-right: 10px;">today</div>
+                                
+                                    <div class="col-md-9 " >
+                                        <b  class="pr-2" style="font-weight: 400; color: #5a5a90"><b>From:&nbsp;</b>{{Leave_Request1.From_Date}}   &nbsp;<b>To:</b> {{Leave_Request1.To_Date}}</b>
+                                        <label class="pr-2 label-to-crect-all-names-to-divs mt-0 pt-0 labelcards"><b>Leave Type: </b>{{Leave_Request1.Leave_Type_Name}}</label> 
+                                        <label class="pr-2 label-to-crect-all-names-to-divs mt-0 pt-0 labelcards"><b>Applied On: &nbsp;</b>{{Leave_Request1.Entry_Date}}</label> 
+                                        <label class="pr-2 label-to-crect-all-names-to-divs mt-0 pt-0 labelcards"><b>Reason: &nbsp;</b>{{Leave_Request1.Reasonfor}}</label> 
+                                        <label class="pr-2 label-to-crect-all-names-to-divs mt-0 pt-0 labelcards"><b>Leave Mode: &nbsp;</b>{{Leave_Request1.Leave_Mode_Name }}</label> 
+                                        <!-- <label class="col-md-2 label-to-crect-all-names-to-divs mt-0 pt-0 labelcards"><b>Balance CL: &nbsp;</b>{{Leave_Request1.Balance_CL }}</label> 
+                                        <label class="col-md-2 label-to-crect-all-names-to-divs mt-0 pt-0 labelcards"><b>Balance PL: &nbsp;</b>{{Leave_Request1.Balance_PL }}</label>  -->
+                                        <label class="pr-2 label-to-crect-all-names-to-divs mt-0 pt-0 labelcards"><b>No. of Leave: &nbsp;</b>{{Leave_Request1.Noof_Leaves }}</label> 
+
+                                        <label class="pr-2 label-to-crect-all-names-to-divs mt-0 pt-0 labelcards"><b>Approved Date: &nbsp;</b>{{Leave_Request1.Approved_Date }}</label> 
+
+                                        <label class="pr-2 label-to-crect-all-names-to-divs mt-0 pt-0 labelcards"><b></b>{{Leave_Request1.Description}}</label>  
+                                    </div>
+                                    <div class="col-md-1 "  >                                     
+                                        <button  id="Save_Button" type="submit"  [ngClass]="{'onebg' : Leave_Request1.Leave_Request_Status_Id === 1, 
+                                        'twobg' : Leave_Request1.Leave_Request_Status_Id === 2 , 'threebg' : Leave_Request1.Leave_Request_Status_Id === 3, 'fourbg' : Leave_Request1.Leave_Request_Status_Id === 4}">
+                                        <span  [ngClass]="{'one' : Leave_Request1.Leave_Request_Status_Id === 1, 'two' : Leave_Request1.Leave_Request_Status_Id === 2 ,'three' : Leave_Request1.Leave_Request_Status_Id === 3,'four' : Leave_Request1.Leave_Request_Status_Id === 4 }">
+                                         {{Leave_Request1["Leave_Request_Status_Name"]}}</span></button>                                        
+                                    </div>
+                            </div>
+                        </div>                    
+                    </div>
+                </div>            
+            </div>
+        </div>
+     </div>
+</div>    
+
+
+            <div class="dt-card__body mt-2 "  *ngIf="Entry_View" >                   
+               <form class="mb-0" >
+                <div class="container-fluidprofile">
+                <div class="dt-card__body mt-3" style="margin-left: 8% !important;" >
+<!--  <div class="form-row">
+                
+                <label class="col-md-1 col-sm-1 col-form-label text-sm-right">From Date</label>
+                <div class="col-md-4 col-sm-4 mb-1">
+                <input type="date"  class="form-controlt" (Change)="datediff()"
+                 style="height: 47px !important; width: 83%!important;border-radius: 10px;" placeholder=""[(ngModel)]="Leave_Request_.From_Date" name="Leave_Request_.From_Date" >
+                 </div>
+                </div>
+                <div class="form-row">
+                
+                    <label class="col-md-1 col-sm-1 col-form-label text-sm-right">To Date</label>
+                    <div class="col-md-4 col-sm-4 mb-1">
+                    <input type="date"  class="form-controlt" (Change)="datediff()"
+                     style="height: 47px !important; width: 83%!important;border-radius: 10px;" placeholder=""[(ngModel)]="Leave_Request_.To_Date" name="Leave_Request_.To_Date" >
+                     </div>
+                    </div> -->
+                <div class="form-row">
+                    <label class="col-md-1 col-sm-1 col-form-label text-sm-right" style="text-align: right;">From</label>
+                <mat-form-field class="form-controldate col-md-3" style="    margin-left: 10px !important;">
+                    <input matInput [matDatepicker]="picker" name="Leave_Request_.From_Date"
+                           (dateInput)="datediff()"  [(ngModel)]="Leave_Request_.From_Date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                <!-- </div> -->
+                <!-- <div class="form-row"> -->
+                  <label class="col-md-2 col-sm-1 col-form-label text-sm-right" style="text-align: right;">To</label>
+                  <mat-form-field class="form-controldate col-md-3" style="    margin-left: 10px !important;"> 
+                    <input matInput [matDatepicker]="picker1" name="Leave_Request_.To_Date"
+                           (dateInput)="datediff()"  [(ngModel)]="Leave_Request_.To_Date">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+               
+                 
+            </div>
+         <div class="form-row">
+           
+                </div>
+                 
+            
+                 <div class="form-row">
+                    <!-- <label class="col-md-1 col-sm-1 col-form-label text-sm-right">TO Date</label>
+                    <div class="col-md-4 col-sm-4 mb-1">
+                    <input type="date"   (Change)="datediff()"  class="form-controlt" style="height: 47px !important; width: 83%!important;border-radius: 10px;" placeholder="" [(ngModel)]="Search_ToDate" name="Search_ToDate"  >
+                   </div> -->
+                    <!-- <div class="col-md-1 col-sm-1"></div>   -->
+                
+                    <label class="col-md-1 col-sm-1 col-form-label text-sm-right mt-2 " style="text-align: right;">Mode</label>
+                    <div class="col-md-4 col-sm-4 mt-2">
+                    <select class="form-controlt p-0 pl-1" style="height: 47px !important;width:83% !important; border-radius: 10px;border: solid 1px #ced4da;"   placeholder="" 
+                    [(ngModel)]="Leave_Mode_" name="Leave_Request_.Leave_Mode_Name" (change)="datediff()">
+                    <option *ngFor="let Leave_Mode_1 of Leave_Mode_Data"  [ngValue]="Leave_Mode_1">{{Leave_Mode_1.Leave_Mode_Name}}</option>
+                    </select>
+                    </div>
+                    <!-- -->
+                    <!-- <div class="col-md-1 col-sm-1"></div>   -->
+                    <label class="col-md-1 col-sm-1 col-form-label text-sm-right mt-2" style="text-align: right;">Type</label>
+                    <div class="col-md-4 col-sm-4 mt-2" style="    margin-left: 15px;">
+                                <select class=" form-controlt p-0 pl-1" style="height: 47px !important;width:83% !important; border-radius: 10px;padding-top: 9px;border: solid 1px #ced4da;"
+                                 [(ngModel)]="Leave_Type_" name="Leave_Request_.Leave_Type_Name">
+                                <option *ngFor="let Leave_Type_1 of Leave_Type_Data"  [ngValue]="Leave_Type_1">{{Leave_Type_1.Leave_Type_Name}}</option>
+                                </select>
+                                </div> 
+                               
+                </div>  
+             
+                <div class="form-row mt-3">
+                    <div class="col-md-6">
+                    <b class="ml-2" style="    padding-left: 35px;"> Available PL&nbsp;:&nbsp; </b> <b style="color: #f3a024;">{{Leave_Request_.Balance_PL}}</b>  
+                    <b> &nbsp;&nbsp; , CL&nbsp;:&nbsp;</b> <b style="color: #f3a024;">{{Leave_Request_.Balance_CL}}</b>
+                </div>
+                    <div class="col-md-6">   <b>   &nbsp;&nbsp; No Of Leaves&nbsp;:&nbsp;</b> <b style="color: #f3a024;">{{Leave_Request_.Noof_Leaves}}</b></div>
+                    <!-- <b> <br> &nbsp;&nbsp; No Of Leaves&nbsp;:&nbsp;</b> <b style="color: #f3a024;">{{Leave_Request_.Noof_Leaves}}</b> -->
+                    </div>
+                    <div class="form-row mt-3">
+
+                        <!-- <b class="ml-2"> Balance PL&nbsp;:&nbsp; </b> <b style="color: #f3a024;">{{Leave_Request_.Balance_PL}}</b>  
+                        <b> &nbsp;&nbsp; ,CL&nbsp;:&nbsp;</b> <b style="color: #f3a024;">{{Leave_Request_.Balance_CL}}</b> -->
+                     
+                        </div>
+                  <div class="form-row">
+
+                    <!-- <b> PL </b> {{Leave_Request_.Balance_PL}}  <b> CL </b>  {{Leave_Request_.Balance_CL}} -->
+                    <!-- <label class="col-md-0 col-sm-0 col-form-label text-sm-right"> PL</label> -->
+                    <!-- <div class="col-md-0 col-sm-0 mt-2"> -->
+                    <!-- <input type="text" readonly [(ngModel)]="Leave_Request_.Balance_PL" name = "Leave_Request_.Balance_PL" class="form-controlt"
+                     style="height: 47px !important; border:0;" placeholder=""  > -->
+                    <!-- </div> -->
+                      
+                    <!-- <label class="col-md-0 col-sm-0 col-form-label text-sm-right"> CL</label> -->
+                 
+                    <!-- <div class="col-md-0 col-sm-0 mt-2"> -->
+                    <!-- <input type="text" readonly  [(ngModel)]="Leave_Request_.Balance_CL" name = "Leave_Request_.Balance_CL" class="form-controlt"
+                     style="height: 47px !important; border:0;" placeholder=""  > -->
+                    <!-- </div> -->
+
+                    <!-- <label class="col-md-0 col-sm-0 col-form-label text-sm-right">No Of Leaves</label> -->
+                    <!-- <div class="col-md-0 col-sm-0 mt-2"> -->
+                    <!-- <input type="text"  readonly  [(ngModel)]="Leave_Request_.Noof_Leaves" name ="Leave_Request_.Noof_Leaves" class="form-controlt" 
+                    style="height: 41px !important;border:0;" placeholder=""  > -->
+                   <!-- </div> -->
+
+                   
+                    <!-- <label class="col-md-0 col-sm-0 col-form-label text-sm-right">No Of Leaves</label>
+                    <input type="text"  readonly  [(ngModel)]="Leave_Request_.Noof_Leaves" name ="Leave_Request_.Noof_Leaves" class="form-controlt" 
+                    style="height: 41px !important;border:0;" placeholder=""  > -->
+                  
+                </div>
+
+                    <!-- <div class="form-row">
+                    <label class="col-md-1 col-sm-1 col-form-label text-sm-right">No of Leaves</label>
+                    <div class="col-md-4 col-sm-4 mb-1">
+                    <input type="text"  readonly  [(ngModel)]="Leave_Request_.Noof_Leaves" name ="Leave_Request_.Noof_Leaves" class="form-controlt" 
+                    style="height: 47px !important;border:0;" placeholder=""  >
+                   </div>
+                </div> -->
+                
+               <!-- <ul class="nme-cstmr-sls-mble-rspnsv-sctn">
+                 <li class="cstmr-sls-mble-rspnsv-list-sctn dte-chck-bx-vew-sls-mble-rspnsv-sctn" style="padding-left:0px;"> 
+                 <button   class="login-buttonnew mt-3" type="submit"  style="margin-left: -4px!important;  " (click) = "Add_Leave()" > Add More Leave</button> -->
+                 <!--  style="width: 87%;background-color: #7387f4;font-weight: bold;color: white;font-weight:bold;text-align: center;" height: 36px!important;-->
+                 <!-- </li>
+                </ul> -->
+                
+                <!-- Leave_Datastyle="overflow:scroll;height: 350px;"class="card horizontal cardbg mb-4  pt-3 pb-5 "  -->
+                <div class="dt-card" *ngIf="Card_View" >
+                <div>    
+                    <div *ngFor="let Leave_T of Leave_Data; let i = index">                           
+                            <!-- <mat-list> -->
+                            <!-- <mat-list-item> -->
+                            <span>{{Leave_T["From_Date"]}} - </span> &nbsp;&nbsp;
+                            <span >{{Leave_T["To_Date"]}}</span> &nbsp;&nbsp;
+                            <!-- <span >{{Leave_T["Leave_Type_Name"]}}</span> &nbsp;&nbsp;
+                            <span >{{Leave_T["Leave_Mode_Name"]}}</span> -->
+                            <button _ngcontent-gdi-c11="" style="float:right;margin-top:0px;margin-right:-30px;color:#7387f4;"class="btn btn-danger btn-link btn-sm btn-just-icon mat-raised-button" mat-raised-button color="primary" mattooltip="Remove" type="button" 
+                            aria-describedby="cdk-describedby-message-1" cdk-describedby-host="" ng-reflect-position="above" ng-reflect-message="Remove">
+                            <span class="mat-button-wrapper"><i _ngcontent-gdi-c11="" (click)="Delete_Leave_Details(Leave_T,i)"class="material-icons"  >close</i></span>
+                            <div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div>
+                            <div class="mat-button-focus-overlay"  ></div></button> 
+                           
+                            <!-- </mat-list-item>                      -->
+                              <!-- <mat-divider style="    margin-left: 15px!important;"></mat-divider>    -->
+                            <!-- </mat-list>   -->
+                    </div>
+                </div>  
+                </div>
+                <div class="form-row">
+                    <!-- <label class="col-md-1 col-sm-1 col-form-label text-sm-right">Leave Type</label>
+                <div class="col-md-4 col-sm-4 mb-1">
+                            <select class=" form-controlt p-0 pl-1" style="height: 47px !important; width: 22%!important;border-radius: 10px;padding-top: 9px;"
+                             [(ngModel)]="Leave_Type_" name="Leave_Request_.Leave_Type_Name">
+                            <option *ngFor="let Leave_Type_1 of Leave_Type_Data"  [ngValue]="Leave_Type_1">{{Leave_Type_1.Leave_Type_Name}}</option>
+                            </select>
+                            </div>  -->
+
+                            <!-- <div class="col-md-1 col-sm-1"></div>   -->
+
+                    <label class="col-md-1 col-sm-1 col-form-label text-sm-right" style="text-align: right;" >Reason</label>
+                    <div class="col-md-8 col-sm-4 mb-1">
+                    <input type="text"    class="form-controlt col-md-12" style="height: 47px !important; border-radius: 10px;border: solid 1px #ced4da;" placeholder=""
+                     [(ngModel)]="Leave_Request_.Reasonfor" name ="Leave_Request_.Reasonfor" >
+                   </div>
+                  
+                <!-- <label class="col-md-1 col-sm-1 col-form-label text-sm-right">Balance CL</label>
+                <div class="col-md-4 col-sm-4 mb-1">
+                <input type="text" readonly  [(ngModel)]="Leave_Request_.Balance_CL" class="form-controlt" style="height: 47px !important; width: 83%!important;border-radius: 10px;" placeholder=""  >
+                </div> -->
+                             
+                <div class="col-md-1" style="    display: flex;
+                justify-content: start;
+                align-items: center;">
+                    <button (click)="Save_Leave_Request()"  [hidden]="Leave_Request_Save==false"id="Save_Button"class="login-buttonnew ml-1" style="background: #3fa0d3;
+                    color: #fff;
+                    border: none;
+                    padding: 2px 14px;
+                    border-radius: 10px;
+                " 
+                  type="submit"  ><h5 style="    font-weight: 400;
+                  padding: 5px;
+                  margin-bottom: 0;
+                  font-size: 16px;
+              ">Apply</h5></button>
+
+<button (click)=Close_Click()   [hidden]="Leave_Request_Save==false"id="Save_Button"class="login-buttonnew ml-1" style="background: #3fa0d3;
+                    color: #fff;
+                    border: none;
+                    padding: 2px 14px;
+                    border-radius: 10px;
+                " 
+                  type="submit"  ><h5 style="    font-weight: 400;
+                  padding: 5px;
+                  margin-bottom: 0;
+                  font-size: 16px;
+              ">Close</h5></button>
+
+
+
+               </div>
+            </div>  
+               <!-- <ul class="nme-cstmr-sls-mble-rspnsv-sctn">
+                <li class="cstmr-sls-mble-rspnsv-list-sctn dte-chck-bx-vew-sls-mble-rspnsv-sctn" style="padding-left:0px;"> 
+                <button   class="login-buttonnew mt-3" type="submit"  style="margin-left: -4px!important;  " (click) = "Add_Leave()" > Add More Leave</button>
+              
+                </li>
+               </ul> -->
+                </div>                
+                </div>
+                </form>
+
+            </div>

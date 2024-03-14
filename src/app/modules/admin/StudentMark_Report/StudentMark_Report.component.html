@@ -1,0 +1,718 @@
+
+<div *ngIf="issLoading" class="overlay">
+    <mat-progress-spinner class="spinner" [color]="color" [mode]="mode" [value]="value">
+    </mat-progress-spinner>
+</div>
+<div  id='Topdiv'></div>
+<div  id='Bottomdiv'></div>
+<div class="main-content pb-0"  >
+
+    <div class="container-fluid">
+        <div class="row" *ngIf="Entry_View"  >
+        
+        </div>
+        </div>
+
+<div class="row" *ngIf="Entry_View" >
+
+    <div class="col-md-12 pl-3 pr-8 mt-2" style="border: 1" *ngIf="isDesktopMenu()">
+    <div class="dt-card mb-0 pb-1 "   >        
+    <div class="dt-card__body " >
+    <div class="mb-0">          
+    <div class="form-row">
+        <div class="row col-md-4">
+
+        <label class="col-md-2 col-sm-0 col-form-label text-sm-right">Exam Date</label>  
+        <div class="col-md-1 col-sm-0 mb-1">
+        <div _ngcontent-xmy-c9="" class="checkbox-to-crect-sales-search-section">
+        <div _ngcontent-xmy-c9="" class="form-check uper-dte-lbel-sales-sctn-new pl-0" >
+        <label _ngcontent-xmy-c9="" class="form-check-label">
+        <input type='checkbox' class="form-check-input" name="Is_Date" [(ngModel)]="Is_Date"   />
+        <span _ngcontent-xmy-c9="" class="form-check-sign"><span _ngcontent-xmy-c9="" class="check">
+        </span>
+        </span>
+        </label>
+        </div>
+        </div>  
+        </div>    
+    
+        <label class="col-md-3 col-sm-0 col-form-label text-sm-right">From</label>
+        <div class="col-md-6 col-sm-2 mb-1" >
+        <!-- <input type="date" class="form-control p-0 pl-1" placeholder="From"[(ngModel)]="FromDate_"   name="FromDate_" > -->
+        <mat-form-field class="col-md-12 form-control mrgn-crct-input-text-div-tre-prt-sles1 mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn" 
+        style="height: 40px;padding-top: 7px!important;">
+            <input matInput [matDatepicker]="dp1" placeholder="" [(ngModel)]="FromDate_"   name="FromDate_" >
+            <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+            <mat-datepicker #dp1></mat-datepicker>
+            </mat-form-field>
+        </div>  
+
+    </div>
+    <div class="row col-md-3">
+        <label class="col-md-4 col-sm-0 col-form-label text-sm-right">To</label>
+        <div class="col-md-8 col-sm-2 mb-1">
+        <!-- <input type="date" class="form-control p-0 pl-1" placeholder="To"  [(ngModel)]="ToDate_" name="ToDate_"> -->
+        <mat-form-field class="col-md-12 form-control mrgn-crct-input-text-div-tre-prt-sles1 mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn" style="height: 40px;"
+        style="height: 40px !important;padding-top: 7px!important;">
+        <input matInput [matDatepicker]="dpdate" placeholder=""  [(ngModel)]="ToDate_" name="ToDate_">
+        <mat-datepicker-toggle matSuffix [for]="dpdate"></mat-datepicker-toggle>
+        <mat-datepicker #dpdate></mat-datepicker>
+        </mat-form-field>
+        </div>
+        </div>
+        <div class="row col-md-3">
+        <label class="col-md-4 col-sm-0 col-form-label text-sm-right">Batch</label>
+        <div  class="col-md-8 col-sm-2 mb-1">
+            <input type="text"  class="form-control"  id="Batch_" name="Batch_"  [matAutocomplete]="auto_Batch"
+            [(ngModel)]="Batch_" (click)="Search_Batch_Typeahead($event)" (keyup)="Search_Batch_Typeahead($event)"/></div>  
+            <mat-autocomplete #auto_Batch="matAutocomplete" [displayWith]="display_Batch">
+            <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+            <ng-container *ngIf="!issLoading">
+            <mat-option *ngFor="let Batch_ of Batch_Data_Filter" [value]="Batch_">
+            <span>{{Batch_.Batch_Name}}</span>
+            </mat-option>
+            </ng-container>
+            </mat-autocomplete> 
+            </div>
+            
+
+            <div class="row col-md-3">
+            <label class="col-md-4 col-sm-0 col-form-label text-sm-right">Level</label>
+            <div  class="col-md-8 col-sm-3 mb-1">
+            <input type="text"  class="form-control"  id="Course_" name="Course_"  [matAutocomplete]="auto_Course"
+            [(ngModel)]="Course_" (click)="Search_Course_Typeahead($event)"(keyup)="Search_Course_Typeahead($event)" /></div>  
+            <mat-autocomplete #auto_Course="matAutocomplete" [displayWith]="display_Course">
+                <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+                <ng-container *ngIf="!issLoading">
+                <mat-option *ngFor="let Course of Course_Data_Filter" [value]="Course">
+                <span>{{Course.Course_Name}}</span>
+                </mat-option>
+                </ng-container>
+            </mat-autocomplete>  
+        </div>
+        </div>
+        <div class="form-row">
+        <!-- <div class="row col-md-3">
+          
+                <label
+                class="col-md-4 col-sm-1 col-form-label text-sm-right"
+                >Mark Status</label
+                >
+                <div class="col-md-8 col-sm-3 mb-1">
+                <select
+                [(ngModel)]="MarkStatus_Type"
+                name="MarkStatus_Type"
+                required
+                class="form-control p-0 pl-1"
+                >
+                <option
+                *ngFor="
+                let MarkStatus_Type_ of MarkStatus_Type_Data
+                "
+                [ngValue]="MarkStatus_Type_"
+                >
+                {{ MarkStatus_Type_.Markstatus_Name }}
+                </option>
+                </select>
+                </div>
+</div> -->
+
+
+
+<!-- <div class="row col-md-3">
+                <label class="col-md-4 col-sm-0 col-form-label text-sm-right pt-1"
+                >Total Mark From</label
+                >
+                <div class="col-md-8 col-sm-3 mb-1 ml-0">
+                <input
+                type="text"
+                [(ngModel)]="markfrom"
+                name="markfrom"
+                class="form-control"
+                placeholder=" "
+                />
+                </div>
+                </div>
+
+                <div class="row col-md-3">
+                <label class="col-md-4 col-sm-0 col-form-label text-sm-right pt-1"
+                >Total Mark To</label
+                >
+                <div class="col-md-8 col-sm-3 mb-1 ml-0">
+                <input
+                type="text"
+                [(ngModel)]="markto"
+                name="markto"
+                class="form-control"
+                placeholder=" "
+                />
+                </div>
+                
+    </div> -->
+
+
+
+
+
+    <div class="row col-md-3">
+			
+        <label class="col-md-4 col-sm-0 col-form-label text-sm-right pt-1" >Exam
+
+        </label>
+        <div class="col-md-8 col-sm-3 mb-1 ml-0">
+        <select [(ngModel)]="Exam_" name="Exam_" class="form-control p-0 pl-1" >
+        <option *ngFor="let Exam_Data_T of Exam_Data" [ngValue]="Exam_Data_T" >
+        {{ Exam_Data_T.Exam_Name }} </option> </select>
+        </div>   </div>
+        <div class="row col-md-3">
+      <label class="col-md-4 col-sm-0 col-form-label text-sm-right pt-1" >Exam Type			
+      </label>
+      <div class="col-md-8 col-sm-3 mb-1 ml-0">
+      <select [(ngModel)]="Exam_Type_" name="Exam_Type_" class="form-control p-0 pl-1" >
+      <option *ngFor="let Exam_Type_Data_T of Exam_Type_Data" [ngValue]="Exam_Type_Data_T" >
+      {{ Exam_Type_Data_T.Exam_Type_Name }} </option> </select>
+      </div> </div>
+ 
+ 
+    
+
+
+
+
+
+    <div class="row col-md-3" style="    display: flex;
+    align-items: center;
+    justify-content: end;">
+        <!-- <button (click)="Create_New()" mat-raised-button type="submit"  class="save-button-style pull-right mr-1 ">Create New</button> -->
+        <button style="background-color: #0ab33c;" mat-raised-button type="submit"  [hidden]="Export_View==false" (click)="Export()"class="other-button-style btnflot pull mr-1"><i></i>EXPORT</button>
+        <button (click)="Search_StudentMark_Report()" mat-raised-button type="submit"  class="other-button-style btnflot pull-left mr-2 ">Search</button>
+       
+        
+
+    </div>
+   
+    </div>
+    </div>
+    </div>  
+</div> 
+</div>     
+
+
+    <div class="col-md-12 pl-3 pr-8 mt-2" style="border: 1" >
+        <!-- *ngIf="isDesktopMenu()" -->
+    <div class="dt-card mb-0 pb-1" style="background-color: white;" >  
+                                                               <!-- style="overflow: scroll;" -->
+    <div class="card-body card-body-for-searchedit-lead-section " >
+    <!-- <div class="table-responsive" > -->
+        <div class="table-responsive" 	style="overflow: scroll;"[style.height.px]="myInnerHeight">
+    <!-- <table class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format" style="width: 130% !important;"> -->
+        <table class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format" >
+            <!-- style="width: 100%;" -->
+            <thead>  
+    <th >No</th>     
+    <th style="width: 20%!important;">Student</th>  
+    <th >Level</th>  
+    <th >Batch</th>     
+    <th >Reading</th>  
+    <th >Speaking</th>  
+    <th >Listening</th> 
+    <th >Writing </th> 
+    <!-- <th>Grammer</th> -->
+    <th>Total</th>
+    <th>Status</th>
+    </thead>
+    <tbody  *ngFor="let StudentMark_Report_Data_T of StudentMark_Report_Data; let i = index" >
+    <tr>
+        <td  >{{i+1}}</td>
+        <td  (click)="Get_Marklistreport_Studentdetails(StudentMark_Report_Data_T.Student_Id,StudentMark_Report_Data_T.Student_Course_Id,StudentMark_Report_Data_T.Course_Id,i)" style="color: #357bfd; font-weight: 800;">{{StudentMark_Report_Data_T["Student"]}}</td>
+        <!-- [routerLink]="['/Student']" -->
+        <!-- <td  class=" icon-pointer"><a target="_blank"  (click)="Edit_Admission(StudentMark_Report_Data_T.Student_Id,i)" style="color: #357bfd; font-weight: 800;">{{StudentMark_Report_Data_T["Student"]}}</a></td> -->
+    <td >{{StudentMark_Report_Data_T["Course"]}}</td>
+    <td >{{StudentMark_Report_Data_T["Batch"]}}</td>
+    <td  >{{StudentMark_Report_Data_T["Reading"]}}</td>
+    <td  >{{StudentMark_Report_Data_T["Speaking"]}}</td>
+    <td  >{{StudentMark_Report_Data_T["Listening"]}}</td>
+    <td  >{{StudentMark_Report_Data_T["Writing"]}}</td>
+    <!-- <td  >{{StudentMark_Report_Data_T["Grammer"]}}</td> -->
+    <td  >{{StudentMark_Report_Data_T["TotalMark"]}}</td>
+    <td  >{{StudentMark_Report_Data_T["Markstatus_Name"]}}</td>
+    </tr>
+    </tbody>
+    </table>
+
+    </div>
+         
+    </div>
+    </div>
+    </div>
+    <label class="entry-num">Entries : {{Total_Entries}}</label>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="" *ngIf="Studentdetails_View">
+    <div class=" " >
+    <div class="dt-card__body mr-8" >
+    <form class="mb-0">
+    <div class="" [style.height.px]="myInnerHeightTwo" style="overflow-y: scroll;">
+    <!-- <div class="dt-card mt-2" [style.height.px]="myInnerHeight" style="overflow-y: scroll;height: 300px;" > -->
+    <div class="dt-card mt-2 mb-0">
+    <div class="dt-card__body mt-3" style="margin-left: 2%">
+    <div>
+
+        <div class="dt-card__heading">
+            <h4 style="font-weight: 800;
+            font-size: 18px;
+            margin-bottom: 20px;">
+        Student Details
+            </h4>
+            </div>
+    <div class="form-row mb-2">
+    
+        <label class="col-md-1 col-sm-1 col-form-label text-sm-right" >Student Name
+
+        </label>
+        <div class="col-md-4 col-sm-4" style="height: 43px !important;">
+            <input
+            type="text"
+            [(ngModel)]="Student_.Student_Name"
+            name="Student_.Student_Name"
+            class="form-control"
+            placeholder=""
+           readonly
+            />
+            </div>
+      <div class="col-md-1 col-sm-1"></div>
+      <label class="col-md-1 col-sm-1 col-form-label text-sm-right" >Phone
+   			
+      </label>
+      <div class="col-md-4 col-sm-4" style="height: 43px !important;">
+        <input
+        type="text"
+        [(ngModel)]="Student_.Phone"
+        name="Student_.Phone"
+        class="form-control"
+        placeholder=""
+        readonly
+        />
+        </div>
+    </div>
+
+    <div class="form-row mb-2">
+    
+        <label
+        class="col-md-1 col-sm-1 col-form-label text-sm-right"
+        >Email</label
+        >
+        <div class="col-md-4 col-sm-4" style="height: 43px !important;">
+        <input
+        type="text"
+        [(ngModel)]="Student_.Email"
+        name="Student_.Email"
+        class="form-control"
+        placeholder=""
+        readonly
+        />
+        </div>
+        <div class="col-md-1 col-sm-1"></div>
+        <label
+        class="col-md-1 col-sm-1 col-form-label text-sm-right"
+        >Address</label
+        >
+        <div class="col-md-4 col-sm-4">
+        <input
+        type="text"
+        [(ngModel)]="Student_.Address1"
+        name="Student_.Address1"
+        class="form-control"
+        placeholder=""
+        readonly
+        />
+        </div>
+
+    </div>
+    
+    <div class="form-row mb-2">
+    <div class="col-md-11">
+  
+    </div>
+    </div>
+    </div>
+ 
+    
+    <div class="dt-card__heading">
+    <h4>
+Internal Exam
+    </h4>
+    </div>
+    <div class="col-md-12 pl-3 pr-8 mt-2" style="border: 1">
+    <div
+    class="container-import"
+    style="margin-left: -3% !important"
+    >
+    <div
+    class="dt-card mb-0 pb-1"
+    style="background-color: #ffff; margin-right: 2%"
+    >
+    <div class="table-responsive">
+    <table
+    class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format"
+    >
+    <thead>
+        <th>Level</th>
+        <th>Exam Date</th>
+        <th>Exam Type</th>
+        <th>Mark</th>
+        <th></th>
+        </thead>
+        <tbody
+        *ngFor="
+        let StudentdetailsInternal_Report_Data_T of StudentdetailsInternal_Report_Data;let i = index">
+        <tr>
+        <td>{{ StudentdetailsInternal_Report_Data_T["Course_Name"] }}</td>
+        <td>{{ StudentdetailsInternal_Report_Data_T["Exam_Date"] }}</td>
+        <td>{{ StudentdetailsInternal_Report_Data_T["Exam_Type_Name"] }}</td>
+        <td>{{ StudentdetailsInternal_Report_Data_T["Mark"] }}</td>
+     
+    
+        </tr>
+        </tbody>
+        </table>
+    </div>
+    </div>
+    
+    </div>
+    </div>
+
+
+
+    <div class="dt-card__heading">
+        <h4>
+    Final Exam
+        </h4>
+        </div>
+        <div class="col-md-12 pl-3 pr-8 mt-2" style="border: 1">
+        <div
+        class="container-import"
+        style="margin-left: -3% !important"
+        >
+        <div
+        class="dt-card mb-0 pb-1"
+        style="background-color: #ffff; margin-right: 2%"
+        >
+        <div class="table-responsive">
+        <table
+        class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format"
+        >
+        <thead>
+            <th>Level</th>
+            <th>Exam Date</th>
+            <th>S</th>
+            <th>R</th>
+            <th>L</th>
+            <th>W</th>
+            <th>G</th>
+            <th>Total Mark</th>
+            <th></th>
+            </thead>
+            <tbody
+            *ngFor="
+            let StudentdetailsFinal_Report_Data_T of StudentdetailsFinal_Report_Data;let i = index">
+            <tr>
+            <td>{{ StudentdetailsFinal_Report_Data_T["Course_Name"] }}</td>
+            <td>{{ StudentdetailsFinal_Report_Data_T["Exam_Date"] }}</td>
+            <td>{{ StudentdetailsFinal_Report_Data_T["Speaking"] }}</td>
+            <td>{{ StudentdetailsFinal_Report_Data_T["Reading"] }}</td>
+            <td>{{ StudentdetailsFinal_Report_Data_T["Listening"] }}</td>
+            <td>{{ StudentdetailsFinal_Report_Data_T["Writing"] }}</td>
+            <td>{{ StudentdetailsFinal_Report_Data_T["Grammer"] }}</td>
+            <td>{{ StudentdetailsFinal_Report_Data_T["TotalMark"] }}</td>
+        
+            </tr>
+            </tbody>
+            </table>
+        </div>
+        </div>
+        
+        </div>
+        </div>
+
+
+
+        <div class="dt-card__heading">
+            <h4>
+       Leaves
+            </h4>
+            </div>
+            <div class="col-md-12 pl-3 pr-8 mt-2" style="border: 1">
+            <div
+            class="container-import"
+            style="margin-left: -3% !important"
+            >
+            <div
+            class="dt-card mb-0 pb-1"
+            style="background-color: #ffff; margin-right: 2%"
+            >
+            <div class="table-responsive">
+            <table
+            class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format"
+            >
+            <thead>
+                <th>Date</th>
+                <th>Session</th>
+                <th></th>
+                </thead>
+                <tbody
+                *ngFor="
+                let StudentdetailsLeaves_Report_Data_T of StudentdetailsLeaves_Report_Data;let i = index">
+                <tr>
+                <td>{{ StudentdetailsLeaves_Report_Data_T["AttendanceDate"] }}</td>
+                <td>{{ StudentdetailsLeaves_Report_Data_T["Session_Name"] }}</td>
+           
+            
+                </tr>
+                </tbody>
+                </table>
+            </div>
+            </div>
+            
+            </div>
+            </div>
+    
+
+            <div class="dt-card__heading">
+                <h4>
+           Remarks
+                </h4>
+                </div>
+                <div class="col-md-12 pl-3 pr-8 mt-2" style="border: 1">
+                <div
+                class="container-import"
+                style="margin-left: -3% !important"
+                >
+                <div
+                class="dt-card mb-0 pb-1"
+                style="background-color: #ffff; margin-right: 2%"
+                >
+                <div class="table-responsive">
+                <table
+                class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format"
+                >
+                <thead>
+                    <th>Date</th>
+                    <th>Details</th>
+                    <th>Description</th>
+                    <th></th>
+                    </thead>
+                    <tbody
+                    *ngFor="
+                    let StudentdetailsRemark_Report_Data_T of StudentdetailsRemark_Report_Data;let i = index">
+                    <tr>
+                    <td>{{ StudentdetailsRemark_Report_Data_T["Entered_Date"] }}</td>
+                    <td>{{ StudentdetailsRemark_Report_Data_T["Remark"] }}</td>
+                    <td>{{ StudentdetailsRemark_Report_Data_T["Details"] }}</td>
+                
+                    </tr>
+                    </tbody>
+                    </table>
+                </div>
+                </div>
+                
+                </div>
+                </div>
+
+
+
+                <div>
+
+                    <div class="dt-card__heading">
+                        <h4>
+                    Book Issued Details
+                        </h4>
+                        </div>
+                <!-- <div class="form-row mb-2">
+                
+                    <label class="col-md-1 col-sm-1 col-form-label text-sm-right" >Student Name
+            
+                    </label>
+                    <div class="col-md-4 col-sm-4" style="height: 43px !important;">
+                        <input
+                        type="text"
+                        [(ngModel)]="Student_.Student_Name"
+                        name="Student_.Student_Name"
+                        class="form-control"
+                        placeholder=""
+                       readonly
+                        />
+                        </div>
+                  <div class="col-md-1 col-sm-1"></div>
+                  <label class="col-md-1 col-sm-1 col-form-label text-sm-right" >Phone
+                           
+                  </label>
+                  <div class="col-md-4 col-sm-4" style="height: 43px !important;">
+                    <input
+                    type="text"
+                    [(ngModel)]="Student_.Phone"
+                    name="Student_.Phone"
+                    class="form-control"
+                    placeholder=""
+                    readonly
+                    />
+                    </div>
+                </div>
+            
+                <div class="form-row mb-2">
+                
+                    <label
+                    class="col-md-1 col-sm-1 col-form-label text-sm-right"
+                    >Book Issued Date</label
+                    >
+                    <div class="col-md-4 col-sm-4" style="height: 43px !important;">
+                    <input
+                    type="date"
+                    [(ngModel)]="Student_.Books_Issued_EntryDate"
+                    name="Student_.Books_Issued_EntryDate"
+                    class="form-control"
+                    placeholder=""
+                    readonly
+                    />
+                    </div>
+                    <div class="col-md-1 col-sm-1"></div>
+                    <label
+                    class="col-md-1 col-sm-1 col-form-label text-sm-right"
+                    >Book Name</label
+                    >
+                    <div class="col-md-4 col-sm-4">
+                    <input
+                    type="text"
+                    [(ngModel)]="Student_.Books_Name"
+                    name="Student_.Books_Name"
+                    class="form-control"
+                    placeholder=""
+                    readonly
+                    />
+                    </div>
+            
+                </div>
+
+
+                <div class="form-row mb-2">
+                
+                    <label
+                    class="col-md-1 col-sm-1 col-form-label text-sm-right"
+                    >Issued By</label
+                    >
+                    <div class="col-md-4 col-sm-4" style="height: 43px !important;">
+                    <input
+                    type="text"
+                    [(ngModel)]="Student_.Users_Name"
+                    name="Student_.Users_Name"
+                    class="form-control"
+                    placeholder=""
+                    readonly
+                    />
+                    </div>
+            
+                </div>
+ -->
+
+                
+
+ <div class="col-md-12 pl-3 pr-8 mt-2" style="border: 1">
+    <div
+    class="container-import"
+    style="margin-left: -3% !important"
+    >
+    <div
+    class="dt-card mb-0 pb-1"
+    style="background-color: #ffff; margin-right: 2%"
+    >
+    <div class="table-responsive">
+    <table
+    class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format"
+    >
+    <thead>
+        <th>Book Issued Date</th>
+        <th>Book Name</th>
+        <th>Issued By</th>
+        <th></th>
+        </thead>
+        <tbody
+        *ngFor="
+        let StudentdetailsBooksissued_Report_Data_T of StudentdetailsBooksissued_Report_Data;let i = index">
+        <tr>
+        <td>{{ StudentdetailsBooksissued_Report_Data_T["Books_Issued_EntryDate"] }}</td>
+        <td>{{ StudentdetailsBooksissued_Report_Data_T["Books_Name"] }}</td>
+        <td>{{ StudentdetailsBooksissued_Report_Data_T["ByUserName"] }}</td>
+    
+        </tr>
+        </tbody>
+        </table>
+    </div>
+    </div>
+    
+    </div>
+    </div>
+
+
+
+
+
+                <div class="form-row mb-2">
+                <div class="col-md-11">
+              
+                </div>
+                </div>
+                </div>
+
+
+
+
+
+    <button
+style="margin-top: -47PX!important;"
+    (click)="Close_Studentdetails()"
+    id="Save_Button"
+    mat-raised-button
+    type="submit"
+    class="close-button-style pull-right mr-0 ml-5"
+    >
+Close    </button>
+
+    </div>
+    </div>
+    </div>
+    
+    </form>
+    </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+

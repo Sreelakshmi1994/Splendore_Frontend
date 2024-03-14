@@ -1,0 +1,20 @@
+.home-component{
+    background: white;
+    height: 50px;
+    Color: red;
+}
+.logo_lab{
+    
+    Color: red;
+}
+
+@media(max-width:1400px) and (min-width:1200px){
+    .nav-link {
+        padding: 0.8rem 7px;
+    }
+}
+@media(max-width:1200px){
+    .nav-link {
+        padding: 0.8rem 0px;
+    }
+}

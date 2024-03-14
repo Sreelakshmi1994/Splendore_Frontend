@@ -1,0 +1,396 @@
+
+<div *ngIf="issLoading" class="overlay" [style.left.px]="spinleft" style="margin-top: 25%;background-color: transparent;">
+    <img src="/Grand1_assets/img/spinner.gif" width="100px" >
+</div>
+
+<div class="main-content"   style="position: fixed; width: 100%!important;" >
+<div class="container-fluid">
+<div class="row" *ngIf="Entry_View">    
+
+<div class="col-xl-12 pl-0 mt-1">   
+<div class="profilecard mb-2">  
+<div class="dt-card__body mt-2 ">
+<form class="mb-0">
+<div class="container-fluidprofile" >
+<div class="dt-card-New ">
+<div class="dt-card__body mt-3"  >
+<div class="form-row  mb-2">
+<!-- <label class="col-md-1 col-sm-1 col-form-label text-sm-right">Date of Payment</label>                          
+<div class="col-md-2 col-sm-2 mb-1">
+<input type="date"  name ="Salary_Calculation_Master_.Entry_Date" [(ngModel)]="Salary_Calculation_Master_.Entry_Date" class="form-control" placeholder="">
+</div>  -->
+<!-- <div class="col-md-1 col-sm-1"></div>    
+<label class="col-md-1 col-sm-1 col-form-label text-sm-right">Calculation No</label>                          
+<div class="col-md-4 col-sm-4 mb-1">
+<input type="text" [(ngModel)]="Salary_Calculation_Master_.Calculation_No" name="Salary_Calculation_Master_.Calculation_No" class="form-control" placeholder="">
+</div>   -->
+<label class="col-md-0 col-sm-0 col-form-label text-sm-right">Salary From</label>                          
+<div class="col-md-2 col-sm-2 mb-1">
+<input type="date"  name ="Wps_FromDate" [(ngModel)]="Wps_FromDate" class="form-control" placeholder="">
+</div> 
+<!-- <div class="col-md-1 col-sm-1"></div>     -->
+<label class="col-md-0 col-sm-0 col-form-label text-sm-right">Salary To</label>                          
+<div class="col-md-2 col-sm-2 mb-1">
+<input type="date"  name ="Wps_ToDate" [(ngModel)]="Wps_ToDate" class="form-control" placeholder="">
+</div>
+</div> 
+
+<div class="form-row  mb-2">
+<div class="col-md-12" style="float: right;">
+  <button mat-raised-button type="submit"class="close-button-style pull-right ml-1 mr-0 mb-2 " (click)="Close_Click()">Close</button>
+  <button mat-raised-button type="submit"  id="Save_Button" class="save-button-style pull-right ml-1 " (click)="Save_Salary_Calculation_Master()">Calculate Salary</button>
+  <button (click)="Search_Salary_Employee()"  mat-raised-button type="submit" class="other-button-style pull-right ml-2">Search Employees</button>
+
+</div>
+</div>
+<!-- <div class="col-md-12" style="float: right;margin-top: -56px!important;">
+  <button mat-raised-button type="submit"class="close-button-style pull-right ml-1 mr-0 mb-2 " (click)="Close_Click()">Close</button>
+  <button mat-raised-button type="submit"  id="Save_Button" class="save-button-style pull-right ml-1 " (click)="Save_Salary_Calculation_Master()">Calculate Salary</button>
+  <button (click)="Search_Salary_Employee()"  mat-raised-button type="submit" class="other-button-style pull-right ml-2">Search Employees</button>
+
+</div> -->
+
+    <!-- <div class="form-row  mb-2">
+        <label class="col-md-1 col-sm-1 col-form-label text-sm-right">Salary From</label>                          
+        <div class="col-md-4 col-sm-4 mb-1">
+        <input type="date"  name ="Wps_FromDate" [(ngModel)]="Wps_FromDate" class="form-control" placeholder="">
+        </div> 
+        <div class="col-md-1 col-sm-1"></div>    
+        <label class="col-md-1 col-sm-1 col-form-label text-sm-right">Salary To</label>                          
+        <div class="col-md-4 col-sm-4 mb-1">
+        <input type="date"  name ="Wps_ToDate" [(ngModel)]="Wps_ToDate" class="form-control" placeholder="">
+        </div>     
+    </div>  -->
+    <!-- <div class="form-row  mb-2">
+       
+        <div class="col-md-1 col-sm-1"></div>    
+        <button (click)="Search_Salary_Employee()"  mat-raised-button type="submit" class="other-button-style pull-left mr-1">Search Employees</button>
+    </div> -->
+</div>
+</div>
+</div>
+</form>
+</div> 
+</div>
+</div>
+
+<div class="col-md-12  mt-2" style="border: 1;margin-left: -10px !important;">
+    <div class="dt-card cardalt mb-0 pb-1" style="background-color: white;" >  
+    <div class="card-body card-body-for-searchedit-lead-section">
+     <div class="table-responsive"  [style.height.px]="myInnerHeight" style="margin-top: -17px!important;">  
+    <table class="table table-hover table-for-sale-search-section-diary">
+    <thead class="grid_hdr_wrp">
+    <th >EMPLOYEE CODE</th>        
+    <th > EMPLOYEE NAME</th>
+    <!-- <th ></th> -->
+    <!-- <th > DEPARTMENT</th> -->
+    <th >DATE OF JOINING</th>
+    <th >MONTHY GROSS PAY</th>  
+    <th >TOTAL WORKING DAYS</th>
+    <th > SALARY PER DAY </th>
+    <th >TOTAL ATTENDANCE WORK DONE</th>        
+    <th >LEAVE</th>
+    <th > LOP</th>
+    <th > DEDUCTION  AMOUNT ON LEAVE</th>
+    <th >MEDICLAIM</th> 
+    
+    <th >REMARK</th>
+    <!-- <th >EXCESS DEDUCTION</th> -->
+    <!-- <th >ADVANCE DEDUCTION</th>
+    <th > LOAN CUTTING </th> -->
+    <th > ESI SALARY</th>
+    <th > ESI .75%</th>
+    <th > PF SALARY</th>
+    <th > PF 12%</th>
+    <th >TOTAL PAYMENT</th>
+    <th ></th>
+    </thead>
+    <tbody  *ngFor="let Salary_Calculation_Details_D of Salary_Calculation_Details_Data; let i = index" >
+    <tr>
+    <td class="td-padding">{{Salary_Calculation_Details_D["Employee_Code"]}} </td>          
+    <td class="col-md-1">{{Salary_Calculation_Details_D["Employee_Details_Name"]}}</td>
+    <!-- <td class="td-padding">
+    <div class="col-md-12">                    
+      <button  [hidden]="Print_Button==false" (click)="Print_Click(Salary_Calculation_Details_D,i)"  mat-raised-button type="submit" class="other-button-style pull-left mr-1">Print</button>
+    </div>
+</td> -->
+    <!-- <td class="col-md-1">{{Salary_Calculation_Details_D["Department"]}}</td> -->
+    <td class="col-md-1">{{Salary_Calculation_Details_D["DateOfJoin"]}}</td>
+    <td class="td-padding">{{Salary_Calculation_Details_D["Basic_Salary"]}}</td>          
+    <td class="col-md-1">{{Salary_Calculation_Details_D["Total_Working_Days"]}}</td>
+    <td class="col-md-1">{{Salary_Calculation_Details_D["Salary_Per_Day"]}}</td>
+    <td class="col-md-1">{{Salary_Calculation_Details_D["Present_Days"]}}</td>     
+    <td class="col-md-1">{{Salary_Calculation_Details_D["Absent_Days"]}}</td>
+    
+    <td class="inner-tables-colmn-to-crect-alighn-location td-padding" style="width:150px;">
+        <input matInput type="number"  name={{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}C{{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}
+        [(ngModel)]="Salary_Calculation_Details_D.LOP" (ngModelChange)="Ded_Amount(i)" class="col-md-9 input-text-item-sales-section-group-diary input-allighn-to-crect-wole-paddings mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn">
+      </td>
+      <td class="inner-tables-colmn-to-crect-alighn-location td-padding" style="width:150px;">
+        <input matInput type="number"  readonly name={{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}d{{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}
+        [(ngModel)]="Salary_Calculation_Details_D.Leave_Amount" (ngModelChange)="Calcualtion_Total(i)"  class="col-md-9 input-text-item-sales-section-group-diary input-allighn-to-crect-wole-paddings mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn">
+      </td>
+      <td class="inner-tables-colmn-to-crect-alighn-location td-padding" style="width:150px;">
+        <input matInput type="number"  name={{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}e{{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}
+        [(ngModel)]="Salary_Calculation_Details_D.Mediclaim" (ngModelChange)="Calcualtion_Total(i)" class="col-md-9 input-text-item-sales-section-group-diary input-allighn-to-crect-wole-paddings mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn">
+      </td>
+      <!-- <td class="inner-tables-colmn-to-crect-alighn-location td-padding" style="width:150px;">
+        <input matInput type="number"  name={{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}f{{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}
+        [(ngModel)]="Salary_Calculation_Details_D.Excess_Deduction" (ngModelChange)="Calcualtion_Total(i)"  class="col-md-9 input-text-item-sales-section-group-diary input-allighn-to-crect-wole-paddings mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn">
+      </td> -->
+
+
+      <td class="inner-tables-colmn-to-crect-alighn-location td-padding" style="width:150px;">
+        <input matInput type="text"  name={{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}f{{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}
+        [(ngModel)]="Salary_Calculation_Details_D.Remarks" (ngModelChange)="Calcualtion_Total(i)"  class="col-md-9 input-text-item-sales-section-group-diary input-allighn-to-crect-wole-paddings mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn">
+      </td>
+
+
+
+      <!-- <td class="inner-tables-colmn-to-crect-alighn-location td-padding" style="width:150px;">
+        <input matInput type="number" readonly name={{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}g{{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}
+        [(ngModel)]="Salary_Calculation_Details_D.Advance_Amount" (ngModelChange)="Calcualtion_Total(i)"  (ngModelChange)="Calcualtion_Total(i)"  class="col-md-9 input-text-item-sales-section-group-diary input-allighn-to-crect-wole-paddings mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn">
+      </td>
+      <td class="inner-tables-colmn-to-crect-alighn-location td-padding" style="width:150px;">
+        <input matInput type="number" readonly name={{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}h{{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}
+        [(ngModel)]="Salary_Calculation_Details_D.Loan_Amount"  (ngModelChange)="Calcualtion_Total(i)"  class="col-md-9 input-text-item-sales-section-group-diary input-allighn-to-crect-wole-paddings mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn">
+      </td> -->
+      <td class="inner-tables-colmn-to-crect-alighn-location td-padding" style="width:150px;">
+        <input matInput type="number"  name={{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}i{{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}
+        [(ngModel)]="Salary_Calculation_Details_D.ESI_Salary"  class="col-md-9 input-text-item-sales-section-group-diary input-allighn-to-crect-wole-paddings mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn">
+      </td>
+      <td class="inner-tables-colmn-to-crect-alighn-location td-padding" style="width:150px;">
+        <input matInput type="number"  name={{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}j{{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}
+        [(ngModel)]="Salary_Calculation_Details_D.ESI_Amount"  (ngModelChange)="Calcualtion_Total(i)"  class="col-md-9 input-text-item-sales-section-group-diary input-allighn-to-crect-wole-paddings mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn">
+      </td>
+      <td class="inner-tables-colmn-to-crect-alighn-location td-padding" style="width:150px;">
+        <input matInput type="number"  name={{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}k{{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}
+        [(ngModel)]="Salary_Calculation_Details_D.PF_Salary"  class="col-md-9 input-text-item-sales-section-group-diary input-allighn-to-crect-wole-paddings mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn">
+      </td>
+      <td class="inner-tables-colmn-to-crect-alighn-location td-padding" style="width:150px;">
+        <input matInput type="number"  name={{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}l{{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}
+        [(ngModel)]="Salary_Calculation_Details_D.PF_Amount" (ngModelChange)="Calcualtion_Total(i)"   class="col-md-9 input-text-item-sales-section-group-diary input-allighn-to-crect-wole-paddings mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn">
+      </td>
+      <td class="inner-tables-colmn-to-crect-alighn-location td-padding" style="width:150px;">
+        <input matInput type="number" readonly name={{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}m{{Salary_Calculation_Details_D.Salary_Calculation_Details_Id}}
+        [(ngModel)]="Salary_Calculation_Details_D.Total_Amount"  class="col-md-9 input-text-item-sales-section-group-diary input-allighn-to-crect-wole-paddings mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn">
+      </td>
+    
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+</div>  
+
+<!-- <div class="col-md-12 mt-3">
+<button mat-raised-button type="submit"  id="Save_Button" class="save-button-style pull-right mr-1" (click)="Save_Salary_Calculation_Master()">Calculate Salary</button>
+<button mat-raised-button type="submit"class="close-button-style pull-right mr-1 mb-2 " (click)="Close_Click()">Close</button>
+</div> -->
+</div>
+<div class="row" *ngIf="!Entry_View">
+<div class="col-md-12 mt-2 mb-2">  
+<div class="dt-card-search mb-2 pb-1" >         
+<div class="dt-card__body mt-1 mb-0 pb-0" style="    background-color: #fff;
+background-clip: border-box;
+border: 1px solid #eeeeee;
+border-radius: 0.25rem;
+padding: 20px 0;">
+<form class="mb-0">    
+<div class="form-row  mb-2" style="align-items: center;">
+<label class="col-md-1 col-sm-0 col-form-label text-sm-right mr-0" style="text-align: right;">From Date</label>                          
+<div class="col-md-2 col-sm-2 mb-1 mr-2">
+<input type="date" name="Search_FromDate" [(ngModel)]="Search_FromDate" class="form-control" placeholder="">
+</div>                
+<div class="form-row  mb-2"></div>      
+<label class="col-md-1 col-sm-0 col-form-label text-sm-right mr-0" style="text-align: right;">To Date</label>
+<div class="col-md-2 col-sm-2 mb-1 mr-2">
+<input type="date"  name="Search_ToDate" [(ngModel)]="Search_ToDate" class="form-control" placeholder="">
+</div> 
+<div class="form-row  mb-2"></div>      
+<!-- <label class="col-md-0 col-sm-0 col-form-label text-sm-right mr-0">Store</label>
+<div class="col-md-2 col-sm-2 mb-2">
+    <input Input type="text"  class="form-control" [matAutocomplete]="autoc4" placeholder="" [(ngModel)]="Search_Store_"  name="Search_Store_"  
+        (click)="Search_Store_Typeahead($event)" (keyup)="Search_Store_Typeahead($event)">
+    </div> 
+    <mat-autocomplete #autoc4="matAutocomplete" [displayWith]="display_Store">
+        <mat-option *ngIf="issLoading">
+            <mat-spinner diameter="500"></mat-spinner>
+        </mat-option>
+        <ng-container *ngIf="!issLoading">
+            <mat-option *ngFor="let Store_T of Store_Type_Data_Filter" [value]="Store_T">
+                <span name="Store_T.Store_Name">{{Store_T.Store_Name}}</span>
+            </mat-option>
+        </ng-container>
+    </mat-autocomplete>  -->
+<!-- <div class="form-row  mb-2"></div>      
+<label class="col-md-0 col-sm-0 col-form-label text-sm-right ml-2">Calculation NO</label>
+<div class="col-md-2 col-sm-2 mb-1">
+<input type="text"  name="Calculation_No_Search" [(ngModel)]="Calculation_No_Search" class="form-control" placeholder="">
+</div>  -->
+
+<div class="col-md-06" style="float: right;">
+    <button (click)="Search_Salary_Calculation_Master()"   type="submit" class="other-button-style pull-left m-0 mr-1 mb-1">Search</button>
+    <button (click)="Create_New()"   type="submit"  class="save-button-style pull-left m-0 mb-1">NEW </button>
+</div>
+</div>
+</form>
+</div>
+</div>        
+</div> 
+<div class="col-md-12  mt-0" style="border: 1;">
+<div class="dt-card mb-0 pb-1" style="background-color: white;" >  
+<div class="card-body card-body-for-searchedit-lead-section">
+<div class="table-responsive" style="background-color: white;" [style.height.px]="myInnerHeight"
+style="overflow-y: scroll; ">
+<div [@listAnimation]="Salary_Calculation_Master_Data.length">
+<table class="table table-hover table-for-sale-search-section-diary">
+<thead class="grid_hdr_wrp">
+<th >Payment Date</th>
+<!-- <th >Calculation No</th> -->
+<!-- <th >Download WPS</th> -->
+<!-- <th >Download All</th> -->
+<th >EDIT</th>
+<th >DELETE</th>
+</thead>
+<tbody  *ngFor="let Salary_Calculation_Master_D of Salary_Calculation_Master_Data; let i = index" >
+<tr>
+<td  class="td-padding">{{Salary_Calculation_Master_D["Search_Date"]}}</td> 
+<!-- <td  class="td-padding">{{Salary_Calculation_Master_D["Calculation_No"]}}</td>      -->
+<!-- <td  class="td-padding">{{Salary_Calculation_Master_D["Store_Name"]}}</td>          -->
+<!-- <td  class="td-padding" > <button (click)="Downloadwpflist(Salary_Calculation_Master_D,i)"   mat-raised-button type="submit"  class="save-button-style pull-left mr-1 ">Download WPS</button></td>
+<td  class="td-padding" > <button (click)="Downloadalllist(Salary_Calculation_Master_D,i)"   mat-raised-button type="submit"  class="save-button-style pull-left mr-1 ">Download All</button></td> -->
+<td  class="td-padding" > <span class="icon-background2 mr-1" [hidden]="Salary_Calculation_Master_Edit==false"   (click)="Edit_Salary_Calculation_Master(Salary_Calculation_Master_D,i)" > <mat-icon class="text-green small" >edit</mat-icon></span></td>
+
+<td class="td-padding"> <span class="icon-background3 mr-1" [hidden]="Salary_Calculation_Master_Dlete==false"  (click)="Delete_Salary_Calculation_Master(Salary_Calculation_Master_D.Salary_Calculation_Master_Id,i)" > <mat-icon class="text-red small" >close</mat-icon></span> </td>      
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- <div class="row"  style="text-align: center;">
+<div class="col-md-12 buttons-next-previous">
+<button mat-raised-button type="submit" (click)="previous_Click()"  class="btn btn-danger change-colour-button buttons-next-previous-edit-portion p-2" style="background: none;"><i class="fa fa-chevron-left" aria-hidden="true" style="color:#5f6368;"></i></button>
+<button mat-raised-button type="submit"  (click)="Next_Click()" class="btn btn-danger change-colour-button buttons-next-previous-edit-portion p-2" style="background: none;"><i class="fa fa-chevron-right" aria-hidden="true" style="color: #5f6368;"></i></button>
+</div>
+</div> -->
+</div>
+</div>
+</div>   
+</div>
+</div>
+
+ <div  id="Slip_Div" style="display:none;">
+<div class="col-md-12" style="height: 5%;">
+</div>
+<body>
+<table  style="width:90%;margin-left: 6%!important;  border: 1px solid black;border-collapse: collapse;">
+<tr>
+<th  style="height: 70px;width:33%;border: 1px solid black;border-collapse: collapse;"colspan="3"></th>
+<th style="border: 1px solid black;border-collapse: collapse;" colspan="3"> 
+<b><h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GRAND ASSOCIATE</h3></b>&nbsp;&nbsp;&nbsp;&nbsp;
+<b> 8/263-2,FIRST FLOOR,OPP.SOUTH INDIAN BANK ,</b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b>MARADU P.O KOCHI,KERALA -682304</b></th>
+</tr>
+<tr>
+<th style="border: 1px solid black;border-collapse: collapse;" colspan="3"  >PAY SLIP FOR</th>
+<td style="border: 1px solid black;border-collapse: collapse;width:45%;">NOVEMBER</td>
+<td style="border: 1px solid black;border-collapse: collapse;">2021</td></tr>
+</table>
+<br>
+<table style="border: 1px solid black;border-collapse: collapse; width:90%;margin-left: 6%!important;">
+<tr>
+<th style="border: 1px solid black;border-collapse: collapse;text-align:left" colspan="3">EMPLOYEE NAME</th>
+<td style="border: 1px solid black;border-collapse: collapse;">{{Salary_Calculation_Details_.Client_Accounts_Name}}</td>
+<th style="border: 1px solid black;border-collapse: collapse;">CODE</th>
+<td style="border: 1px solid black;border-collapse: collapse;">{{Salary_Calculation_Details_.Client_Accounts_Code}}</td>
+</tr>
+<tr>
+<th style="border: 1px solid black;border-collapse: collapse;text-align:left" colspan="3" >FATHER NAME</th>
+<td style="border: 1px solid black;border-collapse: collapse;">{{Salary_Calculation_Details_.Parent_Name}}</td>
+<th style="border: 1px solid black;border-collapse: collapse;">PAN NO</th>
+<td style="border: 1px solid black;border-collapse: collapse;"></td>
+</tr>
+<tr>
+<th style="border: 1px solid black;border-collapse: collapse;text-align:left" colspan="3">DATE OF BIRTH</th>
+<td style="border: 1px solid black;border-collapse: collapse;">{{Salary_Calculation_Details_.Search_DateOfBirth}}</td>
+<th style="border: 1px solid black;border-collapse: collapse;">UAN AC NO</th>
+<td style="border: 1px solid black;border-collapse: collapse;">{{Salary_Calculation_Details_.UAN_No}}</td>
+</tr>
+<tr>
+<th style="border: 1px solid black;border-collapse: collapse;text-align:left" colspan="3">DATE OF JOINING</th>
+<td style="border: 1px solid black;border-collapse: collapse;">{{Salary_Calculation_Details_.Search_DateOfJoin}} </td>
+<th style="border: 1px solid black;border-collapse: collapse;">ESI AC NO</th>
+<td style="border: 1px solid black;border-collapse: collapse;">{{Salary_Calculation_Details_.ESI_No}} </td>
+</tr>
+<tr>
+<th style="border: 1px solid black;border-collapse: collapse;text-align:left" colspan="3" >DEPARTMENT </th>
+<td style="border: 1px solid black;border-collapse: collapse;">{{Salary_Calculation_Details_.Department_Name}}</td>
+<td style="border: 1px solid black;border-collapse: collapse;"></td>
+<td style="border: 1px solid black;border-collapse: collapse;"></td>
+</tr>
+<tr>
+<th style="border: 1px solid black;border-collapse: collapse; text-align:left" colspan="3">DESIGNATION  </th>
+
+<td style="border: 1px solid black;border-collapse: collapse;">{{Salary_Calculation_Details_.Designation_Name}}</td>
+<td style="border: 1px solid black;border-collapse: collapse;"></td>
+<td style="border: 1px solid black;border-collapse: collapse;"></td>
+
+</tr>
+<tr>
+<th style="border: 1px solid black;border-collapse: collapse; text-align:left" colspan="3" >LOCATION</th>
+<td style="border: 1px solid black;border-collapse: collapse;">ERNAKULAM</td>
+<td style="border: 1px solid black;border-collapse: collapse;"></td>
+<td style="border: 1px solid black;border-collapse: collapse;"></td>
+</tr>
+</table>
+<br>
+<table style="border: 1px solid black;border-collapse: collapse;width:90%;margin-left: 6%!important;">
+<tr>
+<th  style="border: 1px solid black;border-collapse: collapse;text-align:left;width:33%!important;">BASIC SALARY</th>
+<td style="border: 1px solid black;border-collapse: collapse;">{{Salary_Calculation_Details_.Basic_Salary}}</td>
+</tr>
+<tr>
+<th  style="border: 1px solid black;border-collapse: collapse;text-align:left">DEDUCTIONS</th>
+<td style="border: 1px solid black;border-collapse: collapse;">13360</td>
+</tr>
+<tr>
+<th style="border: 1px solid black;border-collapse: collapse;text-align:left">EPF</th>
+<td style="border: 1px solid black;border-collapse: collapse;">{{Salary_Calculation_Details_.PF_Amount}}</td>
+</tr>
+<tr>
+<th style="border: 1px solid black;border-collapse: collapse;text-align:left">ESI</th>
+<td style="border: 1px solid black;border-collapse: collapse;">{{Salary_Calculation_Details_.ESI_Amount}}</td>
+</tr>
+<tr>
+<th style="border: 1px solid black;border-collapse: collapse;text-align:left">NET SALARY PAYABLE  </th>
+<td style="border: 1px solid black;border-collapse: collapse;">{{Salary_Calculation_Details_.Total_Amount}}</td></tr>
+
+</table>
+<br>
+<table style="border: 1px solid black;
+border-collapse: collapse;width:90%;margin-left: 6%!important;">
+<tr>
+  <th style="border: 1px solid black;border-collapse: collapse; width:14%!important;">Leave Type</th>
+  <th style="border: 1px solid black;border-collapse: collapse; width:19%!important;">Leave Balance</th>
+  <th  style="border: 1px solid black;border-collapse: collapse;width:70%" rowspan="4">This is a computer generated payslip and<br>doesn’t require signature.
+  </th>
+</tr>
+<tr>
+<td style="border: 1px solid black;border-collapse: collapse;text-align:center">CL</td>
+<td  style="border: 1px solid black;border-collapse: collapse;text-align:center">12</td>
+</tr>
+<tr>
+<td  style="border: 1px solid black;border-collapse: collapse;text-align:center">PL</td>
+<td style="border: 1px solid black;border-collapse: collapse;text-align:center">11</td></tr>
+<tr>
+  <td style="border: 1px solid black; border-collapse: collapse;text-align:center">SL</td>
+  <td style="border: 1px solid black; border-collapse: collapse;text-align:center">12</td>
+</tr>
+</table>
+</body>
+
+</div>

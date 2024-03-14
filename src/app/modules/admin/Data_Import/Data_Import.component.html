@@ -1,0 +1,676 @@
+<div *ngIf="issLoading" class="overlay" 
+style="margin-top: 21%;margin-left:46% ;
+background-color: transparent;"
+[style.left.px]="spinleft">
+<img src="/assets/img/spinner.gif" width="100px" >
+</div>
+
+<!-- <div class="card-body set-height-scroll-bar-wole-block"> -->
+
+<div class="main-content new-margin-T">
+	<div class="container-fluid">
+		<div
+			class="card-body "
+			
+		>
+			<div class="row" *ngIf="Entry_View">
+			
+
+
+				<div
+				class="col-md-12 pl-0 pr-0 mt-0 mb-2"
+			
+				>
+				<div class="container-fluidprofile">
+				<div class="dt-card mt-2">
+				<div class="dt-card__header">
+				<div class="dt-card__heading">
+				<h3>
+				<i class="icon icon-users icon-fw icon-lg"></i
+				><b style="margin-bottom: 20px"
+				>Followup Call  Status:{{ Student_Name }}</b
+				>
+				</h3>
+				<div classs="mb-2"></div>
+				<hr class="lineheader" />
+				</div>
+				</div>
+				<div class="dt-card__body" style="margin-left: 9px">
+				<div class="mb-0">
+				<div class="form-row">
+				<label
+				class="col-md-2 col-sm-2 col-form-label text-sm-right"
+				>Status<span
+				style="
+				color: #ef071e;
+				font-size: 22px;
+				vertical-align: -webkit-baseline-middle;
+				"
+				>*</span
+				></label
+				>
+				<div class="col-md-3 col-sm-3 mb-1">
+				<input
+				type="text"
+				class="form-control"
+				id="Followup_Status"
+				name="Followup_Status"
+				[matAutocomplete]="auto_FollowUp_Status"
+				[(ngModel)]="Followup_Status_"
+				(click)="Search_Status_Typeahead($event)"
+				/>
+				</div>
+				<mat-autocomplete
+				#auto_FollowUp_Status="matAutocomplete"
+				[displayWith]="display_Followup_Status"
+				>
+				<mat-option *ngIf="issLoading"
+				><mat-spinner diameter="500"></mat-spinner
+				></mat-option>
+				<ng-container *ngIf="!issLoading">
+				<mat-option
+				*ngFor="let Status of Followup_Status_Data"
+				[value]="Status"
+				>
+				<span
+				><div (click)="Status_Change(Status)">
+				{{ Status.Status_Name }}
+				</div></span
+				>
+				</mat-option>
+				</ng-container>
+				</mat-autocomplete>
+				<div class="col-md-1 col-sm-1"></div>
+				<label
+				class="col-md-2 col-sm-2 col-form-label text-sm-right"
+				>To staff<span
+				style="
+				color: #ef071e;
+				font-size: 22px;
+				vertical-align: -webkit-baseline-middle;
+				"
+				>*</span
+				></label
+				>
+				<div class="col-md-3 col-sm-3 mb-1">
+				<input
+				type="text"
+				class="form-control"
+				[matAutocomplete]="auto_Followup_Users"
+				name="Followup_Users_"
+				[(ngModel)]="Followup_Users_"
+				(click)="Search_User_Typeahead($event)"
+				(keyup)="Search_User_Typeahead($event)"
+				/>
+				</div>
+				<mat-autocomplete
+				#auto_Followup_Users="matAutocomplete"
+				[displayWith]="display_Followup_Users"
+				>
+				<mat-option *ngIf="issLoading"
+				><mat-spinner diameter="500"></mat-spinner
+				></mat-option>
+				<ng-container *ngIf="!issLoading">
+				<mat-option
+				*ngFor="let Users of Followup_Users_Data_Filter"
+				[value]="Users"
+				>
+				<span>{{ Users.Users_Name }}</span>
+				</mat-option>
+				</ng-container>
+				</mat-autocomplete>
+				</div>
+				
+				<div class="form-row">
+				<label
+				class="col-md-2 col-sm-2 col-form-label text-sm-right"
+				>Followup Call Comments<span
+				style="
+				color: #ef071e;
+				font-size: 22px;
+				vertical-align: -webkit-baseline-middle;
+				"
+				>*</span
+				></label
+				>
+				<div class="col-md-9 col-sm-3 mb-1">
+				<input
+				type="text"
+				class="form-control"
+				placeholder=""
+				name="Student_Followup_.Remark"
+				[(ngModel)]="Student_Followup_.Remark"
+				/>
+				</div>
+				</div>
+				
+				<div class="form-row" [hidden]="Next_FollowUp_Date_Visible">
+				<label
+				class="col-md-2 col-sm-2 col-form-label text-sm-right"
+				>Next Follow Up Date<span
+				style="
+				color: #ef071e;
+				font-size: 22px;
+				vertical-align: -webkit-baseline-middle;
+				"
+				>*</span
+				></label
+				>
+				<div class="col-md-3 col-sm-3 mb-1">				
+				<mat-form-field
+				class="col-md-8 form-control mrgn-crct-input-text-div-tre-prt-sles1 mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn"
+				style="height: 40px; padding-top: 7px !important"
+				>
+				<input
+				matInput
+				[matDatepicker]="dp13"
+				placeholder=""
+				[min]="minDate"
+				[(ngModel)]="Student_Followup_.Next_FollowUp_Date"
+				/>
+				<mat-datepicker-toggle
+				matSuffix
+				[for]="dp13"
+				></mat-datepicker-toggle>
+				<mat-datepicker #dp13></mat-datepicker>
+				</mat-form-field>
+				</div>			
+				</div>				
+				</div>
+				</div>
+				</div>
+				</div>
+				</div>
+
+
+
+				<div class="col-md-12 pl-0 pr-0 mt-0 mb-2">
+					<div class="dt-card mb-2 mt-0" style="background-color: #ffff">
+						<div
+							class="card-body set-height-scroll-bar-wole-block"
+							style="height: 100%;overflow-y: auto;"
+						>
+							<div class="form-row">
+								
+								<div class="col-md-12 pb-1">
+									<h3 style="margin-top:0px;"><b>Excel format</b></h3>
+									<p style="margin: 0px;">Column names are case sesitive</p> &nbsp;
+									<div class="col-md-12">
+										<label class="col-md-3"></label>
+									</div>
+									<div class="col-lg-12 p-0 Student_Excel_img">
+									  <img src="assets/img/Data_Migration_Excel_Image.png" alt="Responsive image"/><br />	
+									</div>
+									<label></label>
+									
+								</div>
+								
+
+	<div class="p-0 mb-1 mr-1">
+		<div class="mob-flt">
+		  <a style="color: white" href="assets/img/Data_Migration_Format.xlsx"download>
+			  <button
+				  mat-raised-button
+				  type="submit"
+				  id="Download"
+				  class="other-button-style btnflot pull-right mr-1"
+				  name="Download_Button">
+				  Download Excel Format
+			  </button>
+		  </a>
+		</div>
+	  </div>
+
+								<div class=" p-0 mb-1" style="    display: flex;
+								align-items: center;">
+									
+										<button
+											class="other-button-style pull-left mr-1 mb-2 pl-2 pr-2 mt-0"
+											type="button"
+											style="background-color: #5d6071;min-height: 36px;"
+											(click)="fileInput4.click()"
+										>
+											<span>Choose File</span>
+											<input
+												#fileInput4
+												type="file"
+												name="File"
+												[(ngModel)]="File"
+												(change)="incomingfile($event)"
+												style="display: none"
+												placeholder="Upload file"
+												accept=".xlsx"
+											/>
+										</button>
+										<div class="col-md-0">
+											{{ Display_File_Name_ }}
+										</div>
+								
+									<!-- <div class="col-md-4 pull-right" style="margin-right: 180px; margin-top: 14px;"> {{Display_File_Name_}} -->
+								</div>
+
+								
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-12 pl-0 pr-0 mt-0 mb-2" *ngIf="Entry_View">
+					<!-- <div class="dt-card mt-2 mb-2" style="background-color: #ffff">
+						<div class="form-row">
+							<div class="col-md-4">
+								<label
+									><h3 style="margin:0px;"><b>Data in Excel</b></h3></label
+								>
+							</div>
+							<div class="col-md-12">
+								<div class="card-body">
+									<div
+										class="table-responsive"
+										[style.height.px]=""
+										style="overflow-y: scroll; min-height:200px;"
+									>
+										<table class="table table-hover">
+											<thead class="bg-col-stock-add-diary">
+												<th></th>
+												<th>Sl No</th>
+												
+												<th>Name</th>
+												
+												<th>Mobile</th>
+												<th>Whatsapp</th>
+												<th>Email</th>
+												<th>Address</th>
+												
+												<th>Remarks</th>
+												<th [hidden]="Course_Import_Delete == false"></th>
+											</thead>
+											<tbody
+												class="bk_tb_bg"
+												*ngFor="
+													let Student_Import_Details of Student_Import_Details_Data;
+													let i = index
+												"
+											>
+												<div class="col-md-1 mt-2">
+													<span
+														class="icon-background3 mr-1"
+														[hidden]="Course_Import_Delete == false"
+														(click)="
+															Delete_Student_Import(
+																Student_Import_Details.Student_Import_Id,
+																i
+															)
+														"
+													>
+														<mat-icon class="text-red small"
+															>close</mat-icon
+														></span
+													>
+												</div>
+												<td>{{ i + 1 }}</td>
+												
+												<td>{{ Student_Import_Details["Name"] }}</td>
+												
+												<td>{{ Student_Import_Details["Mobile"] }}</td>
+												<td>{{ Student_Import_Details["Whatsapp"] }}</td>
+												<td>{{ Student_Import_Details["Email"] }}</td>
+												<td>{{ Student_Import_Details["Address"] }}</td>
+												
+												<td>{{ Student_Import_Details["Remarks"] }}</td>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div> -->
+					<div class="col-md-12 pl-0 pr-0 mt-0 mb-2">
+						
+						<button
+							mat-raised-button
+							type="submit"
+							id="Save_Button"
+							class="other-button-style btnflot pull-right mr-5"
+							name="Save_Button"
+							(click)="Save_Data_Migration()"
+						>
+							Import
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="row" *ngIf="Search_view">
+				<div class="container-import1">
+					<div class="col-md-12">
+						<div class="dt-card">
+							<div class="card-body">
+								<form>
+									<div class="row">
+										<label
+											class="col-md-0 col-sm-0 col-form-label text-sm-right ml-2 pl-2"
+											>Date</label
+										>
+										<div
+											_ngcontent-xmy-c9=""
+											class="col-md-1 lead-search-section-date-alighn label-down-alighn-stk-ad-mstr-prhse-rte pt-1"
+										>
+											<div
+												_ngcontent-xmy-c9=""
+												class="form-check"
+												style="margin-top: 1px"
+											>
+												<label _ngcontent-xmy-c9="" class="form-check-label">
+													<input
+														type="checkbox"
+														class="form-check-input"
+														placeholder="Update Stock"
+														[(ngModel)]="Look_In_Date"
+														name="Look_In_Date"
+													/>
+													<span
+														_ngcontent-xmy-c9=""
+														class="form-check-sign"
+														style="margin-top: -4px"
+														><span _ngcontent-xmy-c9="" class="check"></span>
+													</span>
+												</label>
+											</div>
+										</div>
+										<label
+											class="col-md-1 col-sm-1 col-form-label text-sm-right"
+											>From</label
+										>
+										<div class="col-md-2 col-sm-2 mb-1">
+											<!-- <input type="date" class="form-control p-0 pl-1" placeholder="From" [(ngModel)]="Search_FromDate" [(ngModel)]="Search_FromDate" > -->
+											<mat-form-field
+												class=" form-control mrgn-crct-input-text-div-tre-prt-sles1 mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn"
+												style=" padding-top: 9px !important"
+											>
+												<input
+													matInput
+													[matDatepicker]="dp18"
+													placeholder=""
+													[(ngModel)]="Search_FromDate"
+												/>
+												<mat-datepicker-toggle
+													matSuffix
+													[for]="dp18"
+												></mat-datepicker-toggle>
+												<mat-datepicker #dp18></mat-datepicker>
+											</mat-form-field>
+										</div>
+										<label
+											class="col-md-0 col-sm-0 col-form-label text-sm-right"
+											>To</label
+										>
+										<div class="col-md-2 col-sm-2 mb-1">
+											<!-- <input type="date" class="form-control p-0 pl-1" placeholder="To"  [(ngModel)]="Search_ToDate" name="Search_ToDate"> -->
+											<mat-form-field
+												class="form-control mrgn-crct-input-text-div-tre-prt-sles1 mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn"
+												
+												style="	
+													padding-top: 9px !important;
+												"
+											>
+												<input
+													matInput
+													[matDatepicker]="dpdate"
+													placeholder=""
+													[(ngModel)]="Search_ToDate"
+													name="Search_ToDate"
+												/>
+												<mat-datepicker-toggle
+													matSuffix
+													[for]="dpdate"
+												></mat-datepicker-toggle>
+												<mat-datepicker #dpdate></mat-datepicker>
+											</mat-form-field>
+										</div>
+										<div class="col-md-3">
+											<button
+												(click)="Create_New()"
+												mat-raised-button
+												type="submit"
+												class="save-button-style btnflot pull-right mr-1"
+											>
+												New Import
+											</button>
+											<button
+												(click)="Search_Student_Import()"
+												mat-raised-button
+												type="submit"
+												class="other-button-style btnflot mr-1"
+											>
+												Search
+											</button>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-12 pl-3 pr-8 mt-2" style="border: 1">
+					<div class="container-import">
+						<div class="dt-card mb-0 pb-1" style="background-color: #ffff">
+							<div class="table-responsive">
+								<table
+									class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format"
+								>
+									<thead>
+										<th>Sl No</th>
+										<th>User Name</th>
+										<th>Date</th>
+
+										<th></th>
+									</thead>
+									<tbody
+										*ngFor="
+											let Course_Import1 of Search_Course_Import_Details_Data;
+											let i = index
+										"
+									>
+										<tr>
+											<td>
+												{{ i + 1 }}
+											</td>
+											<td>
+												{{ Student_Import1["User_Details_Name"] }}
+											</td>
+											<td>
+												{{ Student_Import1["Entry_Date"] }}
+											</td>
+										</tr>
+									</tbody>
+									<label class="entry-num">Entries : {{ Total_Entries }}</label>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row" *ngIf="Duplicate_View">
+				<div class="col-md-12">
+					<div class="dt-card" style="background-color: #ffff">
+						<!-- <h3 style=" border-bottom:0;">Import Summary</h3>     dt-card mt-2         -->
+						<h3 style="padding-left: 18px">Import Summary</h3>
+
+						<div class="col-md-12 pl-0 pr-0 mt-0 mb-2">
+							<div class="" style="margin-left: 39px; margin-right: 47px">
+								<div class="card-body" style="margin-top: -48px">
+									<div class="row pl-3 mt-7">
+										<div class="col-lg-3 col-md-6 col-sm-6">
+											<div
+												class="card card-stats mb-0"
+												style="margin-left: 42px; padding-bottom: 21px"
+											>
+												<div
+													class="card-header card-header-warning card-header-icon"
+												>
+													<div
+														class="card-icon"
+														style="
+															background: linear-gradient(
+																60deg,
+																#ffa726,
+																#fb8c00
+															);
+														"
+													>
+														<i class="material-icons" style="color: #ffff"
+															>content_copy</i
+														>
+													</div>
+													<h2 class="card-category">Total Imports</h2>
+													<h3 style="color: #000!important;">
+														{{ Total_Import_Entries }}
+													</h3>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-3 col-md-6 col-sm-6">
+											<div
+												class="card card-stats mb-0"
+												style="margin-left: 130px; padding-bottom: 21px"
+											>
+												<div
+													class="card-header card-header-success card-header-icon"
+												>
+													<div
+														class="card-icon"
+														style="
+															background: linear-gradient(
+																60deg,
+																#66bb6a,
+																#43a047
+															);
+														"
+													>
+														<i class="material-icons" style="color: #ffff"
+															>store</i
+														>
+													</div>
+													<h2 class="card-category">Total Imported</h2>
+													<!-- card-title -->
+													<h3 style="color: #000!important;">
+														{{ Total_Imports }}
+													</h3>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-3 col-md-6 col-sm-6">
+											<div
+												class="card card-stats mb-0"
+												style="margin-left: 257px; padding-bottom: 21px"
+											>
+												<div
+													class="card-header card-header-danger card-header-icon"
+												>
+													<div
+														class="card-icon"
+														style="
+															background: linear-gradient(
+																60deg,
+																#ef5350,
+																#e53935
+															);
+														"
+													>
+														<i class="material-icons" style="color: #ffff"
+															>info_outline</i
+														>
+													</div>
+													<h2 class="card-category">Duplicates found</h2>
+													<h3 style="color: #000!important;">
+														{{ Total_Duplicate_Data }}
+													</h3>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-12 pl-3 pr-8 mt-0" style="border: 1">
+							<h3>Duplicate Entries</h3>
+							<div class="container-import">
+								<div
+									class="dt-card mb-0 pb-1"
+									style="margin-left: 20px; background-color: white"
+								>
+									<div class="table-responsive" [style.height.px]="myInnerHeight"
+									style="overflow-y: scroll"
+									id="profile">
+										<table
+											class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format" 
+										>
+											<thead>
+												<th>Sl No</th>
+												<th>Student Name</th>
+												<th>Mobile</th>
+												<th>Handled By</th>
+
+												<th></th>
+											</thead>
+											<tbody
+												*ngFor="
+													let Student_Duplicates of Student_Duplicate_Array;
+													let i = index
+												"
+											>
+												<tr>
+													<td>
+														{{ i + 1 }}
+													</td>
+													<td>
+														{{ Student_Duplicates["Student_Name"] }}
+													</td>
+													<td>
+														{{ Student_Duplicates["Mobile"] }}
+													</td>
+													<td>
+														{{ Student_Duplicates["By_User_Name"] }}
+													</td>
+												</tr>
+											</tbody>
+											
+										</table>
+										
+									</div>
+									<div class="col-md-12 mt-2 mb-2 row" style="    align-items: center;
+									justify-content: space-between;
+								">
+										<label class="entry-num"
+												>Entries : {{ Total_Entries }}</label
+											>
+										<!-- <button mat-raised-button type="submit" class="other-button-style btnflot pull-right mt-3" style="margin-right: -30px;" (click)="Close_Click()">Close</button> -->
+										<button
+											(click)="Create_New()"
+											mat-raised-button
+											type="submit"
+											class="other-button-style btnflot pull-right mt-3"
+											style="margin-right: -30px"
+										>
+											Close
+										</button>
+									</div>
+								</div>
+								<!-- <div class="col-md-12 mt-2 mb-2">  
+                        <button mat-raised-button type="submit" class="other-button-style btnflot pull-right" (click)="Close_Click()">Close</button>
+                    </div> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- </div> -->

@@ -1,0 +1,84 @@
+
+<div *ngIf="issLoading" class="overlay">
+    <mat-progress-spinner class="spinner" [color]="color" [mode]="mode" [value]="value">
+    </mat-progress-spinner>
+</div>
+<div  id='Topdiv'></div>
+<div  id='Bottomdiv'></div>
+<div class="main-content pb-0"  >
+
+    <div class="container-fluid">
+        <div class="row" *ngIf="Entry_View"  >
+        
+        </div>
+        </div>
+
+<div class="row" *ngIf="!Entry_View" >
+
+    <div class="col-md-12 pl-3 pr-8 mt-2" style="border: 1" *ngIf="isDesktopMenu()">
+    <div class="dt-card mb-0 pb-1 "  >        
+    <div class="dt-card__body " >
+    <div class="mb-0">          
+    <div class="form-row">
+
+         
+
+        <div class="col-md-0 col-sm-0">  
+        <!-- <button (click)="Create_New()" mat-raised-button type="submit"  class="save-button-style pull-right mr-1 ">Create New</button> -->
+        <button style="background-color: #0ab33c;" mat-raised-button type="submit"  [hidden]="Export_View==false" (click)="Export()"class="other-button-style btnflot pull mr-1"><i></i>EXPORT</button>
+        <button (click)="Search_Employees_List()" mat-raised-button type="submit"  class="other-button-style btnflot pull-left mr-1 ">Search</button>
+       
+        
+
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>        
+    </div>
+
+    <div class="col-md-12 pl-3 pr-8 mt-2" style="border: 1" >
+        <!-- *ngIf="isDesktopMenu()" -->
+    <div class="dt-card mb-0 pb-1" style="background-color: white;" >  
+                                                               <!-- style="overflow: scroll;" -->
+    <div class="card-body card-body-for-searchedit-lead-section " >
+    <!-- <div class="table-responsive" > -->
+        <div class="table-responsive" 	style="overflow: scroll;"[style.height.px]="myInnerHeight">
+    <!-- <table class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format" style="width: 130% !important;"> -->
+        <table class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format" >
+            <!-- style="width: 100%;" -->
+            <thead>  
+    <th >No</th>     
+    <th  >Employee Name</th>  
+    <th  >Employee Code</th>  
+    <th  >Designation</th>  
+    <th  >Basic Salary</th>  
+    <th  >CL Count</th>  
+    <th  >PL Count</th>  
+    <th  >Working Status</th>  
+    </thead>
+    <tbody  *ngFor="let Admission_Report_ of Employees_List_Data; let i = index" >
+    <tr>
+        <td  >{{i+1}}</td>
+    <td  >{{Admission_Report_["Employee_Details_Name"]}}</td>
+    <td >{{Admission_Report_["Employee_Code"]}}</td>
+    <td  >{{Admission_Report_["Designation_Name"]}}</td>
+    <td >{{Admission_Report_["Basic_Salary"]}}</td>
+    <td  >{{Admission_Report_["CL_Count"]}}</td>
+    <td >{{Admission_Report_["PL_Count"]}}</td>
+    <td >{{Admission_Report_["Working_Status"]}}</td>
+    
+    </tr>
+    </tbody>
+    </table>
+
+    </div>
+         
+    </div>
+    </div>
+    </div>
+    <label class="entry-num">Entries : {{Total_Entries}}</label>
+</div>
+
+</div>
+

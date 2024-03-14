@@ -1,0 +1,1111 @@
+
+<div *ngIf="issLoading" class="overlay">
+    <mat-progress-spinner class="spinner" [color]="color" [mode]="mode" [value]="value">
+    </mat-progress-spinner>
+</div>
+<div  id='Topdiv'></div>
+<div  id='Bottomdiv'></div>
+<div class="main-content pb-0"  >
+
+    <div class="container-fluid">
+        <div class="row" *ngIf="Entry_View" >
+        
+        </div>
+        </div>
+
+<div class="row" *ngIf="!Entry_View" >
+
+    <div class="col-md-12 pl-3 pr-8 mt-2" style="border: 1" *ngIf="isDesktopMenu()">
+    <div class="dt-card mb-0 pb-1 " >        
+    <div class="dt-card__body" >
+    <div class="mb-0">          
+    <div class="form-row">
+		<div class="col-md-3 row">
+
+        <label class="col-md-1 col-sm-0 col-form-label text-sm-right">Date</label>  
+        <div class="col-md-1 col-sm-0 mb-1">
+        <div _ngcontent-xmy-c9="" class="checkbox-to-crect-sales-search-section">
+        <div _ngcontent-xmy-c9="" class="form-check uper-dte-lbel-sales-sctn-new pl-0" >
+        <label _ngcontent-xmy-c9="" class="form-check-label">
+        <input type='checkbox' class="form-check-input" name="Is_Date" [(ngModel)]="Is_Date"   />
+        <span _ngcontent-xmy-c9="" class="form-check-sign"><span _ngcontent-xmy-c9="" class="check">
+        </span>
+        </span>
+        </label>
+        </div>
+        </div>  
+        </div>   
+	
+
+
+        <label class="col-md-3 col-sm-0 col-form-label text-sm-right">From</label>
+        <div class="col-md-6 col-sm-2 mb-1">
+        <!-- <input type="date" class="form-control p-0 pl-1" placeholder="From"[(ngModel)]="FromDate_" name="FromDate_" > -->
+        <mat-form-field class="col-md-12 form-control mrgn-crct-input-text-div-tre-prt-sles1 mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn" 
+        style="height: 40px;padding-top: 7px!important;">
+            <input matInput [matDatepicker]="dp1" placeholder="" [(ngModel)]="FromDate_" name="FromDate_" >
+            <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+            <mat-datepicker #dp1></mat-datepicker>
+            </mat-form-field>
+
+    </div>
+</div>  
+<div class="col-md-3 row">
+        <label class="col-md-4 col-sm-0 col-form-label text-sm-right">To</label>
+        <div class="col-md-8 col-sm-2 mb-1">
+        <!-- <input type="date" class="form-control p-0 pl-1" placeholder="To"  [(ngModel)]="ToDate_" name="ToDate_"> -->
+        <mat-form-field class="col-md-12 form-control mrgn-crct-input-text-div-tre-prt-sles1 mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn" 
+        style="height: 40px !important;padding-top: 7px!important;">
+        <input matInput [matDatepicker]="dpdate" placeholder=""  [(ngModel)]="ToDate_" name="ToDate_">
+        <mat-datepicker-toggle matSuffix [for]="dpdate"></mat-datepicker-toggle>
+        <mat-datepicker #dpdate></mat-datepicker>
+        </mat-form-field>
+
+    </div>
+	</div>
+	<div class="col-md-3 row">
+        <label class="col-md-4 col-sm-0 col-form-label text-sm-right">Level</label>
+        <div class="col-md-8 col-sm-5 mb-1">
+        <input type="text"  class="form-control"  id="CourseSearch_" name="CourseSearch_"  [matAutocomplete]="auto_Course"
+        [(ngModel)]="CourseSearch_" (click)="Search_Course_Typeahead_Forcandidatelist($event)"(keyup)="Search_Course_Typeahead_Forcandidatelist($event)" /></div>  
+        <mat-autocomplete #auto_Course="matAutocomplete" [displayWith]="display_CourseSearch">
+            <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+            <ng-container *ngIf="!issLoading">
+            <mat-option *ngFor="let CourseSearch_T of Course_Data_Filter_Search" [value]="CourseSearch_T">
+            <span>{{CourseSearch_T.Course_Name}}</span>
+            </mat-option>
+            </ng-container>
+        </mat-autocomplete>  
+    </div>
+	
+	<div class="col-md-3 row">
+            <label class="col-md-4 col-sm-0 col-form-label text-sm-right">Batch</label>
+       
+            <div class="col-md-8 col-sm-3 mb-1">
+                <input type="text"  class="form-control"  id="BatchSearch_" name="BatchSearch_"  [matAutocomplete]="auto_Batch"
+                [(ngModel)]="BatchSearch_" (click)="Search_Batch_Typeahead($event)" (keyup)="Search_Batch_Typeahead($event)"/></div>  
+                <mat-autocomplete #auto_Batch="matAutocomplete" [displayWith]="display_BatchSearch">
+                <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+                <ng-container *ngIf="!issLoading">
+                <mat-option *ngFor="let BatchSearch_T of Batch_Data_Filter" [value]="BatchSearch_T">
+                <span>{{BatchSearch_T.Batch_Name}}</span>
+                </mat-option>
+                </ng-container>
+                </mat-autocomplete> 
+                
+                </div>
+				<div class="col-md-3 row">
+    
+        <label class="col-md-4 col-sm-0 col-form-label text-sm-right "> Reading</label>
+        <div class="col-md-8 col-sm-2 mb-1 ">
+        <input type="number" class="form-control" [(ngModel)]="Search_Reading" placeholder=" " >
+        </div> 
+		</div>
+		<div class="col-md-3 row">
+
+        <label class="col-md-4 col-sm-0 col-form-label text-sm-right">Speaking</label>
+            <div class="col-md-8 col-sm-2 mb-1 ">
+                <input type="number" class="form-control" [(ngModel)]="Search_Speaking" placeholder=" " >
+                </div>  
+</div>
+       
+<div class="col-md-3 row">
+
+            <label class="col-md-4 col-sm-0 col-form-label text-sm-right "> Listening</label>
+            <div class="col-md-8 col-sm-2 mb-1 ">
+            <input type="number" class="form-control" [(ngModel)]="Search_Listening" placeholder=" " >
+            </div> 
+			</div>
+			<div class="col-md-3 row">
+    
+            <label class="col-md-4 col-sm-0 col-form-label text-sm-right">Writing</label>
+           <div class="col-md-8 col-sm-2 mb-1 ">
+             <input type="number" class="form-control" [(ngModel)]="Search_Writing" placeholder=" " >
+              </div>  
+			  </div>
+
+			  <div class="col-md-3 row">
+              <label class="col-md-4 col-sm-0 col-form-label text-sm-right">Grammer</label>
+       <div class="col-md-8 col-sm-2 mb-1 ">
+                   <input type="number" class="form-control" [(ngModel)]="Search_Grammer" placeholder=" " >
+                    </div>  
+					</div>
+      
+	
+
+					<div class="col-md-3 row">
+						<label
+						class="col-md-4 col-sm-1 col-form-label text-sm-right"
+						>Mark Status</label
+						>
+						<div class="col-md-8 col-sm-3 mb-1">
+						<select
+						[(ngModel)]="MarkStatus_Type_Search"
+						name="MarkStatus_Type_Search"
+						required
+						class="form-control p-0 pl-1"
+						>
+						<option
+						*ngFor="
+						let MarkStatus_Type_ of MarkStatus_Type_Data
+						"
+						[ngValue]="MarkStatus_Type_"
+						>
+						{{ MarkStatus_Type_.Markstatus_Name }}
+						</option>
+						</select>
+						</div>
+					</div>
+		
+		
+		
+					<div class="col-md-3 row">
+						<label class="col-md-4 col-sm-0 col-form-label text-sm-right pt-1"
+						>Mark From</label
+						>
+						<div class="col-md-8 col-sm-3 mb-1 ml-0">
+						<input
+						type="text"
+						[(ngModel)]="markfrom"
+						name="markfrom"
+						class="form-control"
+						placeholder=" "
+						/>
+						</div>
+						</div>
+		
+						<div class="col-md-3 row">
+						<label class="col-md-4 col-sm-0 col-form-label text-sm-right pt-1"
+						>Mark To</label
+						>
+						<div class="col-md-8 col-sm-3 mb-1 ml-0">
+						<input
+						type="text"
+						[(ngModel)]="markto"
+						name="markto"
+						class="form-control"
+						placeholder=" "
+						/>
+						</div>
+						</div>
+			</div>
+
+
+
+
+
+
+
+			<div class="col-md-12 row" style="    display: flex;
+			justify-content: end;
+			margin-top: 10px;
+			margin-bottom: 10px;">
+            <button style="background-color: #3192b7;" mat-raised-button type="submit"  (click)="New_Transfer()"class="other-button-style btnflot pull mr-1"><i></i>Transfer</button> 
+            <button style="background-color: #0ab33c;" mat-raised-button type="submit"  [hidden]="Export_View==false" (click)="Export()"class="other-button-style btnflot pull mr-1"><i></i>EXPORT</button>
+            <button (click)="Search_CandidateList()" mat-raised-button type="submit"  class="other-button-style btnflot pull-left mr-1 ">Search</button>
+        </div>
+   
+            
+    
+    
+    </div>
+    </div>
+    </div>        
+    </div>
+
+   
+
+
+    <div class="col-md-12 pl-3 pr-8 mt-2" style="border: 1" >
+        <!-- *ngIf="isDesktopMenu()" -->
+    <div class="dt-card mb-0 pb-1" style="background-color: white;" >  
+                                                 <!--  style="overflow: scroll;" -->
+    <div class="card-body card-body-for-searchedit-lead-section" >
+        <div class="table-responsive" 	style="overflow: scroll;"[style.height.px]="myInnerHeight">
+    <!-- <table class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format" style="width: 130% !important;"> -->
+      <table class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format">
+          <!--  style="width: 100%;" -->
+     <thead>  
+        <th class="mb-1 crect-margin-width-table-header-title ">
+            <!-- <label >Select All</label>  -->
+
+            
+              <div _ngcontent-xmy-c9="" class="col-md-2 form-check">
+                  <label _ngcontent-xmy-c9="" class="form-check-label">
+                  <input _ngcontent-xmy-c9="" checked="" class="form-check-input"
+                  [(ngModel)]="Select_Student" (click)="Student_View_Click()" type="checkbox" name="Select_View"
+                  [checked]="Select_View_Check" value="">
+                  <span _ngcontent-xmy-c9="" class="form-check-sign">
+                  <span _ngcontent-xmy-c9="" class="check mt-3"></span>
+                  </span>
+                  </label>
+                  </div>   
+          
+            </th>
+     <th style="width:0%!important;">No</th>
+     <th style="width:7%!important;">Student</th>  
+     <th >Phone</th>    
+     <th >Email</th>    
+     <th style="width: 17%!important;">Level</th>   
+     <th >Batch</th>  
+     <th >Reading</th>  
+     <th >Speaking</th>  
+     <th >Listening</th>  
+     <th >Writing</th>  
+     <th >Grammer</th>  
+	 <th >Total</th> 
+	 <th >Duration(In Days)</th>   
+	 <th >Duration Completed(In Days)</th>  
+	 <th >Rivision</th>   
+	 <th >Rivision Duration Completed(In Days)</th>  
+	 <th >Status</th>  
+     <!-- <th >District</th>   -->
+     </thead>
+    <tbody  *ngFor="let Lead_Report_ of Lead_Report_Data; let i = index" >
+    <tr>
+        <td class="crect-margin-width-table-header-title">
+            <div _ngcontent-xmy-c9="" class="form-check">
+                <label _ngcontent-xmy-c9="" class="form-check-label">
+                <input _ngcontent-xmy-c9="" checked="" class="form-check-input"
+                [(ngModel)]="Lead_Report_.Check_Box_View"  type="checkbox" name="{{Lead_Report_.Student_Id}}"
+                [checked]="Lead_Report_.Check_Box_View" value="">
+                <span _ngcontent-xmy-c9="" class="form-check-sign">
+                <span _ngcontent-xmy-c9="" class="check mt-2"></span>
+                </span>
+                </label>
+                </div>
+        
+        </td>
+    <td  >{{i+1}}</td>
+	<!-- [routerLink]="['/Student']" -->
+    <td  class=" icon-pointer" ><a target="_blank"  (click)="Edit_Lead(Lead_Report_.Student_Id,i)" style="color: #357bfd; font-weight: 800;">{{Lead_Report_["Student"]}}</a></td>
+    <td>{{Lead_Report_["Phone"]}}</td>
+    <td >{{Lead_Report_["Email"]}}</td>
+    <td  >{{Lead_Report_["Course_Name"]}}</td>
+    <td >{{Lead_Report_["Batch_Name"]}}</td>
+    <td >{{Lead_Report_["Reading"]}}</td>
+    <td >{{Lead_Report_["Speaking"]}}</td>
+    <td >{{Lead_Report_["Listening"]}}</td>
+    <td >{{Lead_Report_["Writing"]}}</td>
+    <td >{{Lead_Report_["Grammer"]}}</td>
+	<td >{{Lead_Report_["TotalMark"]}}</td>
+	<td >{{Lead_Report_["Duration"]}}</td>
+	<td >{{Lead_Report_["Duration_Completed"]}}</td>
+	<td >{{Lead_Report_["Revision_Duration"]}}</td>
+	<td >{{Lead_Report_["Revision_Duration_Completed"]}}</td>
+    <td >{{Lead_Report_["Markstatus_Name"]}}</td>
+    <!-- <td >{{Lead_Report_["District_Name"]}}</td> -->
+    <!-- <td  class="col-md-2">{{Lead_Report_["Location"]}}</td> -->
+    </tr>
+    </tbody>
+    </table>
+
+    </div>
+        
+         </div>
+    </div>
+    </div>
+
+
+    <label class="entry-num">Entries : {{Total_Entries}}</label> 
+</div>
+
+
+
+
+
+
+<div class="container-fluidprofile mt-4" *ngIf="Course_View">
+	<!-- <div class="dt-card "  id="course"  [style.height.px]="myInnerHeight" style="overflow-y: scroll;height: 300px;"> -->
+	<div class="dt-card" id="course">
+	<div
+	class="dt-card__body mt-2"
+	style="margin-left: 8% !important"
+	>
+	<form class="mb-0">
+	<div class="form-row">
+	<label
+	class="col-md-1 col-sm-1 col-form-label text-sm-right"
+	>Level<span
+	style="
+	color: #ef071e;
+	font-size: 22px;
+	vertical-align: -webkit-baseline-middle;
+	"
+	>*</span
+	></label
+	>
+	<div class="col-md-4 col-sm-4 mb-1">
+	<input
+	type="text"
+	class="form-control"
+	id="Course_"
+	name="Course_"
+	[matAutocomplete]="auto_Course2"
+	(ngModelChange)="Course_Change()"
+	[(ngModel)]="Course_"
+	(click)="Search_Course_Typeahead_Forcandidatelist($event)"
+	(keyup)="Search_Course_Typeahead_Forcandidatelist($event)"
+	/>
+	</div>
+	<mat-autocomplete
+	#auto_Course2="matAutocomplete"
+	[displayWith]="display_MasterCourse"
+	>
+	<mat-option *ngIf="issLoading"
+	><mat-spinner diameter="500"></mat-spinner
+	></mat-option>
+	<ng-container *ngIf="!issLoading">
+	<mat-option
+	*ngFor="let Course of Course_Data_Filter_Search"
+	[value]="Course"
+	>
+	<span
+	><div
+	(click)="Get_Course_Student(Course)"
+	>
+	{{ Course.Course_Name }}
+	</div></span
+	>
+	</mat-option>
+	</ng-container>
+	</mat-autocomplete>
+	<div class="col-md-1 col-sm-1"></div>
+	<label
+	class="col-md-0 col-sm-0 col-form-label text-sm-right"
+	>Level Details</label
+	>
+	<div class="col-md-4 col-sm-4 mb-1">
+	<input
+	type="text"
+	[(ngModel)]="Student_Course_.Course_Name_Details"
+	name="Course_Name_Details"
+	class="form-control"
+	placeholder=""
+	/>
+	</div>
+	</div>
+	<div class="form-row">
+	<label
+	class="col-md-1 col-sm-1 col-form-label text-sm-right"
+	>Batch<span
+	style="
+	color: #ef071e;
+	font-size: 22px;
+	vertical-align: -webkit-baseline-middle;
+	"
+	>*</span
+	></label
+	>
+	<div class="col-md-4 col-sm-4 mb-1">
+	<input
+	type="text"
+	class="form-control"
+	id="Batch_"
+	name="Batch_"
+	[matAutocomplete]="auto_Batch1"
+	[(ngModel)]="Batch_"
+	(click)="Search_Batch_Typeahead($event)"
+	(keyup)="Search_Batch_Typeahead($event)"
+	/>
+	</div>
+	<mat-autocomplete
+	#auto_Batch1="matAutocomplete"
+	[displayWith]="display_Batch"
+	>
+	<mat-option *ngIf="issLoading"
+	><mat-spinner diameter="500"></mat-spinner
+	></mat-option>
+	<ng-container *ngIf="!issLoading">
+	<mat-option
+	*ngFor="let Batch_1 of Batch_Data_Filter"
+	[value]="Batch_1"
+	>
+	<!-- <span>{{Batch_.Batch_Name}}</span> -->
+	<span (click)="Get_Batch(Batch_1)"
+	><div>{{ Batch_1.Batch_Name }}</div></span
+	>
+	</mat-option>
+	</ng-container>
+	</mat-autocomplete>
+	<div class="col-md-1 col-sm-1"></div>
+	<label
+	class="col-md-0 col-sm-0 col-form-label text-sm-right"
+	>Faculty<span
+	style="
+	color: #ef071e;
+	font-size: 22px;
+	vertical-align: -webkit-baseline-middle;
+	"
+	>*</span
+	></label
+	>
+	<div class="col-md-4 col-sm-4 ml-5">
+	<input
+	type="text"
+	class="form-control"
+	id="Faculty_"
+	name="Faculty_"
+	[matAutocomplete]="auto_Faculty"
+	[(ngModel)]="Faculty_"
+	(click)="Search_User_Typeahead_Faculty($event)"
+	(keyup)="Search_User_Typeahead_Faculty($event)"
+	/>
+	</div>
+	<mat-autocomplete
+	#auto_Faculty="matAutocomplete"
+	[displayWith]="display_Followup_Users"
+	>
+	<mat-option *ngIf="issLoading"
+	><mat-spinner diameter="500"></mat-spinner
+	></mat-option>
+	<ng-container *ngIf="!issLoading">
+	<mat-option
+	*ngFor="let Faculty_ of Faculty_Users_Data_Filter"
+	[value]="Faculty_"
+	>
+	<span>{{ Faculty_.Users_Name }}</span>
+	</mat-option>
+	</ng-container>
+	</mat-autocomplete>
+	</div>
+
+
+
+	<div class="form-row">
+		<!-- <label class="col-md-1 col-sm-1 col-form-label text-sm-right">Does the Student have Laptop?<span style="color: 
+		#ef071e;font-size: 22px;vertical-align: -webkit-baseline-middle;">*</span></label>
+		<div class="col-md-4 col-sm-4 mb-1">
+		<select [(ngModel)]="Laptopdetails_"name="Laptopdetails_" required class="form-control p-0 pl-1">
+		<option *ngFor="let Laptopdetails_Data_T of Laptopdetails_Data"[ngValue]="Laptopdetails_Data_T">{{ Laptopdetails_Data_T.Laptop_details_Name }}</option>
+		</select>
+		</div>
+	
+		<div class="col-md-1 col-sm-1" ></div> -->
+
+		<label class="col-md-1 col-sm-1 col-form-label text-sm-right">Duration(In Days)</label>
+			<div class="col-md-4 col-sm-4 mb-1">
+				<input type="number" [(ngModel)]="Student_Course_.Duration" name="Student_Course_.Duration" class="form-control" placeholder=" ">
+
+			</div>
+
+
+
+	</div>
+
+
+	<div class="form-row">
+	
+		<label class="col-md-1 col-sm-1 col-form-label text-sm-right">Revision Duration(In Days)</label>
+			<div class="col-md-4 col-sm-4 mb-1">
+				<input type="number" [(ngModel)]="Student_Course_.Revision_Duration" name="Student_Course_.Revision_Duration" class="form-control" placeholder=" ">
+
+			</div>
+	</div>
+
+	
+	<!-- <div class="form-row" *ngIf="!Batch_View">
+		<label class="col-md-0 col-sm-0 col-form-label text-sm-right">Start Date<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+		<div class="col-md-3 col-sm-3 mb-2">
+			<input type="date" class="form-control" [(ngModel)]="Batch_.Start_Date" name="Batch_.Start_Date"  placeholder="">
+		   
+		</div>
+	 
+	   <div class="col-md-1 col-sm-1" ></div>
+	   <label class="col-md-0 col-sm-0 col-form-label text-sm-right">End Date<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+	   <div class="col-md-3 col-sm-3 mb-2">
+		   <input type="date" class="form-control" [(ngModel)]="Batch_.End_Date" name="Batch_.End_Date"  placeholder="">
+		 
+	   </div>
+	
+	 
+	</div> -->
+	
+	<div class="form-row">
+	<label
+	class="col-md-1 col-sm-1 col-form-label text-sm-right"
+	>Installment Type<span
+	style="
+	color: #ef071e;
+	font-size: 22px;
+	vertical-align: -webkit-baseline-middle;
+	"
+	>*</span
+	></label
+	>
+	<div class="col-md-4 col-sm-4 mb-1">
+	<select
+	[(ngModel)]="Installment_Type"
+	(ngModelChange)="Instalment_Change()"
+	name="Student_.Installment_Type"
+	required
+	class="form-control p-0 pl-1"
+	>
+	<option
+	*ngFor="
+	let Installment_Type_ of Installment_Type_Data
+	"
+	[ngValue]="Installment_Type_"
+	>
+	{{ Installment_Type_.Installment_Type_Name }}
+	</option>
+	</select>
+	</div>
+	
+	<!-- <label class="col-md-1 col-sm-1 col-form-label text-sm-right">Fees Type<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>                          
+			 <div class="col-md-4 col-sm-4 mb-1">
+			<select [(ngModel)]="Fees_Type_" (ngModelChange)="Instalment_Change()" name="Fees_Type_.Fees_Type" required class="form-control p-0 pl-1">
+			<option *ngFor="let Fees_Type of Fees_Type_Data" [ngValue]="Fees_Type_">{{Fees_Type.Fees_Type_Name}}</option>
+			</select>
+			</div> -->
+	
+	<div class="col-md-1 col-sm-1"></div>
+	<!-- <label
+	class="col-md-0 col-sm-0 col-form-label text-sm-right"
+	>Join Date<span
+	style="
+	color: #ef071e;
+	font-size: 22px;
+	vertical-align: -webkit-baseline-middle;
+	"
+	>*</span
+	></label
+	>
+	<div class="col-md-4 col-sm-4 ml-5">
+	<mat-form-field
+	class="col-md-8 form-control mrgn-crct-input-text-div-tre-prt-sles1 mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn"
+	style="height: 40px; padding-top: 7px !important"
+	>
+	<input
+	matInput
+	[matDatepicker]="dp2"
+	placeholder=""
+	[(ngModel)]="Student_Course_.Join_Date"
+	name="Student_Course_.Join_Date"
+	/>
+	<mat-datepicker-toggle
+	matSuffix
+	[for]="dp2"
+	></mat-datepicker-toggle>
+	<mat-datepicker #dp2></mat-datepicker>
+	</mat-form-field>
+	</div> -->
+	<!-- <label class="col-md-1 col-sm-1 col-form-label text-sm-right">No Of Installment<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>                          
+		<div class="col-md-4 col-sm-4 mb-1">
+		<input type="number" [(ngModel)]="Student_Course_.No_Of_Installment" name="Student_Course_.No_Of_Installment" class="form-control" placeholder="">
+		</div>                  -->
+	</div>
+	
+	<div class="form-row">
+	<!-- <label class="col-md-1 col-sm-1 col-form-label text-sm-right">Installment Amount</label>
+			<div class="col-md-4 col-sm-4 mb-2 ">
+			<input type="number" (ngModelChange)="Load_Instalmentfn()"  [(ngModel)]="Student_Course_.Total_Fees"  name="Student_Course_.Total_Fees" class="form-control" placeholder="">      
+		</div>  -->
+	
+	<label
+	class="col-md-1 col-sm-1 col-form-label text-sm-right"
+	>Start Date<span
+	style="
+	color: #ef071e;
+	font-size: 22px;
+	vertical-align: -webkit-baseline-middle;
+	"
+	>*</span
+	></label
+	>
+	<div class="col-md-4 col-sm-4 mb-1">
+	<!-- <input type="date" class="form-control"  placeholder="" name="Start_Date" [(ngModel)]="Student_Course_.Start_Date"(ngModelChange)="Instalment_Change()" > -->
+	
+	<mat-form-field 
+	class="col-md-8 form-control mrgn-crct-input-text-div-tre-prt-sles1 mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn"
+	style="height: 40px"
+	style="
+	height: 40px !important;
+	padding-top: 7px !important;
+	"
+	>
+	<input   
+	matInput
+	[matDatepicker]="dpdate"
+	placeholder=""
+	[(ngModel)]="Student_Course_.Start_Date"
+	(ngModelChange)="Instalment_Change()"
+	name="Start_Date"
+	/>
+	<!-- style="visibility: hidden" -->
+	<mat-datepicker-toggle
+	
+	matSuffix
+	[for]="dpdate"
+	></mat-datepicker-toggle>
+	<mat-datepicker #dpdate></mat-datepicker>
+	</mat-form-field>
+	</div>
+	
+	<div class="col-md-1 col-sm-1"></div>
+	<label
+	class="col-md-0 col-sm-0 col-form-label text-sm-right"
+	>End Date</label
+	>
+
+	<div class="col-md-0 col-sm-0 mb-1 x-tra-label-mob" style="padding-top: 6px">
+		<div
+			_ngcontent-xmy-c9=""
+			class="checkbox-to-crect-sales-search-section"
+		>
+			<div
+				_ngcontent-xmy-c9=""
+				class="form-check uper-dte-lbel-sales-sctn-new pl-0"
+			>
+				<label _ngcontent-xmy-c9="" class="form-check-label">
+					<input
+						type="checkbox"
+						class="form-check-input"
+						name="Student_Course_.End_Date_Check"
+						[(ngModel)]="Student_Course_.End_Date_Check"
+					/>
+					<span _ngcontent-xmy-c9="" class="form-check-sign"
+						><span _ngcontent-xmy-c9="" class="check"> </span>
+					</span>
+				</label>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4 col-sm-4 ml-5" *ngIf="Student_Course_.End_Date_Check">
+	<!-- <input type="Date" [(ngModel)]="Student_Course_.End_Date"  name="End_Date" class="form-control" placeholder=""> -->
+	<mat-form-field
+	class="col-md-8 form-control mrgn-crct-input-text-div-tre-prt-sles1 mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn"
+	style="height: 40px; padding-top: 7px !important"
+	>
+	<input 
+	matInput
+	[matDatepicker]="dp10"
+	placeholder=""
+	[(ngModel)]="Student_Course_.End_Date_L"
+	name="End_Date_L"
+	/>
+	<!-- style="visibility: hidden" -->
+	<mat-datepicker-toggle
+	
+	matSuffix
+	[for]="dp10"
+	></mat-datepicker-toggle>
+	<mat-datepicker #dp10></mat-datepicker>
+	</mat-form-field>
+	</div>
+	
+	</div>
+
+
+	<!-- <div class="form-row mt-2">
+		<label
+			class="col-md-2 col-lg-2 ml-1 col-form-label text-sm-right x-tra-label"
+			style="padding-left: 19px"
+			>Exam</label
+		>
+		<div class="col-md-3 col-sm-0 mb-1 x-tra-label-mob" style="padding-top: 6px;">
+			<div
+				_ngcontent-xmy-c9=""
+				class="checkbox-to-crect-sales-search-section"
+			>
+				<div
+					_ngcontent-xmy-c9=""
+					class="form-check uper-dte-lbel-sales-sctn-new pl-0"
+				>
+					<label _ngcontent-xmy-c9="" class="form-check-label">
+						<input
+							type="checkbox"
+							class="form-check-input"
+							name="Student_Course_.Exam_Date_Check"
+							[(ngModel)]="Student_Course_.Exam_Date_Check"
+						/>
+						<span _ngcontent-xmy-c9="" class="form-check-sign"
+							><span _ngcontent-xmy-c9="" class="check"> </span>
+						</span>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-0 col-sm-0"></div>
+
+		<label
+			class="col-md-2 col-sm-2 col-form-label text-sm-right"
+			*ngIf="Student_Course_.Exam_Date_Check"
+			>Exam Date</label
+		>
+		<div class="col-md-3 col-lg-2 mb-1" *ngIf="Student_Course_.Exam_Date_Check">
+			<mat-form-field
+				class="form-control mrgn-crct-input-text-div-tre-prt-sles1"
+				style=" padding-top: 12px !important"
+			>
+				<input
+					matInput
+					[matDatepicker]="dp13"
+					placeholder=""
+					[(ngModel)]="Student_Course_.Exam_Date"
+					name="Student_Course_.Exam_Date"
+				/>
+				<mat-datepicker-toggle
+					matSuffix
+					[for]="dp13"
+				></mat-datepicker-toggle>
+				<mat-datepicker #dp13></mat-datepicker>
+			</mat-form-field>
+		</div>
+	</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- <div class="form-row mb-2">
+		<label
+	class="col-md-1 col-sm-1 col-form-label text-sm-right"
+	>Result</label
+	>
+	<div class="col-md-4 col-sm-4 mb-1" style="display:flex">
+	<div class="mt-2 ml-3">R</div> 
+	<input
+	type="number"
+	[(ngModel)]="Student_Course_.Reading"
+	name="Student_Course_.Reading"
+	(ngModelChange)="Calculate_Total_Mark()"
+	class="form-control"
+	placeholder=""
+	style="margin-left: 6px;width:81px;"
+	/>
+	<div class="mt-2 ml-3">S</div> 
+	<input
+	type="number"
+	[(ngModel)]="Student_Course_.Speaking"
+	name="Student_Course_.Speaking"
+	(ngModelChange)="Calculate_Total_Mark()"
+	class="form-control"
+	placeholder=""
+	style="margin-left: 6px;width: 81px;"
+	/>
+	<div class="mt-2 ml-3">L</div> 
+	<input
+	type="number"
+	[(ngModel)]="Student_Course_.Listening"
+	name="Student_Course_.Listening"
+	(ngModelChange)="Calculate_Total_Mark()"
+	class="form-control"
+	placeholder=""
+	style="margin-left: 6px;width: 81px;"
+	/>
+	<div class="mt-2 ml-3">W</div> 
+	<input
+	type="number"
+	[(ngModel)]="Student_Course_.Writing"
+	name="Student_Course_.Writing"
+	(ngModelChange)="Calculate_Total_Mark()"
+	class="form-control"
+	placeholder=""
+	style="margin-left: 6px;width: 81px;"
+	/>
+
+	<div class="mt-2 ml-3">G</div> 
+	<input
+	type="number"
+	[(ngModel)]="Student_Course_.Grammer"
+	name="Student_Course_.Grammer"
+	(ngModelChange)="Calculate_Total_Mark()"
+	class="form-control"
+	placeholder=""
+	style="margin-left: 6px;width: 81px;"
+	/>
+
+	<div class="mt-2 ml-3">Total</div> 
+	<input
+	type="number"
+	[(ngModel)]="Student_Course_.TotalMark"
+	name="Student_Course_.TotalMark"
+	class="form-control"
+	placeholder=""
+	style="margin-left: 6px;width: 81px;"
+	/>
+
+
+	</div>
+		
+		</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+		<!-- <div class="form-row">
+			<label
+			class="col-md-1 col-sm-1 col-form-label text-sm-right"
+			>Mark Status<span
+			style="
+			color: #ef071e;
+			font-size: 22px;
+			vertical-align: -webkit-baseline-middle;
+			"
+			>*</span
+			></label
+			>
+			<div class="col-md-4 col-sm-4 mb-1">
+			<select
+			[(ngModel)]="MarkStatus_Type"
+			name="MarkStatus_Type"
+			required
+			class="form-control p-0 pl-1"
+			>
+			<option
+			*ngFor="
+			let MarkStatus_Type_ of MarkStatus_Type_Data
+			"
+			[ngValue]="MarkStatus_Type_"
+			>
+			{{ MarkStatus_Type_.Markstatus_Name }}
+			</option>
+			</select>
+			</div>
+			
+</div> -->
+
+	<div class="col-md-12 pl-3 pr-8 mt-2" style="border: 1">
+	<div
+	class="container-impflu"
+	style="margin-left: -3% !important"
+	>
+	<div
+	class="dt-card mb-0 pb-1"
+	style="background-color: #ffff"
+	>
+	<div class="dt-card__heading">
+	<h4>
+	<b style="color: #3f6ad8">Fees Installment</b>
+	</h4>
+	</div>
+	<div class="table-responsive">
+	<table
+	class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format"
+	>
+	<!-- <tbody *ngFor="let  Student_Fees_Installment_ of Student_Fees_Installment_Master_Data; let i = index">          
+				<tr>
+					<table class="table table-hover table-for-sale-search-section-diary"> -->
+	<thead class="thead">
+	<th>Installment Date</th>
+	<th class="col-md-5">Installment Amount</th>
+	<th class="col-md-5">Balance Amount</th>
+	<th class="col-md-5"></th>
+	</thead>
+	<tbody
+	class="bk_tb_bg"
+	*ngFor="
+	let Student_Fees_Installment_1 of Student_Fees_Installment_Details_Data;
+	let j = index;
+	trackBy: trackByShipment_Details
+	"
+	>
+	<td class="col-md-5">
+	<input
+	readonly
+	matInput
+	[matDatepicker]="dpdate3"
+	placeholder=""
+	name="oooo{{ j }}"
+	id="oooo{{ j }}"
+	[(ngModel)]="
+	Student_Fees_Installment_1.Instalment_Date
+	"
+	class="col-md-6 input-text-item-sales-section-group-diary border-colour-width-crect-input-boxes mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn"
+	/>
+	<mat-datepicker-toggle
+	style="visibility: hidden"
+	matSuffix
+	[for]="dpdate3"
+	></mat-datepicker-toggle>
+	<mat-datepicker #dpdate3></mat-datepicker>
+	</td>
+	<td >
+	<div *ngIf="Fees_Amount_Edit==true">
+		<input
+	matinput
+	type="number"
+	name="abcc{{ j }}"
+	id="abcc{{ j }}"
+	[(ngModel)]="
+	Student_Fees_Installment_1.Fees_Amount
+	"
+	class="form-control"
+	/>
+</div>
+
+<div *ngIf="Fees_Amount_Edit==false">
+	<label>{{Student_Fees_Installment_1.Fees_Amount}}</label>
+</div>
+	</td>
+	
+	<td readonly>
+	{{ Student_Fees_Installment_1.Balance_Amount }}
+	</td>
+	<td>
+	<button
+	class="save-button-style btnflot"
+	name="ppp{{ j }}"
+	id="ppp{{ j }}"
+	*ngIf="Student_Fees_Installment_1.Status == 0"
+	(click)="
+	Fees_Tab_Click(
+	1,
+	Student_Fees_Installment_1,i)"
+	type="submit"
+	>
+	Pay
+	</button>
+	</td>
+	</tbody>
+	<!-- </table>
+	
+	
+			  </tr>
+			  </tbody>          -->
+	</table>
+	
+	<div class="col-md-12 pl-0">
+	<div class="card-body">
+	<div class="table-responsive"></div>
+	</div>
+	</div>
+	</div>
+	</div>
+	<!-- <button class="close-button-style btnflot mt-3 mr-1" type="submit" *ngIf="Course_Id_Edit>0" (click)="course_click()">Extra Course</button>   -->
+	<!-- <button class="close-button-style btnflot mt-3 mr-1" type="submit" *ngIf="Course_Id_Edit>0" (click)="Clr_Student_Course()">Add New Course</button>
+		<button class="close-button-style btnflot mt-3 mr-1" type="submit" (click)="Close_Click()">Close</button>
+		<button class="save-button-style btnflot mt-3"  id="Save_Button" (click)="Save_Student_Course()" type="submit">Save</button> -->
+	</div>
+	</div>
+	
+	<div class="col-md-12 pl-3 pr-8 mt-2" style="border: 1">
+	<div
+	class="container-impflu"
+	style="margin-left: -3% !important"
+	>
+	<div
+	class="dt-card mb-0 pb-1"
+	style="background-color: #ffff"
+	>
+	<div class="dt-card__heading">
+	<h4><b style="color: #3f6ad8">Syllabus</b></h4>
+	</div>
+	<div
+	class="table-responsive"  style="overflow: scroll;height:220px!important;"
+	>
+	<table
+	class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format"
+	>
+	<tbody>
+	<tr>
+	<table
+	class="table table-hover table-for-sale-search-section-diary"
+	>
+	<thead class="thead">
+	<th>Syllabus</th>
+	<th class="col-md-5">Attendance Percentage</th>
+	<th class="col-md-5"></th>
+	</thead>
+	<tbody
+	*ngFor="
+	let Student_Course_Subject_ of Student_Course_Subject_Data;
+	let i = index
+	"
+	>
+	<td class="col-md-6">
+	{{
+	Student_Course_Subject_["Subject_Name"]
+	}}
+	</td>
+	<td class="col-md-9">
+	{{
+	Student_Course_Subject_["Minimum_Mark"]
+	}}
+	</td>
+	</tbody>
+	</table>
+	</tr>
+	</tbody>
+	</table>
+	</div>
+	</div>
+	</div>
+	</div>
+	
+	<!-- <button
+	class="close-button-style btnflot mt-3 mr-1"
+	type="submit"
+	*ngIf="Course_Id_Edit > 0"
+	(click)="Clr_Student_Course()"
+	>
+	Add New Course
+	</button> -->
+	<button
+	class="close-button-style btnflot mt-3 mr-1"
+	type="submit"
+	(click)="Close_Click()"
+	>
+	Close
+	</button>
+	<button 
+	class="save-button-style btnflot mt-3"
+	id="Save_Button"
+	(click)="Save_Student_Course()"
+	type="submit"
+	>
+	Save
+	</button>
+	
+	<!-- <button class="save-button-style btnflot"  id="Save_Button" (click)="Save_Student_Course()" type="submit">Save</button> -->
+	</form>
+	</div>
+	</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+

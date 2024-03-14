@@ -1,0 +1,91 @@
+
+<div *ngIf="issLoading" class="overlay">
+    <mat-progress-spinner class="spinner" [color]="color" [mode]="mode" [value]="value">
+    </mat-progress-spinner>
+    </div>
+    <div class="main-content">
+    <div class="container-fluid">
+    <div class="row" *ngIf="Entry_View">
+    <div class="col-md-12">
+
+    <div class="card-body">
+    <form>
+    <div class="row">
+    <div class="col-md-6">
+    <div class="col-md-12">
+   <label class="col-md-3 name-label-margin-down-employer-details-name">Location <span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span> </label>  
+    <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings">
+    <input matInput type="text" [(ngModel)]="Location_.Location_Name" name="Location_.Location_Name">
+    </mat-form-field>
+    </div>
+   
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-4 down-alighn-label-all">
+    <button mat-raised-button type="submit" [hidden]="Location_Save==false"id="Save_Button"class="btn btn-danger pull-right"(click)="Save_Location()">Save</button>
+    <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="Close_Click()">Close</button>   
+        </div>
+    </div>
+    </div>
+    <div class="clearfix"></div>
+    </form>
+    </div>
+
+    </div>
+    </div>
+    <div class="row" *ngIf="!Entry_View">
+      <div class="col-md-6">
+          <div class="col-md-12">
+          <label class="col-md-3 label-to-crect-all-names-to-divs name-label-margin-down-employer-details-name">Location</label>
+          <mat-form-field class="col-md-9 input-allighn-to-crect-wole-paddings">      
+          <input matInput type="text"  [(ngModel)]="Search_Location_"  name="Search_Location_">  
+          </mat-form-field>
+          </div> 
+      </div>
+
+    <div class="col-md-6">
+    <button mat-raised-button type="submit" type="button" (click)="Search_Location()" class="btn btn-danger button-to-crect-margin change-colour-button"><i class="fa fa-search" aria-hidden="true"></i></button>  
+    <button mat-raised-button type="submit" (click)="Create_New()" class="btn btn-danger button-to-crect-margin change-colour-button"><i class="fa fa-plus" aria-hidden="true"></i></button>
+  
+    </div>
+    <div class="col-md-12">
+        <div class="card card-plain">
+    <div class="table-responsive">
+ <cdk-virtual-scroll-viewport [style.height.px]="myInnerHeight" itemSize="90" >
+    <table class="table table-hover">
+    <thead class="thead">
+    <th>
+    Sl No
+    </th>
+    <th>
+    Location
+    </th>
+    <th [hidden]="Location_Edit==false">
+    Edit
+    </th>
+    <th [hidden]="Location_Delete==false">
+    Delete
+    </th>
+    </thead>
+    <ng-container *cdkVirtualFor="let Location1 of Location_Data; let i = index">
+    <tr>
+    <td style="padding-left:5px;">{{ i+1 }}</td>
+    <td>{{Location1["Location_Name"]}}</td>
+    <td>
+    <button _ngcontent-jry-c5="" _ngcontent-gxp-c5="" [hidden]="Location_Edit==false"aria-describedby="cdk-describedby-message-0" cdk-describedby-host="" class="aligyn-crect-deprtnment btn btn-primary btn-link btn-sm btn-just-icon mat-raised-button" mat-raised-button="" mattooltip="Edit Task" ng-reflect-message="Edit Task" ng-reflect-position="above" type="button"><span class="mat-button-wrapper"><span _ngcontent-jry-c5="" class="mat-button-wrapper"><i _ngcontent-jry-c5="" _ngcontent-gxp-c5="" class="material-icons" (click)="Edit_Location(Location1,i)" >edit</i></span><div _ngcontent-jry-c5="" class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div><div _ngcontent-jry-c5="" class="mat-button-focus-overlay"></div></span><div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div><div class="mat-button-focus-overlay" ></div></button>
+    </td>
+    <td> 
+    <button _ngcontent-gdi-c11="" [hidden]="Location_Delete==false"class="btn btn-danger btn-link btn-sm btn-just-icon mat-raised-button" mat-raised-button="" mattooltip="Remove" type="button" aria-describedby="cdk-describedby-message-1" cdk-describedby-host="" ng-reflect-position="above" ng-reflect-message="Remove"><span class="mat-button-wrapper"><i _ngcontent-gdi-c11="" class="material-icons"  (click)="Delete_Location(Location1.Location_Id,i)" >close</i></span><div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div><div class="mat-button-focus-overlay"  ></div></button>
+    </td>
+   </tr>
+       </ng-container>
+</table>
+</cdk-virtual-scroll-viewport>
+    </div>
+
+    <label class="entry-num">Entries : {{Total_Entries}}</label>
+    </div>
+    </div>
+    </div>
+    </div>
+    

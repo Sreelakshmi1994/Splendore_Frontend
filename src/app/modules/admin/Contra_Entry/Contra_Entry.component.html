@@ -1,0 +1,624 @@
+<div *ngIf="issLoading" class="overlay">
+    <mat-progress-spinner class="spinner" [color]="color" [mode]="mode" [value]="value">
+    </mat-progress-spinner>
+    </div>
+    <div class="main-content">
+    <div class="container-fluid">
+    <div class="row" *ngIf="Entry_View">
+    <div class="col-md-12">
+    <div class="card">
+    <!-- <div class="card-header card-header-danger"> -->
+    <!-- <h4 class="card-title">Contra Entry
+        <button class="btn btn-danger btn-link btn-sm btn-just-icon mat-raised-button close-for-wole-pge-butun" mat-raised-button="" mattooltip="Remove" type="button" aria-describedby="cdk-describedby-message-1" cdk-describedby-host="" ng-reflect-position="above" ng-reflect-message="Remove"><span class="mat-button-wrapper"><i _ngcontent-gdi-c11="" class="material-icons" (click)="Close_Click()" >close</i></span>
+          <div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div><div class="mat-button-focus-overlay"  ></div></button>  
+          
+    
+    </h4> -->
+    <!-- <p class="card-category">Complete your profile</p> -->
+    <!-- </div> -->
+    <div class="card-body">
+    <!-- <form> -->
+    <div class="row">
+    <div class="col-md-6">
+      <!-- <div class="col-md-12">
+        <label class="col-md-4"><span>Company</span></label>
+        <select [(ngModel)]="Company_" name="Company" required class="select-qtatn-mstr" class="col-md-8 for-input-selct-tblelst margin-inputs-edit-portion-jouranl-section">
+        <option *ngFor="let Company of Company_Data" [ngValue]="Company">{{Company.Company_Name}}</option>
+        </select>
+        </div> -->
+        <div class="col-md-12">
+            <label class="col-md-4 label-down-alighn-supler-prhse-mstr-down">From  <span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span> </label>
+            <input type="text" [matAutocomplete]="auto" [(ngModel)]="FromAccount_" (click)="Get_Client_Accounts_Typeahead($event)" (keyup)="Get_Client_Accounts_Typeahead($event)" class="col-md-7 for-input-selct-tblelst margin-inputs-edit-portion-jouranl-section" />
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="display_FromAccount">
+            <mat-option *ngIf="isLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+            <ng-container *ngIf="!isLoading">
+              <mat-option *ngFor="let FromAccount of Client_Accounts_Data" [value]="FromAccount">
+                  <span>{{FromAccount.Client_Accounts_Name}}-{{FromAccount.Address1}}-{{FromAccount.Mobile}}</span>
+              </mat-option>
+            </ng-container>
+            </mat-autocomplete>
+            </div>
+
+            <div class="col-md-12">
+              <label class="col-md-4 label-down-alighn-supler-prhse-mstr-down">To  <span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span> </label>
+              <input type="text" [matAutocomplete]="auto1" [(ngModel)]="ToAccount_" (click)="Get_Client_Accounts_Typeahead($event)" (keyup)="Get_Client_Accounts_Typeahead($event)" class="col-md-8 for-input-selct-tblelst margin-inputs-edit-portion-jouranl-section" />
+              <mat-autocomplete #auto1="matAutocomplete" [displayWith]="display_FromAccount">
+              <mat-option *ngIf="isLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+              <ng-container *ngIf="!isLoading">
+                <mat-option *ngFor="let FromAccount of Client_Accounts_Data" [value]="FromAccount">
+                    <span>{{FromAccount.Client_Accounts_Name}}-{{FromAccount.Address1}}-{{FromAccount.Mobile}}</span>
+                </mat-option>
+              </ng-container>
+              </mat-autocomplete>
+              </div>
+
+    <div class="col-md-12">
+    <label class="col-md-4 label-down-alighn-supler-prhse-mstr-down">Amount <span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span> </label>
+    <mat-form-field class="col-md-8 led-srch-sctn-nput-tb margin-inputs-edit-portion-jouranl-section margin-lh-rh-to-crect-textbox">
+    <input matInput type="number" [(ngModel)]="Contra_Entry_.Amount" name="Journal_Entry_.Amount" >
+    </mat-form-field>
+    </div>
+<!--     
+    <div class="col-md-12">
+      <label class="col-md-4 label-down-alighn-supler-prhse-mstr-down">Payment Status</label>
+  <select  required class="col-md-8 for-input-selct-tblelst ng-valid ng-dirty ng-touched" [(ngModel)]="Contra_Entry_.Payment_Status" name="Contra_Entry_.Payment_Status" >
+  <option value="0">Checked</option>
+  <option value="1">Not Checked</option>
+  </select>
+    </div> -->
+
+    </div>
+    <div class="col-md-6 mrgn-crect-jornal-edit-section">
+       
+      <div class="col-md-12">
+        <label class="col-md-4 label-down-alighn-adrs-tre-prhse-mstr-down">Date</label>
+        <mat-form-field class="col-md-8 margin-down-date-input-box-contra">
+                <input matInput [matDatepicker]="dp" placeholder="" [(ngModel)]="Contra_Entry_.Date">
+                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                <mat-datepicker #dp></mat-datepicker>
+              </mat-form-field>
+        </div>
+
+        <div class="col-md-12 margin-down-wole-div-to-contra-new">
+          <label class="col-md-4 label-down-alighn-adrs-tre-prhse-mstr-down">CV No</label>
+         <mat-form-field class="col-md-8 led-srch-sctn-nput-tb margin-inputs-edit-portion-jouranl-section crect-down-nput-contra-new-sctn">
+         <input disabled matInput type="number" [(ngModel)]="Contra_Entry_.Voucher_No" name="Journal_Entry_.Voucher_No">
+         </mat-form-field>
+         </div>
+
+<div class="col-md-12 margin-down-wole-div-to-contra-new">
+  <label class="col-md-4 label-down-alighn-adrs-tre-prhse-mstr-down">Description</label>
+  <mat-form-field class="col-md-8 led-srch-sctn-nput-tb margin-inputs-edit-portion-jouranl-section crect-down-nput-contra-new-sctn">
+  <input matInput type="text" maxlength="1000" [(ngModel)]="Contra_Entry_.Description" name="Contra_Entry_.Description">
+  </mat-form-field>
+  </div>
+
+  <div class="col-md-12 margin-down-wole-div-to-contra-new">
+    <button mat-raised-button type="submit"[hidden]="Contra_Entry_Save==false" id="Save_Button"class="btn btn-danger pull-right buton-to-move-right-journal"(click)="Save_Contra_Entry()">Save</button>
+    <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="Close_Click()">Close</button>
+   
+    <button mat-raised-button type="submit"[hidden]="Contra_Entry_Print==false" class="btn btn-danger pull-right"(click)="Print_Click()"><i class="fa fa-print" aria-hidden="true"></i></button>
+
+  </div>
+  </div>
+ 
+ </div>
+    <div class="clearfix"></div>
+    <!-- </form> -->
+    </div>
+    </div>
+    </div>
+    
+    
+    </div>
+    <div class="row" *ngIf="!Entry_View">
+      <div class="col-md-12">
+        <div class="card mt-2 mb-2">
+          <div class="card-body">
+            <div class="row">
+           
+    <div _ngcontent-xmy-c9="" class="col-md-1 chck-bxes-dwn-alyn-pymnt-vcher mt-0" style="    display: flex;
+    justify-content: end;
+    padding-right: 0 !important;">
+        <div _ngcontent-xmy-c9="" class="form-check algyn-checkbx-lead-serch-scton mt-0">
+        <label _ngcontent-xmy-c9="" class="form-check-label">
+        <input type='checkbox'class="form-check-input" placeholder='Search...' [(ngModel)]="Look_In_Date" />
+        <span _ngcontent-xmy-c9="" class="form-check-sign"><span _ngcontent-xmy-c9="" class="check"></span>
+        </span></label></div>
+        </div>
+ 
+        <div class="col-md-3 row">
+          <label class="col-md-4 label-down-alighn-supler-prhse-mstr-down ml-0" style="text-align: right;">From</label>
+          <mat-form-field class="col-md-8" style="    height: 38px;">
+                  <input matInput [matDatepicker]="dp1" placeholder="" [(ngModel)]="Search_FromDate">
+                  <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                  <mat-datepicker #dp1></mat-datepicker>
+                </mat-form-field>
+          </div>
+
+        <div class="col-md-3 row">
+          <label class="col-md-4 label-down-alighn-supler-prhse-mstr-down ml-0" style="text-align: right;">TO</label>
+          <mat-form-field class="col-md-8"  style="    height: 38px;">
+                  <input matInput [matDatepicker]="dp2" placeholder="" [(ngModel)]="Search_ToDate">
+                  <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                  <mat-datepicker #dp2></mat-datepicker>
+                </mat-form-field>
+          </div>
+
+
+        <div class="col-md-5 row">
+            <label class="col-md-3 label-down-alighn-supler-prhse-mstr-down ml-0" style="text-align: right;">CV No</label>
+                <mat-form-field  class="col-md-9 led-srch-sctn-nput-tb"  style="    height: 38px;">
+                <input matInput type="number" [(ngModel)]="Voucher_No_search" name="Voucher_No_search">
+                </mat-form-field>
+                </div>
+
+        <div class="col-md-4 row">
+            <label class="col-md-3 label-down-alighn-supler-prhse-mstr-down ml-0" style="text-align: right;">From</label>
+            <input type="text" [matAutocomplete]="auto2" [(ngModel)]="FromAccount_Search" (click)="Get_Client_Accounts_Typeahead($event)" (keyup)="Get_Client_Accounts_Typeahead($event)" class="col-md-9 for-input-selct-tblelst" />
+            <mat-autocomplete #auto2="matAutocomplete" [displayWith]="display_FromAccount">
+            <mat-option *ngIf="isLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+            <ng-container *ngIf="!isLoading">
+              <mat-option *ngFor="let FromAccount of Client_Accounts_Data" [value]="FromAccount">
+                  <span>{{FromAccount.Client_Accounts_Name}}-{{FromAccount.Address1}}-{{FromAccount.Mobile}}</span>
+              </mat-option>
+            </ng-container>
+            </mat-autocomplete>
+            </div>
+    
+            <div class="col-md-4 row">
+                <label class="col-md-2 label-down-alighn-supler-prhse-mstr-down ml-0" style="text-align: right;">To</label>
+                <input type="text" [matAutocomplete]="auto3" [(ngModel)]="ToAccount_Search" (click)="Get_Client_Accounts_Typeahead($event)" (keyup)="Get_Client_Accounts_Typeahead($event)" class="col-md-10 for-input-selct-tblelst" />
+                <mat-autocomplete #auto3="matAutocomplete" [displayWith]="display_FromAccount">
+                <mat-option *ngIf="isLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+                <ng-container *ngIf="!isLoading">
+                  <mat-option *ngFor="let FromAccount of Client_Accounts_Data" [value]="FromAccount">
+                      <span>{{FromAccount.Client_Accounts_Name}}-{{FromAccount.Address1}}-{{FromAccount.Mobile}}</span>
+                  </mat-option>
+                </ng-container>
+                </mat-autocomplete>
+                
+                </div>   
+  <div class="col-md-4 bg-icons" style="    display: flex;
+  align-items: center;
+  margin-left: 20px;
+">        
+    <button mat-raised-button type="submit" (click)="Create_New()" class="btn btn-danger pull-right change-colour-button alighn-butn-user-page button-to-crect-margin"><i class="fa fa-plus" aria-hidden="true"></i></button>
+    <button mat-raised-button type="submit" (click)="Search_Contra_Entry()" class="btn btn-danger pull-right change-colour-button button-to-crect-margin"><i class="fa fa-search" aria-hidden="true"></i></button>
+  </div>  
+  </div>
+  </div>
+  </div>
+</div>
+    <div class="col-md-12">
+    <div class="card card-plain mb-0">
+
+    <div class="card-body">
+    <div class="table-responsive" [style.height.px]="myInnerHeight"
+    style="overflow-y: scroll; ">
+ <!-- <cdk-virtual-scroll-viewport [style.height.px]="myInnerHeight" itemSize="90" > -->
+    <table class="table table-hover">
+    <thead class="thead">
+    <!-- <th>
+    Sl No
+    </th> -->
+    <th>
+     Date
+    </th>
+    <th>
+    From 
+    </th> 
+    <th>
+    To 
+    </th>
+    
+    <th>
+    Amount
+    </th>
+    <th>
+      CV No
+      </th>
+    <th [hidden]="Contra_Entry_Edit==false">
+    Edit
+    </th>
+    <th [hidden]="Contra_Entry_Delete==false">
+    Delete
+    </th>
+    </thead>
+    <!-- <ng-container *cdkVirtualFor="let Contra_Entry1 of Contra_Entry_Data; let i = index"> -->
+        <tr *ngFor="let Contra_Entry1 of Contra_Entry_Data; let i = index">
+    <!-- <tr> -->
+    <!-- <td style="padding-left:5px;">{{ i+1 }}</td> -->
+    <td>{{Contra_Entry1["Search_Date"]}}</td>
+    <td>{{Contra_Entry1["FromAccount_Name"]}}</td> 
+    <td>{{Contra_Entry1["ToAccount_Name"]}}</td> 
+    <td>{{Contra_Entry1["Amount"]}}</td> 
+    <td>{{Contra_Entry1["Voucher_No"]}}</td> 
+   
+    <td>
+    <button _ngcontent-jry-c5="" _ngcontent-gxp-c5=""[hidden]="Contra_Entry_Edit==false"aria-describedby="cdk-describedby-message-0" cdk-describedby-host="" class="aligyn-crect-deprtnment btn btn-primary btn-link btn-sm btn-just-icon mat-raised-button" mat-raised-button="" mattooltip="Edit Task" ng-reflect-message="Edit Task" ng-reflect-position="above" type="button"><span class="mat-button-wrapper"><span _ngcontent-jry-c5="" class="mat-button-wrapper"><i _ngcontent-jry-c5="" _ngcontent-gxp-c5="" class="material-icons" (click)="Edit_Contra_Entry(Contra_Entry1,i)" >edit</i></span><div _ngcontent-jry-c5="" class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div><div _ngcontent-jry-c5="" class="mat-button-focus-overlay"></div></span><div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div><div class="mat-button-focus-overlay" ></div></button>
+    </td>
+    <td> 
+    <button _ngcontent-gdi-c11=""[hidden]="Contra_Entry_Delete==false" class="btn btn-danger btn-link btn-sm btn-just-icon mat-raised-button" mat-raised-button="" mattooltip="Remove" type="button" aria-describedby="cdk-describedby-message-1" cdk-describedby-host="" ng-reflect-position="above" ng-reflect-message="Remove"><span class="mat-button-wrapper"><i _ngcontent-gdi-c11="" class="material-icons"  (click)="Delete_Contra_Entry(Contra_Entry1.Contra_Entry_Id,i)" >close</i></span><div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div><div class="mat-button-focus-overlay"  ></div></button>
+    </td>
+     </tr>
+</table>
+<!-- </cdk-virtual-scroll-viewport> -->
+    </div>
+    </div>
+  
+    </div>
+    <label class="entry-num">Entries : {{Total_Entries}}</label>
+    </div>
+    </div>
+    </div>
+
+
+    
+
+
+
+
+
+  <div id="Print_Div" style="display: none">
+    <table style="width: 100%; margin-left: 10px !important; margin-right: 10px">
+    <tr style="border: 0 !important">
+    <td
+    colspan="2"
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    text-align: center;
+    "
+    >
+    CONTRA ENTRY
+    </td>
+    </tr>
+    <!-- *ngIf="To_Account_Id == 1" -->
+    <!-- <tr  style="border: 0 !important">
+    <td colspan="2" style="font-size: 24px !important; border: 0 !important">
+    <img src="one_team_assets/img/Oneteamlogo.png" />
+    </td>
+    </tr> -->
+    <!-- *ngIf="To_Account_Id == 2" -->
+    <tr  style="border: 0 !important">
+    <td colspan="2" style="font-size: 24px !important; border: 0 !important">
+    <img src="one_team_assets/img/logo_abc.png" />
+    </td>
+    </tr>
+    
+    <tr style="border: 0 !important">
+    <td
+    style="font-size: 24px !important; border: 0 !important; width: 60%"
+    ></td>
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr>
+    
+    
+    
+    <tr style="border: 0 !important">
+    <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    {{ Print_Company_.Company_Name }}
+    </td>
+    <!-- <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    margin-left: 70px !important;
+    "
+    >
+    Invoice No :{{ print_voucher_no }}
+    </td> -->
+    </tr>
+    
+    <tr style="border: 0 !important">
+    <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    <!-- 2nd Floor, Muttathottil Building, -->
+    {{ Print_Company_.Address1 }}
+    </td>
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    margin-left: 70px !important;
+    "
+    >
+    CV No :&nbsp;{{ Contra_Entry_.Voucher_No }}
+    </td>
+    </tr>
+    <!-- <tr style="border:0!important">
+          <td style="font-size:24px !important;border:0!important;width:60%;">Paruthelipalam, Edappally - Pukkattupady Rd</td>
+          <td style="font-size:24px !important;border:0!important;float: right;position: fixed;">To,</td>
+        </tr> -->
+    <tr style="border: 0 !important">
+    <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    <!-- Edappally Toll -->
+    <!-- {{ Print_Client_.Address2}} -->
+    </td>
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    margin-left: 70px !important;
+    "
+    >
+    Date :&nbsp;{{ Contra_Entry_.Search_Date}}
+    </td>
+    </tr>
+    <tr style="border: 0 !important">
+    <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    <!-- Edappally-Pookkattupadi Road -->
+    {{ Print_Company_.Address3 }}
+    </td>
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr>
+    <tr style="border: 0 !important">
+    <!-- <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    {{ print_Company_pincode }}
+    </td> -->
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr>
+    <tr style="border: 0 !important">
+    <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    <!-- +91 949 597 9234 -->
+  {{Print_Company_.Phone_Number}}
+    </td>
+    <!-- <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    
+    {{print_Company_Mobile}}
+      </td> -->
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr>
+    <tr style="border: 0 !important">
+    <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    <u style="color: #357bfd">{{Print_Company_.EMail}}</u>
+    </td>
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr>
+    <!-- <tr style="border: 0 !important">
+    <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    mail@trackbox.com
+    </td>
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr> -->
+    <tr style="border: 0 !important">
+    
+    <!-- <td style="font-size: 24px !important; border: 0 !important; width: 60%x">
+    GSTIN : {{ GSTNo }}
+    </td> -->
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr>
+    <tr style="border: 0 !important; height: 15px">
+    <td
+    style="font-size: 24px !important; border: 0 !important; width: 60%"
+    ></td>
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr>
+    <tr style="border: 0 !important">
+    <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    From Account   <a>:</a>{{ Contra_Entry_.FromAccount_Name }}
+    </td>
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr>
+    <tr style="border: 0 !important">
+    <!-- <td style="font-size: 24px !important; border: 0 !important; width: 60%x">
+    Level <a>:</a>{{ course_name }}
+    </td> -->
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr>
+    </table>
+    <!-- <table style="width:81%;margin-left:150px!important;margin-right:10px;">
+    
+           
+           
+           
+          <tr style="border:0!important">
+          <td style="font-size:24px !important;border:0!important;width:60%;"></td>
+            <td style="font-size:24px !important;border:0!important;float: right;position: fixed;"></td>  
+             </tr>
+           
+           
+          <tr style="border:0!important">
+            <td style="font-size:24px !important;border:0!important;width:60%x;">Student Name  <a>:</a>{{Student_.Student_Name}} </td>
+            <td style="font-size:24px !important;border:0!important;float: right;position: fixed;"></td>
+          </tr>
+       
+          <tr style="border:0!important">
+            <td style="font-size:24px !important;border:0!important;width:60%x;">Course        <a>:</a>{{course_name}}</td>
+            <td style="font-size:24px !important;border:0!important;float: right;position: fixed;"></td>
+          </tr>
+            </table> -->
+    <div
+    style="
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    margin-top: -57px !important;
+    "
+    >
+    <br /><br /><br />
+    <!-- <tbody>
+          <tr style='height: 145px;' >
+          <td style='width: 6%;' >
+             <br >
+               </td >
+             <td style='width: 88.0909%;' >               -->
+    <table
+    style="
+    border-collapse: collapse;
+    width: 100%;
+    height: 144px;
+    margin-left: 3px !important;
+    "
+    border="1"
+    >
+    <tbody>
+    <tr style="height: 18px">
+    <td style="width: 80%; height: 42px; text-align: center">
+    <strong>Particulars </strong>
+    </td>
+    <td
+    style="
+    width: 20%;
+    height: 18px;
+    text-align: center;
+    padding-right: 3% !important;
+    "
+    >
+    <strong>Amount</strong>
+    </td>
+    </tr>
+    <tr style="height: 300px">
+    <td
+    style="
+    width: 80%;
+    height: 126px;
+    vertical-align: top;
+    text-align: left;
+    padding-left: 2%;
+    padding-right: 2%;
+    "
+    >
+    {{ Contra_Entry_.ToAccount_Name }}<br>
+    {{ Contra_Entry_.Description  }}
+    </td>
+    <td
+    style="
+    width: 20%;
+    height: 126px;
+    vertical-align: top;
+    text-align: right;
+    padding-right: 3%;
+    "
+    >
+    {{ Contra_Entry_.Amount }}
+    </td>
+    </tr>
+    <tr style="height: 18px">
+    <td style="width: 80%; height: 18px">
+    <strong>Total </strong>
+    </td>
+    <td
+    style="
+    width: 20%;
+    height: 18px;
+    text-align: right;
+    padding-right: 3% !important;
+    "
+    >
+    <strong>{{ Contra_Entry_.Amount }}</strong>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    <!-- <table style="width:100%">
+          <tr>
+          <td style='width:100%;text-align: left;' >Amount in Words:<strong>{{print_paid}}</strong>&nbsp;Only<td >          
+          </tr>
+          <tr style="border:0!important">
+            <td style="font-size:24px !important;border:0!important;width:60%;">2nd Floor, Muttathottil Building,</td>
+            <td style="font-size:24px !important;border:0!important;float: right;position: fixed;margin-left: 70px!important;">Invoice No :{{print_voucher_no}}</td>    
+            </tr>          
+          </table>  -->
+    <table
+    style="width: 100%; margin-left: 10px !important; margin-right: 10px"
+    >
+    <tr>
+    <td style="height: 20px"></td>
+    </tr>
+    <tr style="border: 0 !important">
+    <td style="text-align: left">
+    Amount in Words:<strong>{{ print_paid }}</strong
+    >&nbsp;Only
+    </td>
+    </tr>
+    <tr style="border: 0 !important">
+    <td style="border: 0 !important; width: 75%;font-size: 18px;" ><u style="color: #357bfd">{{Print_Company_.Website}}</u></td>
+    <!-- <td>
+    Authorized By<br />Amith Prakash<br />Regional Manager<br />Amith_rm@trackbox.com
+    </td> -->
+    <td>
+      Authorized By<br />Account Department<br />
+      </td>
+  
+    </tr>
+    </table>
+    <h5 style="margin-left: 200px;    margin-top: 200px;">This is system generated receipt signature is not required</h5>
+    <!-- <h4 style="margin-left: 190px;">Amount received by DIRECTOR</h4> -->
+    </div>
+    </div>

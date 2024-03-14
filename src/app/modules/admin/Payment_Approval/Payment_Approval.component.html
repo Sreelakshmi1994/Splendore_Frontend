@@ -1,0 +1,632 @@
+<div *ngIf="issLoading" class="overlay">
+    <mat-progress-spinner class="spinner" [color]="color" [mode]="mode" [value]="value">
+    </mat-progress-spinner>
+    </div>
+    <div class="main-content mt-0">
+    <div class="container-fluid">
+    <div class="row" *ngIf="Entry_View">
+    <div class="col-md-12">
+    <div class="card">
+    <div class="card-body">
+    <form>
+<div class="row">
+<div class="col-md-6">
+<div class="col-md-12" >
+    <label class="col-md-3  pdng-crect-rspnsv-mrgn-nptbx-txt-lh">Party Name</label><!--align-label-tab-lead-->
+    <input type="text" [matAutocomplete]="auto_Supplier" [(ngModel)]="Supplier_" name="Supplier" (click)="Search_Supplier_Typeahead($event)" 
+    (keyup)="Search_Supplier_Typeahead($event)" (ngModelChange)="Supplier_Change()"
+    class="col-md-9 for-input-selct-tblelst ng-pristine ng-valid ng-touched" /><!-- for-input-selct-tblelst nput-laed-tabs-for-wole nput-laed-tabs-for-cuntry-wole-->
+    <mat-autocomplete #auto_Supplier="matAutocomplete" [displayWith]="display_Supplier">
+        <mat-option *ngIf="isLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+        <ng-container *ngIf="!isLoading">
+            <mat-option *ngFor="let Supplier_T of Supplier_Data" [value]="Supplier_T">
+                <span>{{Supplier_T.Client_Accounts_Name}}</span>
+            </mat-option>
+        </ng-container>
+    </mat-autocomplete>
+    </div>
+    <div class="col-md-12">
+        <label class="col-md-3 ">Expense Head</label> 
+        <input type="text" [matAutocomplete]="auto_itemGroup" [(ngModel)]="Item_Group_" name="Item_Group_" (click)="Get_Item_Group($event)" 
+        (keyup)="Get_Item_Group($event)" 
+        class="col-md-9 for-input-selct-tblelst ng-pristine ng-valid ng-touched" /> 
+        <mat-autocomplete #auto_itemGroup="matAutocomplete" [displayWith]="display_Item_Group">
+            <mat-option *ngIf="isLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+            <ng-container *ngIf="!isLoading">
+                <mat-option *ngFor="let Itemgroup of Item_Group_Data" [value]="Itemgroup">
+                    <span>{{Itemgroup.Group_Name}}</span>
+                </mat-option>
+            </ng-container>
+        </mat-autocomplete>
+        </div>
+ 
+</div>
+<div class="col-md-6 mrgn-up-wrd-wle-div-rspnsv-prhse-mstr-nw-sctn">
+<div class="col-md-12 div-crct-wdth-crct-date-prhse-mstr-new-sctn">
+    <label class="col-md-3  pdng-crect-rspnsv-mrgn-nptbx-txt-lh">PO Date</label>
+        <mat-form-field class="col-md-9  mrgn-crct-input-text-div-tre-prt-sles1 mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn" style="height: 40px;  border: 1px solid #ced4da !important;
+        padding-left: 10px !important;">
+            <input matInput [matDatepicker]="dp"  name="Payment_Request_.Date" placeholder="" [(ngModel)]="Payment_Request_.PaymentDate" style="border: none;">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
+        </mat-form-field>
+</div>
+<div class="col-md-12 mrgn-up-wrd-wle-div-rspnsv-prhse-mstr-nw-sctn">  
+    <label class="col-md-3 label-to-crect-all-names-to-div-tre-prt-sles">PR No</label>
+    <input type="text"  name="InvoiceNo" style="  border: 1px solid #ced4da !important;
+    padding-left: 10px !important;" disabled
+    [(ngModel)]="Payment_Request_.InvoiceNo"  class="col-md-5 for-input-selct-tblelst ng-pristine ng-valid ng-touched"/>  
+  </div> 
+ 
+
+  <div class="col-md-12 mrgn-up-wrd-wle-div-rspnsv-prhse-mstr-nw-sctn">  
+    <label class="col-md-3 label-to-crect-all-names-to-div-tre-prt-sles">Payment Status</label>
+    <select style="
+    width: 220px;
+    margin-left: 160px;
+    margin-top: -20px;"
+	[(ngModel)]="Payment_Status_"
+	name="Payment_Request_.Payment_Status_Id"
+	required
+	class="form-control p-0 pl-1"
+	>
+	<option
+	*ngFor="let Payment_Status_ of Payment_Status_Data"
+	[ngValue]="Payment_Status_"
+	>
+	{{ Payment_Status_.Payment_Status_Name }}
+	</option>
+	</select></div> 
+                                                        
+</div>
+ 
+ <br>
+ <br>
+<div class="col-md-12 dv-mve-dwn-prhse-mstr-nw-sctn-snd-blck" style="margin: 0px;"> 
+    <div class="col-md-12 dv-mve-dwn-prhse-mstr-nw-sctn-snd-blck" style="margin: 0px;">
+ 
+        <div class="col-md-2 tab-wole-div-alyn alighn-right-inputs-sales-grid">
+           <label class="col-md-7 mrgin-alghn-label-text-otrs-nxt pdng-crect-rspnsv-mrgn-nptbx-txt-lh fw-600">Description
+               <span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+           <input type="text"  name="Payment_Request_Details_Description" style="  border: 1px solid #ced4da !important;
+           padding-left: 10px !important;"
+           [(ngModel)]="Payment_Request_Details_.Description"  class="col-md-5 for-input-selct-tblelst ng-pristine ng-valid ng-touched"/>  
+        </div> 
+       </div>
+    <div class="col-md-12 dv-mve-dwn-prhse-mstr-nw-sctn-snd-blck" style="margin: 0px;">
+ 
+        <div class="col-md-2 tab-wole-div-alyn alighn-right-inputs-sales-grid">
+           <label class="col-md-7 mrgin-alghn-label-text-otrs-nxt pdng-crect-rspnsv-mrgn-nptbx-txt-lh fw-600">Quantity
+               <span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+           <input type="text"  name="Payment_Request_Details_Quantity" style="  border: 1px solid #ced4da !important;
+           padding-left: 10px !important;"
+           [(ngModel)]="Payment_Request_Details_.Quantity"  (ngModelChange)="Amount_Calculation()" class="col-md-5 for-input-selct-tblelst ng-pristine ng-valid ng-touched"/>  
+        </div> 
+       </div>
+       <div class="col-md-12 dv-mve-dwn-prhse-mstr-nw-sctn-snd-blck" style="margin: 0px;">
+ 
+        <div class="col-md-2 tab-wole-div-alyn alighn-right-inputs-sales-grid">
+           <label class="col-md-7 mrgin-alghn-label-text-otrs-nxt pdng-crect-rspnsv-mrgn-nptbx-txt-lh fw-600">Rate
+               <span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+           <input type="text"  name="Payment_Request_Details_Rate"  style="  border: 1px solid #ced4da !important;
+           padding-left: 10px !important;"
+           [(ngModel)]="Payment_Request_Details_.Rate"   (ngModelChange)="Amount_Calculation()"  class="col-md-5 for-input-selct-tblelst ng-pristine ng-valid ng-touched"/>  
+        </div> 
+       </div>
+       
+       <div class="col-md-2 tab-wole-div-alyn alighn-right-inputs-sales-grid">
+        <label class="col-md-7 mrgin-alghn-label-text-otrs-nxt pdng-crect-rspnsv-mrgn-nptbx-txt-lh fw-600">Total
+            <span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+        <input type="text"  name="Payment_Request_Details_TotalAmount" disabled style="  border: 1px solid #ced4da !important;
+        padding-left: 10px !important;"
+        [(ngModel)]="Payment_Request_Details_.TotalAmount"   class="col-md-5 for-input-selct-tblelst ng-pristine ng-valid ng-touched"/>  
+     </div> 
+     <div class="col-md-12 dv-mve-dwn-prhse-mstr-nw-sctn-snd-blck" style="margin: 0px;">
+ 
+        <div class="col-md-2 tab-wole-div-alyn alighn-right-inputs-sales-grid">
+           <label class="col-md-7 mrgin-alghn-label-text-otrs-nxt pdng-crect-rspnsv-mrgn-nptbx-txt-lh fw-600">Remarks
+               <span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+           <input type="text"  name="Payment_Request_Details_Remarks" style="  border: 1px solid #ced4da !important;
+           padding-left: 10px !important;"
+           [(ngModel)]="Payment_Request_Details_.Remarks"   class="col-md-5 for-input-selct-tblelst ng-pristine ng-valid ng-touched"/>  
+        </div> 
+       </div>
+<div class="col-md-1 croct-float-purchase-master-section div-crct-algn-up-wrd-to-crect butn-up-alghn-prchse-mstr-nw-sctn">
+    <button _ngcontent-ucu-c5="" class="btn btn-danger button-to-crect-margin change-colour-button mat-raised-button" 
+    (click)="Plus_Payment_Request_Details()" mat-raised-button="" type="submit">ADD 
+    <div class="mat-button-ripple mat-ripple" matripple=""></div><div class="mat-button-focus-overlay"></div></button>
+    </div>                     
+ </div> 
+<div class="col-md-12">
+<div class="card card-plain">
+<div class="card-body">
+<div class="table-responsive">
+ <!-- <cdk-virtual-scroll-viewport [style.height.px]="myHeight" itemSize="90" > -->
+<table class="table table-hover table-for-sale-search-section-diary">
+<thead class="bg-col-stock-add-diary thead"> 
+    <!-- <th>SlNo</th> -->
+    <th>Description</th>
+<th>Quantity</th>  
+<th>Rate</th> 
+<th>Total</th> 
+<th>Remarks</th> 
+<th [hidden]="Payment_Request_Edit==false"> Edit </th>
+<th [hidden]="Payment_Request_Delete==false"> Delete</th>
+</thead>
+<!-- <ng-container *cdkVirtualFor="let Payment_Request_Details of Payment_Request_Details_Data; let i = index"> -->
+<tbody class="bk_tb_bg" *ngFor="let Payment_Request_Details of Payment_Request_Details_Data; let i = index">
+<!-- <td style="padding-left:5px;">{{ i+1 }}</td> --> 
+
+<td>{{Payment_Request_Details["Description"]}}</td> 
+<td>{{Payment_Request_Details["Quantity"]}}</td> 
+
+<td>{{Payment_Request_Details["Rate"]}}</td> 
+<td>{{Payment_Request_Details["TotalAmount"]}}</td> 
+
+<td>{{Payment_Request_Details["Remarks"]}}</td> 
+<td>
+<button _ngcontent-jry-c5="" _ngcontent-gxp-c5="" [hidden]="Payment_Request_Edit==false"aria-describedby="cdk-describedby-message-0" cdk-describedby-host="" 
+class="aligyn-crect-deprtnment btn btn-primary btn-link btn-sm btn-just-icon mat-raised-button" mat-raised-button="" mattooltip="Edit Task" ng-reflect-message="Edit Task" 
+ng-reflect-position="above" type="button"><span class="mat-button-wrapper"><span _ngcontent-jry-c5="" class="mat-button-wrapper">
+    <i _ngcontent-jry-c5="" _ngcontent-gxp-c5="" class="material-icons" (click)="Edit_Payment_Request_Details(Payment_Request_Details,i)" >edit</i></span>
+    <div _ngcontent-jry-c5="" class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div>
+    <div _ngcontent-jry-c5="" class="mat-button-focus-overlay"></div></span><div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" 
+    ng-reflect-trigger="[object HTMLButtonElement]"></div><div class="mat-button-focus-overlay" ></div></button>
+</td>
+<td> 
+<button _ngcontent-gdi-c11="" [hidden]="Payment_Request_Delete==false"class="btn btn-danger btn-link btn-sm btn-just-icon mat-raised-button" mat-raised-button="" 
+mattooltip="Remove" type="button" aria-describedby="cdk-describedby-message-1" cdk-describedby-host="" ng-reflect-position="above" ng-reflect-message="Remove"><span class="mat-button-wrapper">
+    <i _ngcontent-gdi-c11="" class="material-icons"  (click)="Delete_Payment_Request_Details(Payment_Request_Details,i)" >close</i></span><div class="mat-button-ripple mat-ripple" matripple="" 
+    ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div><div class="mat-button-focus-overlay"  ></div></button>
+</td>
+</tbody>
+<!-- </ng-container> -->
+</table>
+<!-- </cdk-virtual-scroll-viewport> -->
+</div>
+</div>                                                                    
+<!-- <label class="entry-num">Entries : {{Total_Entries}}</label> -->
+</div>
+</div>
+
+<div class="col-md-12">
+</div>                     
+<div class="col-md-12">
+    <div class="col-md-4 croct-float-purchase-master-section">
+
+    </div>
+    <div class="col-md-4 croct-float-purchase-master-section">
+
+    </div>
+    <div class="col-md-4 croct-float-purchase-master-section">
+        <label
+        class="col-md-4 mrgin-alghn-label-text-otrs-nxt pdng-crect-rspnsv-mrgn-nptbx-txt-lh fw-600">Total
+        <span
+            style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+    <input type="text" name="Payment_Request_.NetTotal" style="  border: 1px solid #ced4da !important;
+        padding-left: 10px !important;" [(ngModel)]="Payment_Request_.NetTotal" disabled
+        class="col-md-8 for-input-selct-tblelst ng-pristine ng-valid ng-touched" />
+    </div>
+</div>
+<div class="col-md-12 croct-float-purchase-master-section">
+    <label
+    class="col-md-3 mrgin-alghn-label-text-otrs-nxt pdng-crect-rspnsv-mrgn-nptbx-txt-lh fw-600">Description
+    <span
+        style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+<textarea type="text" name="Payment_Request_.Description"  [(ngModel)]="Payment_Request_.Description"
+    class="col-md-9 for-input-selct-tblelst ng-pristine ng-valid ng-touched"></textarea>
+</div>
+<div class="col-md-12">
+</div>                     
+
+    <div class="col-md-12 margn-aliygn-crect-address-purchase-masters">
+    <button mat-raised-button type="submit" [hidden]="Payment_Request_Save==false"id="Save_Button"class="btn btn-danger pull-right"(click)="Save_Payment_Approval()">Save</button>
+   <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="Close_Click()">Close</button>
+   <button mat-raised-button type="submit" [hidden]="Payment_Request_Print==false"
+   class="btn btn-danger pull-right" (click)="Print_Click()"><i class="fa fa-print"
+       aria-hidden="true"></i></button>   
+</div>
+    </div>
+    <div class="clearfix"></div>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+<div class="row" *ngIf="!Entry_View">
+<div class="col-md-12">
+<div class="card">
+<div class="card-body">
+<form>
+<div class="row" style="align-items: center;    padding-left: 15px;">
+<div class="col-md-0 "> 
+    <label class=" pdng-crect-rspnsv-mrgn-nptbx-txt-lh">Date</label>
+    <div _ngcontent-xmy-c9="" class="checkbox-to-crect-sales-search-section">
+    <div _ngcontent-xmy-c9="" class="form-check uper-dte-lbel-sales-sctn-new">
+    <label _ngcontent-xmy-c9="" class="form-check-label">
+    <input type='checkbox' class="form-check-input" name="Look_In_Date" [(ngModel)]="Look_In_Date"  />
+    <span _ngcontent-xmy-c9="" class="form-check-sign"><span _ngcontent-xmy-c9="" class="check"></span>
+    </span></label></div>
+    </div>   
+    </div>  
+<div class="col-md-2">
+    <label class="col-md-2 label-to-crect-all-names-to-divs down-label-name-to-all-sections" style="    top: 0;
+    ">From</label>
+    <mat-form-field class="col-md-8 mrgn-crct-input-text-div-tre-prt-sles1 mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn" style="height: 40px;    border: 1px solid #ced4da !important;
+    padding-left: 10px !important;">
+    <input matInput [matDatepicker]="dp1" placeholder="" name="Search_FromDate" [(ngModel)]="Search_FromDate">
+    <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+    <mat-datepicker #dp1></mat-datepicker>
+    </mat-form-field>
+    </div> 
+    <div class="col-md-2">
+        <label class="col-md-2 label-to-crect-all-names-to-divs down-label-name-to-all-sections" style="    top: 0;
+        ">To</label>
+        <mat-form-field class="col-md-8 mrgn-crct-input-text-div-tre-prt-sles1 mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn" 
+        style="height: 40px;    border: 1px solid #ced4da !important;
+        padding-left: 10px !important;">
+        <input matInput [matDatepicker]="dp2" placeholder="" name="Search_ToDate" [(ngModel)]="Search_ToDate">
+        <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+        <mat-datepicker #dp2></mat-datepicker>
+        </mat-form-field>
+        </div> 
+    <div class="col-md-2 tab-wole-div-alyn">
+        <label class="col-md-4 label-to-crect-all-names-to-divs margin-alghn-label-text pdng-crect-rspnsv-mrgn-nptbx-txt-lh" style="top: 0;">Party Name</label><!--align-label-tab-lead-->
+        <input type="text" [matAutocomplete]="auto_cus" [(ngModel)]="Search_Customer" name="Search_Customer" style="    margin-bottom: 0; height: 40px;    top: 0;
+        "
+        (click)="Search_Supplier_Typeahead($event)" (input)="Search_Supplier_Typeahead($event)"
+        (ngModelChange)="Supplier_Change()" class="col-md-8 for-input-selct-tblelst alighn-crect-input-box-text txt-bx-mve-up-rspnsv-sles-mstr-cstmr">           
+        <mat-autocomplete #auto_cus="matAutocomplete" [displayWith]="display_Supplier">
+        <mat-option *ngIf="isLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+        <ng-container *ngIf="!isLoading">
+        <mat-option *ngFor="let Supplier_T of Supplier_Data" [value]="Supplier_T">
+        <span>{{Supplier_T.Client_Accounts_Name}}</span>
+        </mat-option>
+        </ng-container>
+        </mat-autocomplete>
+    </div>
+    <div class="col-md-2 tab-wole-div-alyn" style="display: flex;">
+        <label class="col-md-5 label-to-crect-all-names-to-divs margin-alghn-label-text pdng-crect-rspnsv-mrgn-nptbx-txt-lh" style="top:0; margin-top: 2px;">Payment Status</label><!--align-label-tab-lead-->
+        <select style="height: 40px; margin-top: 2px;"
+	[(ngModel)]="Payment_Status_Search_"
+	name="Payment_Status_Search_.Payment_Status_Id"
+	required
+	class="form-control col-md-9 p-0 pl-1"
+	>
+	<option
+	*ngFor="let Payment_Status_ of Payment_Status_Data"
+	[ngValue]="Payment_Status_"
+	>
+	{{ Payment_Status_.Payment_Status_Name }}
+	</option>
+	</select>
+    
+    </div>
+    <!-- <div class="col-md-3 wole-div-margin-to-down-proper">  
+    <label class="col-md-4 label-to-crect-all-names-to-div-tre-prt-sles">Invoice No</label>
+    <input matInput type="number" name="Voucher_Number" [(ngModel)]="Voucher_Number" 
+     class="col-md-5 mrgn-crct-input-text-div-tre-prt-sles" >
+    </div>  -->
+<div class="col-md-1 bg-icons">
+    <button mat-raised-button type="submit" (click)="Search_Payment_Approval()" class="btn btn-danger pull-right change-colour-button" style="padding: 7px 9px 7px 9px;background-color: #44a1ce;"><i _ngcontent-dys-c16="" aria-hidden="true" class="fa fa-search"></i></button>
+
+<!-- <button mat-raised-button type="submit" (click)="Create_New()" class="btn btn-danger pull-right change-colour-button" style="padding: 7px 9px 7px 9px;background-color: #44a1ce;"><i _ngcontent-dys-c16="" aria-hidden="true" class="fa fa-plus"></i></button> -->
+ </div>
+</div>        
+<div class="clearfix"></div>
+</form>
+</div>
+</div>
+</div> 
+    <div class="col-md-12">
+    <div class="card card-plain"> 
+    <div class="card-body">
+    <div class="table-responsive"> 
+    <table class="table table-hover">
+    <thead class="thead">
+    <th>Sl No</th>
+    <th>Party Name</th>
+    <th>PR Date</th>
+  <th> PR No</th> 
+  <th> Status</th> 
+  <!-- <th> Total</th>  -->
+  <th [hidden]="Payment_Request_Edit==false">Edit</th>
+  <th [hidden]="Payment_Request_Delete==false">Delete</th>
+  </thead>
+<tbody class="bk_tb_bg" *ngFor="let Payment_Request1 of Payment_Request_Data; let i = index">
+<td style="padding-left:5px;">{{ i+1 }}</td>
+<td>{{Payment_Request1["Client_Accounts_Name"]}}</td>
+<td>{{Payment_Request1["Search_Date"]}}</td>
+<td>{{Payment_Request1["InvoiceNo"]}}</td>
+<td>{{Payment_Request1["Payment_Status_Name"]}}</td>
+<!-- <td>{{Payment_Request1["NetTotal"]}}</td> -->
+
+<td>
+<button _ngcontent-jry-c5="" _ngcontent-gxp-c5="" [hidden]="Payment_Request_Edit==false"aria-describedby="cdk-describedby-message-0" cdk-describedby-host="" class="aligyn-crect-deprtnment btn btn-primary btn-link btn-sm btn-just-icon mat-raised-button" mat-raised-button="" mattooltip="Edit Task" ng-reflect-message="Edit Task" ng-reflect-position="above" type="button"><span class="mat-button-wrapper"><span _ngcontent-jry-c5="" class="mat-button-wrapper"><i _ngcontent-jry-c5="" _ngcontent-gxp-c5="" class="material-icons" (click)="Edit_Payment_Request(Payment_Request1,i)" >edit</i></span><div _ngcontent-jry-c5="" class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div><div _ngcontent-jry-c5="" class="mat-button-focus-overlay"></div></span><div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div><div class="mat-button-focus-overlay" ></div></button>
+</td>
+<td> 
+<button _ngcontent-gdi-c11="" [hidden]="Payment_Request_Delete==false"class="btn btn-danger btn-link btn-sm btn-just-icon mat-raised-button" mat-raised-button="" mattooltip="Remove" type="button" aria-describedby="cdk-describedby-message-1" cdk-describedby-host="" ng-reflect-position="above" ng-reflect-message="Remove"><span class="mat-button-wrapper"><i _ngcontent-gdi-c11="" class="material-icons"  (click)="Delete_Payment_Request(Payment_Request1.Payment_Request_Id,i)" >close</i></span><div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div><div class="mat-button-focus-overlay"  ></div></button>
+</td>
+</tbody>
+</table>
+</div>
+</div>    
+<label class="entry-num">Entries : {{Total_Entries}}</label>
+ 
+</div>
+</div>
+</div>
+</div>
+</div> 
+<div id="Print_Div" style="display: none">
+    <table style="width: 100%; margin-left: 10px !important; margin-right: 10px">
+        <tr style="border: 0 !important">
+            <td colspan="2" style="font-size: 24px !important; border: 0 !important">
+                <img src="one_team_assets/img/logo_abc.png" />
+            </td>
+        </tr>
+
+        <tr style="border: 0 !important">
+            <td colspan="2" style="
+    font-size: 24px !important;
+    border: 0 !important;
+    text-align: center;
+    ">{{ Print_Company_.Company_Name }}
+                
+            </td>
+        </tr>
+        <!-- *ngIf="To_Account_Id == 1" -->
+        <!-- <tr  style="border: 0 !important">
+    <td colspan="2" style="font-size: 24px !important; border: 0 !important">
+    <img src="one_team_assets/img/Oneteamlogo.png" />
+    </td>
+    </tr> -->
+        <!-- *ngIf="To_Account_Id == 2" -->
+       
+        <tr style="border: 0 !important">
+            <td style="font-size: 24px !important; border: 0 !important; width: 60%"></td>
+            <td style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "></td>
+        </tr>
+
+
+
+        <tr style="border: 0 !important">
+            <td  colspan="2" style="
+            font-size: 24px !important;
+            border: 0 !important;
+            text-align: center;">
+                PAYMENT  APPROVAL 
+            </td>
+            <!-- <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    margin-left: 70px !important;
+    "
+    >
+    Invoice No :{{ print_voucher_no }}
+    </td> -->
+        </tr>
+
+        <tr style="border: 0 !important">
+            <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+                PR DATE :&nbsp;{{ Payment_Request_.PaymentDate}}
+            </td>
+            <td style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    margin-left: 70px !important;
+    ">
+                PR NO :&nbsp;{{ Payment_Request_.InvoiceNo }}
+            </td>
+        </tr>
+        <!-- <tr style="border:0!important">
+          <td style="font-size:24px !important;border:0!important;width:60%;">Paruthelipalam, Edappally - Pukkattupady Rd</td>
+          <td style="font-size:24px !important;border:0!important;float: right;position: fixed;">To,</td>
+        </tr> -->
+        <tr style="border: 0 !important">
+            <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+                <!-- Edappally Toll -->
+                <!-- {{ Print_Client_.Address2}} -->
+            </td>
+            <td style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    margin-left: 70px !important;
+    ">
+             
+            </td>
+        </tr>
+        <tr style="border: 0 !important">
+            <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+                <!-- Edappally-Pookkattupadi Road -->
+                {{ Print_Company_.Address3 }}
+            </td>
+            <td style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "></td>
+        </tr>
+        <tr style="border: 0 !important">
+            <!-- <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    {{ print_Company_pincode }}
+    </td> -->
+            <td style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "></td>
+        </tr>
+        <tr style="border: 0 !important">
+            <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+                <!-- +91 949 597 9234 -->
+                {{Print_Company_.Phone_Number}}
+            </td>
+            <!-- <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    
+    {{print_Company_Mobile}}
+      </td> -->
+            <td style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "></td>
+        </tr>
+        <tr style="border: 0 !important">
+            <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+                <u style="color: #357bfd">{{Print_Company_.EMail}}</u>
+            </td>
+            <td style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "></td>
+        </tr>
+        <!-- <tr style="border: 0 !important">
+    <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    mail@trackbox.com
+    </td>
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr> -->
+        <tr style="border: 0 !important">
+
+            <!-- <td style="font-size: 24px !important; border: 0 !important; width: 60%x">
+    GSTIN : {{ GSTNo }}
+    </td> -->
+            <td style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "></td>
+        </tr>
+        <tr style="border: 0 !important; height: 15px">
+            <td style="font-size: 24px !important; border: 0 !important; width: 60%"></td>
+            <td style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "></td>
+        </tr>
+        <tr style="border: 0 !important">
+            <br>
+            <br>
+            <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+              
+
+                PARTY NAME <a>:</a>{{ Payment_Request_.Client_Accounts_Name}}<br>
+                EXPENSE HEAD<a>:</a>{{ Payment_Request_.Group_Name}}<br>
+                PAYMENT STATUS<a>:</a>{{ Payment_Request_.Payment_Status_Name}}
+            </td>
+            <td style="font-size: 24px !important; border: 0 !important; width: 60%"> </td>
+
+        </tr>
+        <tr style="border: 0 !important">
+            <!-- <td style="font-size: 24px !important; border: 0 !important; width: 60%x">
+    Level <a>:</a>{{ course_name }}
+    </td> -->
+            <td style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "></td>
+        </tr>
+    </table> 
+    <div style=" margin-left: 10px !important; margin-right: 10px !important; margin-top: -57px !important; ">
+        <br /><br /><br />
+        <table style=" border-collapse: collapse; width: 100%;
+    height: 144px;
+    margin-left: 3px !important;
+    " border="1">
+            <thead> <tr> 
+                <th  style="    width: 6%;">
+                    <strong>SL NO. </strong>
+                </th>
+                    <th  style="    width: 6%;">
+                        <strong>DESCRIPTION </strong>
+                    </th>
+                    <th   style="    width: 6%;">
+                        <strong>QUANTITY</strong>
+                </th>
+                <th  style="    width: 6%;"><strong>RATE</strong></th>
+                <th  style="    width: 6%;"><strong>AMOUNT</strong> </th>
+            </tr>
+                <tr>
+                    <tbody class="bk_tb_bg" *ngFor="let Payment_Request_Details of Payment_Request_Details_Data; let i = index">
+                    <td style="padding-left:5px;">{{ i+1 }}</td>
+
+                    <td style="text-align: center;">{{Payment_Request_Details["Description"]}}</td>
+                    <td style="text-align: center;">{{Payment_Request_Details["Quantity"]}}</td>
+
+                    <td style="text-align: center;">{{Payment_Request_Details["Rate"]}}</td>
+                    <td style="text-align: center;">{{Payment_Request_Details["TotalAmount"]}}</td>
+                    </tbody>
+                </tr>
+                 
+            </thead>
+        </table>
+
+
+        <!-- <table style="width:100%">
+          <tr>
+          <td style='width:100%;text-align: left;' >Amount in Words:<strong>{{print_paid}}</strong>&nbsp;Only<td >          
+          </tr>
+          <tr style="border:0!important">
+            <td style="font-size:24px !important;border:0!important;width:60%;">2nd Floor, Muttathottil Building,</td>
+            <td style="font-size:24px !important;border:0!important;float: right;position: fixed;margin-left: 70px!important;">Invoice No :{{print_voucher_no}}</td>    
+            </tr>          
+          </table>  -->
+        <table style="width: 100%; margin-left: 10px !important; margin-right: 10px">
+            <tr>
+                <td style="height: 20px"></td>
+            </tr>
+            <tr style="border: 0 !important">
+               
+            </tr>
+            <tr style="border: 0 !important;    display: flex;">
+                <!-- <td style="border: 0 !important; width: 75%;font-size: 18px;"><u
+                        style="color: #357bfd">{{Print_Company_.Website}}</u></td> -->
+                        <td style="text-align: left" style="width: 65%">
+                            PAYMENT REQUESTED BY:
+                            <br>
+                             ACCOUNT DEPARTMENT 
+                        </td>
+                <!-- <td>
+    Authorized By<br />Amith Prakash<br />Regional Manager<br />Amith_rm@trackbox.com
+    </td> -->
+                <td>
+                    AUTHORIZED BY <br />ACCOUNT DEPARTMENT<br />
+                    DATE :&nbsp;{{ Payment_Request_.Entry_Date}}
+
+                </td>
+
+            </tr>
+        </table>
+        <!-- <h4 style="margin-left: 190px;">Amount received by DIRECTOR</h4> -->
+    </div>
+</div>

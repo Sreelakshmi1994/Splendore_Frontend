@@ -1,0 +1,11 @@
+
+.bg-icons button{
+ 
+    background-color:    #44a1ce !important;
+    transition: all .5s ease-in-out;
+    
+    margin-top: 0 !important;
+}
+.bg-icons button:hover{
+    background-color: #317291 !important;
+}

@@ -1,0 +1,8 @@
+.bg-icons button{
+ 
+    background-color:    #44a1ce !important;
+    transition: all .5s ease-in-out;
+}
+.bg-icons button:hover{
+    background-color: #317291 !important;
+}

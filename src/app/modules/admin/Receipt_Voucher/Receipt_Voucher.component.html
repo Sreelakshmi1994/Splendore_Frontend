@@ -1,0 +1,681 @@
+
+
+<div *ngIf="issLoading" class="overlay">
+  <mat-progress-spinner class="spinner" [color]="color" [mode]="mode" [value]="value">
+  </mat-progress-spinner>
+  </div>
+  <div class="main-content">
+  <div class="container-fluid">
+  <div class="row" *ngIf="Entry_View">
+  <div class="col-md-12">
+  <div class="card">
+  
+  <div class="card-body">
+  <!-- <form> -->
+  <div class="row">
+  <div class="col-md-6">
+
+      <div class="col-md-12">
+          <label class="col-md-4 mrgin-alghn-label-text-otrs-nxt">From <span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span> </label>
+          <input type="text" [matAutocomplete]="auto_fom"   [(ngModel)]="FromAccount_" (click)="Accounts_Typeahead($event)" (keyup)="Accounts_Typeahead($event)" class="col-md-8 for-input-selct-tblelst margin-inputs-edit-portion-jouranl-section" />
+          <mat-autocomplete #auto_fom="matAutocomplete" [displayWith]="display_FromAccount">
+          <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+          <ng-container *ngIf="!issLoading">
+            <mat-option *ngFor="let FromAccount of Client_Accounts_Data" [value]="FromAccount">
+              <span><div  (click)="Get_Client_Accounts(FromAccount.Client_Accounts_Id,FromAccount.Address1)" >{{FromAccount.Client_Accounts_Name}}-{{FromAccount.Address1}}-{{FromAccount.Mobile}}</div></span>
+            </mat-option>
+          </ng-container>
+          </mat-autocomplete>
+          </div>
+          <div class="col-md-12">
+            <label class="col-md-4 label-down-alighn-rcpt-vuchr">Address  </label>
+            <mat-form-field class="col-md-8 margin-lh-rh-to-crect-textbox">
+            <input disabled matInput type="text" [(ngModel)]="Receipt_Voucher_.Address1" name="Address1" >
+            </mat-form-field>
+            </div>
+          <div class="col-md-12">
+            <label class="col-md-4 mrgin-alghn-label-text-otrs-nxt">To  <span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span> </label>
+            <input type="text" [matAutocomplete]="auto1" [(ngModel)]="ToAccount_" (click)="To_Accounts_Typeahead($event)" (keyup)="To_Accounts_Typeahead($event)" class="col-md-8 for-input-selct-tblelst margin-inputs-edit-portion-jouranl-section" />
+            <mat-autocomplete #auto1="matAutocomplete" [displayWith]="display_FromAccount">
+            <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+            <ng-container *ngIf="!issLoading">
+              <mat-option *ngFor="let FromAccount1 of To_Client_Accounts_Data" [value]="FromAccount1">
+                  <span>{{FromAccount1.Client_Accounts_Name}}-{{FromAccount1.Address1}}-{{FromAccount1.Mobile}} </span> 
+              </mat-option>
+            </ng-container>
+            </mat-autocomplete>
+            </div>
+
+  <div class="col-md-12">
+  <label class="col-md-4 label-down-alighn-rcpt-vuchr">Amount <span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span> </label>
+  <mat-form-field class="col-md-8 margin-lh-rh-to-crect-textbox">
+  <input matInput type="number" [(ngModel)]="Receipt_Voucher_.Amount" name="Receipt_Voucher_.Amount" >
+  </mat-form-field>
+  </div>
+  
+  <div class="col-md-12">
+    <label class="col-md-4 mrgin-alghn-label-text-otrs-nxt">Mode <span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span> </label>
+    <select [(ngModel)]="Payment_Mode_" name=""  required class="col-md-8 select-box-style-diary" style="padding: 0.4rem 0rem;">
+    <option *ngFor="let Payment_Mode_M of Payment_Mode_Data"[ngValue]="Payment_Mode_M">{{Payment_Mode_M.Payment_Mode_Name}}</option>
+    </select>
+    </div>
+
+  </div>
+
+  <div class="col-md-6 marin-crect-down-recipt-voucher-new">
+     
+          <div class="col-md-12">
+            <label class="col-md-4 pdng-crect-rspnsv-mrgn-nptbx-txt-lh">Date</label>
+            <mat-form-field class="col-md-8 margin-lh-rh-to-crect-textbox nput-top-to-crect-recipt-voucher">
+                    <input matInput [matDatepicker]="dp" placeholder="" [(ngModel)]="Receipt_Voucher_.Date">
+                    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                    <mat-datepicker #dp></mat-datepicker>
+                  </mat-form-field>
+            </div>
+
+            <!-- <div class="col-md-12" [hidden]="Employee_Save_Edit">
+              <label class="col-md-4 mrgin-alghn-label-text-otrs-nxt">Employee <span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span> </label>
+              <input type="text" [matAutocomplete]="auto_employe" [(ngModel)]="By_Employee" name="Employee" (click)="Employee_Typeahead($event)" (keyup)="Employee_Typeahead($event)" class="col-md-8 for-input-selct-tblelst margin-inputs-edit-portion-jouranl-section" />
+              <mat-autocomplete #auto_employe="matAutocomplete" [displayWith]="display_Employee">
+                  <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+                  <ng-container *ngIf="!issLoading">
+                      <mat-option *ngFor="let Employee of Employee_Data" [value]="Employee">
+                          <span>{{Employee.Client_Accounts_Name}}</span>
+                      </mat-option>
+                  </ng-container>
+              </mat-autocomplete>
+              </div>   
+
+      <div class="col-md-12">
+        <label class="col-md-4 mrgin-alghn-label-text-otrs-nxt">Receipt Status</label>
+        <select   required class="col-md-8 for-input-selct-tblelst ng-valid ng-dirty ng-touched" [(ngModel)]="Receipt_Voucher_.Payment_Status" name="Payment_Voucher_.Payment_Status" >
+          
+          <option value="0">Checked</option>
+        <option value="1">Not Checked</option>
+        </select>
+      </div> -->
+
+      <div class="col-md-12">
+        <label class="col-md-4 label-down-alighn-rcpt-vuchr">Receipt No</label>
+       <mat-form-field class="col-md-8 margin-lh-rh-to-crect-textbox">
+       <input disabled matInput type="number" [(ngModel)]="Receipt_Voucher_.Voucher_No" name="Receipt_Voucher_.Voucher_No">
+       </mat-form-field>
+       </div>
+      
+  <div class="col-md-12">
+      <label class="col-md-4 label-down-alighn-rcpt-vuchr">Description</label>
+      <mat-form-field class="col-md-8 margin-lh-rh-to-crect-textbox">
+      <input matInput type="text" maxlength="1000" [(ngModel)]="Receipt_Voucher_.Description" name="Receipt_Voucher_.Description">
+      </mat-form-field>
+      </div>
+       <div class="row full-box-contents-select-status-department">
+     
+      <div class="col-md-5 mve-up-wrd-crct-alghn-sls-mstr-nw-sctn-brcde-rspnsv">
+        
+      </div>
+        <!-- <div _ngcontent-xmy-c9="" class="card margin-corect-card">                      
+            <div _ngcontent-xmy-c9="" class="nav-tabs-navigation">
+              <table _ngcontent-xmy-c9="" class="table">
+                <tbody _ngcontent-xmy-c9="" class="thead"><tr _ngcontent-xmy-c9="">
+              
+                <th>Select</th> 
+                <th>Date</th> 
+                <th>Bill No</th> 
+                <th>Total Amount</th> 
+                <th>Discount</th> 
+                <th>Receiving Amount</th> 
+                <th>Balance Amount</th> 
+                </tr></tbody>
+              </table>
+            </div>
+            <div _ngcontent-xmy-c9="" class="card-body">
+              <div _ngcontent-xmy-c9="" class="tab-content">
+                <div _ngcontent-xmy-c9="" class="tab-pane active" id="profile">
+                    <table _ngcontent-xmy-c9="" class="table">
+                      <tbody _ngcontent-xmy-c9="" *ngFor="let Sales_Receipt1 of Sales_Receipt_Data; let i = index">
+                        <tr _ngcontent-xmy-c9="">
+                          <td _ngcontent-xmy-c9="" class="inner-tables-colmn-to-crect-alighn-select td-padding" style="width: 13%;">
+                            <div _ngcontent-xmy-c9="" class="form-check mar-crect-for-check-bx-depart">
+                            <label _ngcontent-xmy-c9="" class="form-check-label">
+                            <input type="checkbox" name={{Sales_Receipt1.Sales_Master_Id}}_{{Sales_Receipt1.Sales_Master_Id}}
+                            class="form-check-input"  [(ngModel)]="Sales_Receipt1.Check_Box" 
+                            [checked]="Sales_Receipt1.Check_Box">
+                            <span _ngcontent-xmy-c9="" class="form-check-sign"><span _ngcontent-xmy-c9="" class="check"></span>
+                          </span>
+                        </label>
+                        </div>
+                        </td>
+                        <td class="inner-tables-colmn-to-crect-alighn-location td-padding" style="width: 20%;">{{Sales_Receipt1["Date"]}}</td>
+                        <td class="inner-tables-colmn-to-crect-alighn-location td-padding" style="width: 20%;">{{Sales_Receipt1["Invoice_No"]}}</td>
+                        <td class="inner-tables-colmn-to-crect-alighn-location td-padding" style="width: 20%;">{{Sales_Receipt1["NetTotal"]}}</td>
+                        <td class="inner-tables-colmn-to-crect-alighn-location td-padding">
+                          <input matInput type="text"  name={{Sales_Receipt1.Account_Party_Id}}a{{Sales_Receipt1.Account_Party_Id}} [(ngModel)]="Sales_Receipt1.Discount"
+                            class="col-md-7 input-text-item-sales-section-group-diary input-allighn-to-crect-wole-paddings mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn">
+                        </td>
+                        <td class="inner-tables-colmn-to-crect-alighn-location td-padding">
+                          <input matInput type="text" name={{Sales_Receipt1.Account_Party_Id}}b{{Sales_Receipt1.Account_Party_Id}} [(ngModel)]="Sales_Receipt1.Receiving_Amount"
+                            class="col-md-7 input-text-item-sales-section-group-diary input-allighn-to-crect-wole-paddings mrgn-crct-input-bx-sls-mstr-rspnsv-nw-sctn">
+                        </td>
+                        <td class="inner-tables-colmn-to-crect-alighn-location td-padding" style="width: 20%;">{{Sales_Receipt1["BalAmt"]}}</td>
+                        </tr>
+                      </tbody>
+                    </table>            
+                </div>
+              </div>
+            </div>
+                    </div> -->
+                    </div>
+      <div class="col-md-12">
+      <button mat-raised-button type="submit"[hidden]="Receipt_Voucher_Edit==false" id="Save_Button"class="btn btn-danger pull-right"(click)="Save_Receipt_Voucher()">Save</button>
+      <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="Close_Click()">Close</button>
+      <button mat-raised-button type="submit"  [hidden]="Receipt_Voucher_Print==false"class="btn btn-danger pull-right" (click)="Print_Click()"><i class="fa fa-print" aria-hidden="true"></i></button>
+      </div>
+
+    </div>
+      
+  </div>
+  <div class="clearfix"></div>
+  <!-- </form> -->
+  </div>
+  </div>
+  </div>
+  
+  
+  </div>
+  <div class="row" *ngIf="!Entry_View">
+    <div class="col-md-12">
+      <div class="card mt-2 mb-2">
+        <div class="card-body">
+          <div class="row" style="align-items: center;">
+
+
+    <div _ngcontent-xmy-c9="" class="col-md-1"  style="    display: flex;
+    
+    padding-right: 0;">
+      <div _ngcontent-xmy-c9="" class="form-check top-to-crect-checkboxes-recipt-voucher" style="top: 0; margin-top: 0;">
+        <label _ngcontent-xmy-c9="" class="form-check-label ml-0">
+          <input type='checkbox' class="form-check-input" placeholder='Search...' [(ngModel)]="Look_In_Date" />
+          <span _ngcontent-xmy-c9="" class="form-check-sign"><span _ngcontent-xmy-c9="" class="check"></span>
+          </span></label></div>
+      <label class="for-down-title-tabs-personal-details">Date</label>
+    </div>
+
+      <div class="col-md-3 label-to-crect-all-names-to-divs">
+        <label class="col-md-4 label-down-alighn-supler-prhse-mstr-down label-to-crect-all-names-to-divs ml-0" style="text-align: right;">From</label>
+        <mat-form-field class="col-md-8 margin-lh-rh-to-crect-textbox ">
+                <input matInput [matDatepicker]="dp1" placeholder="" [(ngModel)]="Search_FromDate">
+                <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                <mat-datepicker #dp1></mat-datepicker>
+              </mat-form-field>
+        </div>
+
+      <div class="col-md-3">
+        <label class="col-md-4 label-down-alighn-supler-prhse-mstr-down ml-0" style="text-align: right;">TO</label>
+        <mat-form-field class="col-md-8 margin-lh-rh-to-crect-textbox ">
+                <input matInput [matDatepicker]="dp2" placeholder="" [(ngModel)]="Search_ToDate">
+                <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                <mat-datepicker #dp2></mat-datepicker>
+              </mat-form-field>
+        </div>
+
+
+      <div class="col-md-3">
+          <label class="col-md-4 label-down-alighn-supler-prhse-mstr-down padd-lft-crect-alighn-wole-div ml-0" style="text-align: right;">Receipt No</label>
+              <mat-form-field  class="col-md-8 led-srch-sctn-nput-tb margin-lh-rh-to-crect-textbox ">
+              <input matInput type="number" [(ngModel)]="Voucher_No_search" name="Voucher_No_search">
+              </mat-form-field>
+              </div>
+                  
+              <!-- <div class="col-md-5" [hidden]="Employee_Edit">
+                <label class="col-md-3 label-down-alighn-supler-prhse-mstr-down">Employee </label>
+                <input type="text" [matAutocomplete]="auto" [(ngModel)]="Employee_" name="Employee" (click)="Employee_Typeahead($event)" (keyup)="Employee_Typeahead($event)" class="col-md-9 for-input-selct-tblelst ng-pristine ng-valid ng-touched" />
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="display_Employee">
+                    <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+                    <ng-container *ngIf="!issLoading">
+                        <mat-option *ngFor="let Employee of Employee_Data" [value]="Employee">
+                            <span>{{Employee.Client_Accounts_Name}}</span>
+                        </mat-option>
+                    </ng-container>
+                </mat-autocomplete>
+                </div>   -->
+  
+      <div class="col-md-4">
+          <label class="col-md-3 label-down-alighn-supler-prhse-mstr-down ml-0" style="text-align: right;">From </label>
+          <input type="text" [matAutocomplete]="auto2" [(ngModel)]="FromAccount_Search" (click)="Accounts_Typeahead($event)" (keyup)="Accounts_Typeahead($event)" class="col-md-9 for-input-selct-tblelst margin-lh-rh-to-crect-textbox mb-0" />
+          <mat-autocomplete #auto2="matAutocomplete" [displayWith]="display_FromAccount">
+          <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+          <ng-container *ngIf="!issLoading">
+            <mat-option *ngFor="let FromAccount of Client_Accounts_Data" [value]="FromAccount">
+                <span>{{FromAccount.Client_Accounts_Name}}-{{FromAccount.Address1}}-{{FromAccount.Mobile}}</span>
+            </mat-option>
+          </ng-container>
+          </mat-autocomplete>
+          
+          </div>
+
+             
+          <div class="col-md-3">
+              <label class="col-md-2 label-down-alighn-supler-prhse-mstr-down ml-0" style="text-align: right;">To </label>
+              <input type="text" [matAutocomplete]="auto3" [(ngModel)]="ToAccount_Search" (click)="To_Accounts_Typeahead($event)" (keyup)="To_Accounts_Typeahead($event)" class="col-md-10 for-input-selct-tblelst margin-lh-rh-to-crect-textbox mb-0" />
+              <mat-autocomplete #auto3="matAutocomplete" [displayWith]="display_FromAccount">
+              <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+              <ng-container *ngIf="!issLoading">
+                <mat-option *ngFor="let FromAccount1 of To_Client_Accounts_Data" [value]="FromAccount1">
+                    <span>{{FromAccount1.Client_Accounts_Name}}-{{FromAccount1.Address1}}-{{FromAccount1.Mobile}}</span>
+                </mat-option>
+              </ng-container>
+              </mat-autocomplete>
+              </div> 
+              <!-- <div class="col-md-4">
+                <label class="col-md-4 mrgin-alghn-label-text-otrs-nxt">Receipt Status</label>
+                <select   required class="col-md-8 for-input-selct-tblelst ng-valid ng-dirty ng-touched" [(ngModel)]="Payment_Status_" name="Payment_Status_" >
+                  <option value="-1">All</option>
+                  <option value="0">Checked</option>
+                <option value="1">Not Checked</option>
+                </select>
+              </div> -->
+<div class="col-md-1 d-flex bg-icons">           
+<button mat-raised-button type="submit" (click)="Create_New()" class="btn pull-right btn-danger button-to-crect-margin "><i class="fa fa-plus" aria-hidden="true"></i></button>
+<button mat-raised-button type="submit" (click)="Search_Receipt_Voucher()" class="btn pull-right btn-danger button-to-crect-margin"><i class="fa fa-search" aria-hidden="true"></i></button>
+</div>  
+</div>
+</div>
+</div>
+</div>
+
+  <div class="col-md-12">
+  <div class="card card-plain mb-0">
+  <!-- <div class="card-header card-header-danger">
+  <h4 class="card-title mt-0"> Journal Entry</h4> -->
+  <!-- <p class="card-category"> Here is a subtitle for this table</p> -->
+  <!-- </div> -->
+  <div class="card-body">
+  <div class="table-responsive"  [style.height.px]="myInnerHeight"
+  style="overflow-y: scroll; ">
+  <table class="table table-hover">
+  <thead class="thead">
+  <!-- <th>
+  Sl No
+  </th> -->
+  <th>
+  Date
+  </th>
+
+  <th>
+  From 
+  </th> 
+  <th>
+    Address
+     </th> 
+  <!-- <th> Employee </th> -->
+  <th>
+  Amount
+  </th>
+  <th>
+    Receipt No
+    </th>
+  <th [hidden]="Receipt_Voucher_Edit==false">
+  Edit
+  </th>
+  <th [hidden]="Receipt_Voucher_Delete==false">
+  Delete
+  </th>
+  </thead>
+  <tbody class="bk_tb_bg" *ngFor="let Receipt_Voucher1 of  Receipt_Voucher_Data; let i = index">
+  <!-- <td style="padding-left:5px;">{{ i+1 }}</td> -->
+  <td>{{Receipt_Voucher1["Search_Date"]}}</td>
+  <td>{{Receipt_Voucher1["FromAccount_Name"]}}</td> 
+  <td>{{Receipt_Voucher1["Address1"]}}</td> 
+  <!-- <td>{{Receipt_Voucher1["Employee_Name"]}}</td>  -->
+  <td>{{Receipt_Voucher1["Amount"]}}</td> 
+  <td>{{Receipt_Voucher1["Voucher_No"]}}</td> 
+  <td>
+  <button _ngcontent-jry-c5="" _ngcontent-gxp-c5=""[hidden]="Receipt_Voucher_Edit==false"aria-describedby="cdk-describedby-message-0" cdk-describedby-host="" class="aligyn-crect-deprtnment btn btn-primary btn-link btn-sm btn-just-icon mat-raised-button" mat-raised-button="" mattooltip="Edit Task" ng-reflect-message="Edit Task" ng-reflect-position="above" type="button"><span class="mat-button-wrapper"><span _ngcontent-jry-c5="" class="mat-button-wrapper"><i _ngcontent-jry-c5="" _ngcontent-gxp-c5="" class="material-icons" (click)="Edit_Receipt_Voucher(Receipt_Voucher1,i)" >edit</i></span><div _ngcontent-jry-c5="" class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div><div _ngcontent-jry-c5="" class="mat-button-focus-overlay"></div></span><div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div><div class="mat-button-focus-overlay" ></div></button>
+  </td>
+  <td> 
+  <button _ngcontent-gdi-c11=""[hidden]="Receipt_Voucher_Delete==false" class="btn btn-danger btn-link btn-sm btn-just-icon mat-raised-button" mat-raised-button="" mattooltip="Remove" type="button" aria-describedby="cdk-describedby-message-1" cdk-describedby-host="" ng-reflect-position="above" ng-reflect-message="Remove"><span class="mat-button-wrapper"><i _ngcontent-gdi-c11="" class="material-icons"  (click)="Delete_Receipt_Voucher(Receipt_Voucher1.Receipt_Voucher_Id,i)" >close</i></span><div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div><div class="mat-button-focus-overlay"  ></div></button>
+  </td>
+  </tbody>
+  </table>
+  </div>
+  </div>
+ 
+
+  
+</div>
+<div class="col-md-4 ml-0 pl-0">
+  <label class="entry-num ml-0 ">Entries : {{Total_Entries}}</label>
+   &nbsp;&nbsp;&nbsp;&nbsp; <label class="entry-num">Amount: {{Total_Amounts}}</label>
+  </div>
+  </div>
+  </div>
+  </div>
+ 
+  <div id="Print_Div" style="display: none">
+    <table style="width: 100%; margin-left: 10px !important; margin-right: 10px">
+    <tr style="border: 0 !important">
+    <td
+    colspan="2"
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    text-align: center;
+    "
+    >
+    RECEIPT
+    </td>
+    </tr>
+    <!-- *ngIf="To_Account_Id == 1" -->
+    <!-- <tr  style="border: 0 !important">
+    <td colspan="2" style="font-size: 24px !important; border: 0 !important">
+    <img src="one_team_assets/img/Oneteamlogo.png" />
+    </td>
+    </tr> -->
+    <!-- *ngIf="To_Account_Id == 2" -->
+    <tr  style="border: 0 !important">
+    <td colspan="2" style="font-size: 24px !important; border: 0 !important">
+    <img src="one_team_assets/img/logo_abc.png" />
+    </td>
+    </tr>
+    
+    <tr style="border: 0 !important">
+    <td
+    style="font-size: 24px !important; border: 0 !important; width: 60%"
+    ></td>
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr>
+    
+    
+    
+    <tr style="border: 0 !important">
+    <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    {{ Print_Company_.Company_Name }}
+    </td>
+    <!-- <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    margin-left: 70px !important;
+    "
+    >
+    Invoice No :{{ print_voucher_no }}
+    </td> -->
+    </tr>
+    
+    <tr style="border: 0 !important">
+    <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    <!-- 2nd Floor, Muttathottil Building, -->
+    {{ Print_Company_.Address1 }}
+    </td>
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    margin-left: 70px !important;
+    "
+    >
+    Receipt No :&nbsp;{{ Receipt_Voucher_.Voucher_No }}
+    </td>
+    </tr>
+    <!-- <tr style="border:0!important">
+          <td style="font-size:24px !important;border:0!important;width:60%;">Paruthelipalam, Edappally - Pukkattupady Rd</td>
+          <td style="font-size:24px !important;border:0!important;float: right;position: fixed;">To,</td>
+        </tr> -->
+    <tr style="border: 0 !important">
+    <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    <!-- Edappally Toll -->
+    <!-- {{ Print_Client_.Address2}} -->
+    </td>
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    margin-left: 70px !important;
+    "
+    >
+    Date :&nbsp;{{ Receipt_Voucher_.Search_Date}}
+    </td>
+    </tr>
+    <tr style="border: 0 !important">
+    <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    <!-- Edappally-Pookkattupadi Road -->
+    {{ Print_Company_.Address3 }}
+    </td>
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr>
+    <tr style="border: 0 !important">
+    <!-- <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    {{ print_Company_pincode }}
+    </td> -->
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr>
+    <tr style="border: 0 !important">
+    <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    <!-- +91 949 597 9234 -->
+  {{Print_Company_.Phone_Number}}
+    </td>
+    <!-- <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    
+    {{print_Company_Mobile}}
+      </td> -->
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr>
+    <tr style="border: 0 !important">
+    <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    <u style="color: #357bfd">{{Print_Company_.EMail}}</u>
+    </td>
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr>
+    <!-- <tr style="border: 0 !important">
+    <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    mail@trackbox.com
+    </td>
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr> -->
+    <tr style="border: 0 !important">
+    
+    <!-- <td style="font-size: 24px !important; border: 0 !important; width: 60%x">
+    GSTIN : {{ GSTNo }}
+    </td> -->
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr>
+    <tr style="border: 0 !important; height: 15px">
+    <td
+    style="font-size: 24px !important; border: 0 !important; width: 60%"
+    ></td>
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr>
+    <tr style="border: 0 !important">
+    <td style="font-size: 24px !important; border: 0 !important; width: 60%">
+    From Account   <a>:</a>{{ Receipt_Voucher_.FromAccount_Name }}
+    </td>
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr>
+    <tr style="border: 0 !important">
+    <!-- <td style="font-size: 24px !important; border: 0 !important; width: 60%x">
+    Level <a>:</a>{{ course_name }}
+    </td> -->
+    <td
+    style="
+    font-size: 24px !important;
+    border: 0 !important;
+    float: right;
+    position: fixed;
+    "
+    ></td>
+    </tr>
+    </table> 
+    <table
+    style="
+    border-collapse: collapse;
+    width: 100%;
+    height: 144px;
+    margin-left: 3px !important;
+    "
+    border="1"
+    >
+    <tbody>
+    <tr style="height: 18px">
+    <td style="width: 80%; height: 42px; text-align: center">
+    <strong>Particulars </strong>
+    </td>
+    <td
+    style="
+    width: 20%;
+    height: 18px;
+    text-align: center;
+    padding-right: 3% !important;
+    "
+    >
+    <strong>Amount</strong>
+    </td>
+    </tr>
+    <tr style="height: 300px">
+    <td
+    style="
+    width: 80%;
+    height: 126px;
+    vertical-align: top;
+    text-align: left;
+    padding-left: 2%;
+    padding-right: 2%;
+    "
+    >
+    {{ Receipt_Voucher_.ToAccount_Name }}<br>
+    {{ Receipt_Voucher_.Description  }}
+    </td>
+    <td
+    style="
+    width: 20%;
+    height: 126px;
+    vertical-align: top;
+    text-align: right;
+    padding-right: 3%;
+    "
+    >
+    {{ Receipt_Voucher_.Amount }}
+    </td>
+    </tr>
+    <tr style="height: 18px">
+    <td style="width: 80%; height: 18px">
+    <strong>Total </strong>
+    </td>
+    <td
+    style="
+    width: 20%;
+    height: 18px;
+    text-align: right;
+    padding-right: 3% !important;
+    "
+    >
+    <strong>{{ Receipt_Voucher_.Amount }}</strong>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    <!-- <table style="width:100%">
+          <tr>
+          <td style='width:100%;text-align: left;' >Amount in Words:<strong>{{print_paid}}</strong>&nbsp;Only<td >          
+          </tr>
+          <tr style="border:0!important">
+            <td style="font-size:24px !important;border:0!important;width:60%;">2nd Floor, Muttathottil Building,</td>
+            <td style="font-size:24px !important;border:0!important;float: right;position: fixed;margin-left: 70px!important;">Invoice No :{{print_voucher_no}}</td>    
+            </tr>          
+          </table>  -->
+    <table
+    style="width: 100%; margin-left: 10px !important; margin-right: 10px"
+    >
+    <tr>
+    <td style="height: 20px"></td>
+    </tr>
+    <tr style="border: 0 !important">
+    <td style="text-align: left">
+    Amount in Words:<strong>{{ print_paid }}</strong
+    >&nbsp;Only
+    </td>
+    </tr>
+    <tr style="border: 0 !important">
+    <td style="border: 0 !important; width: 75%;font-size: 18px;" ><u style="color: #357bfd">{{Print_Company_.Website}}</u></td>
+    <!-- <td>
+    Authorized By<br />Amith Prakash<br />Regional Manager<br />Amith_rm@trackbox.com
+    </td> -->
+    <td>
+      Authorized By<br />Account Department<br />
+      </td>
+  
+    </tr>
+    </table>
+    <h5 style="margin-left: 200px;    margin-top: 200px;">This is system generated receipt signature is not required</h5>
+    <!-- <h4 style="margin-left: 190px;">Amount received by DIRECTOR</h4> -->
+    </div>
+ 
+    

@@ -1,0 +1,319 @@
+<div *ngIf="issLoading" class="overlay">
+<mat-progress-spinner class="spinner" [color]="color" [mode]="mode" [value]="value">
+</mat-progress-spinner>
+</div>
+
+<div  id='Topdiv'></div>
+<div  id='Bottomdiv'></div>
+<div class="main-content screenfixed "  >
+<div class="container-fluid">
+    <!-- *ngIf="Entry_View" -->
+<div class="row" >
+<div class="col-xl-12 pl-0 mt-0" >
+
+<div class="profilecard mb-2">
+
+
+<div class="dt-card__body mt-0 pl-0"  id="profile"  *ngIf="profile_View"  >
+<form class="mb-0">
+<div class="container-fluidprofile" style="width: 100%;">
+    <div class="dt-card mt-2">
+    <div class="dt-card__body mt-3" style="margin-left: 2%;" >
+
+  
+    <div class="form-row  mb-2  ">
+    <label class="col-md-1 col-sm-1 col-form-label text-sm-right">Book Name<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>                          
+    <div class="col-md-4 col-sm-4 mb-1">
+    <input type="text" name="Books_.Books_Name" [(ngModel)]="Books_.Books_Name" class="form-control" placeholder="">
+    </div> 
+    <div class="col-md-1 col-sm-1"></div>    
+    <label class="col-md-1 col-sm-1 col-form-label text-sm-right">Author Name</label>
+    <div class="col-md-4 col-sm-4 mb-1">
+    <input type="text"  name="Books_.Authors" [(ngModel)]="Books_.Authors" class="form-control" placeholder="">
+    </div>     
+  
+    </div>
+
+    <div class="form-row  mb-2  ">
+        <label class="col-md-1 col-sm-1 col-form-label text-sm-right">Book No<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>                          
+        <div class="col-md-4 col-sm-4 mb-1">
+        <input type="text" name="Books_.Books_No" [(ngModel)]="Books_.Books_No" class="form-control" placeholder="">
+        </div>  
+        <div class="col-md-1 col-sm-1"></div>    
+
+        <label class="col-md-1 col-sm-1 col-form-label text-sm-right">Rack No</label>                          
+        <div class="col-md-4 col-sm-4 mb-1">
+        <input type="text" name="Books_.Rack_No" [(ngModel)]="Books_.Rack_No" class="form-control" placeholder="">
+        </div>
+   <div class="col-6  d-flex gap-3">
+
+       <label class=" col-form-label text-sm-right"> No of Books</label>                          
+       <div class=" mb-1">
+           <input type="text" name="Books_.Book_Count" [(ngModel)]="Books_.Book_Count" class="form-control" placeholder="">
+        </div>
+        </div>
+   
+    <div class="col-md-1 col-sm-1"></div> 
+    
+  
+       
+    </div>
+
+    <div class="form-row  mb-2">
+        <label class="col-md-1 col-sm-1 col-form-label text-sm-right">Description</label>                          
+        <div class="col-md-4 col-sm-4 mb-1">
+            <textarea Input rows="5" cols="40"  class="form-control " name="Books_.Description" [(ngModel)]="Books_.Description" class="form-control" placeholder=""></textarea>
+        </div> 
+        <div class="col-md-1 col-sm-1"></div> 
+    
+        <label class="col-md-1 col-sm-1 col-form-label text-sm-right"></label>
+       
+        <div class="col-md-4" style="display: flex;
+        align-items: flex-start;
+       ">
+           
+                               
+                <button (click)="Save_Books()" [hidden]="Books_Save==false"id="Save_Button" mat-raised-button type="submit" class="save-button-style pull-right mr-1 ml-1" style="margin-right: -19px !important;">Save</button> 
+              
+                <button (click)="Close_Click()" mat-raised-button type="submit" class="close-button-style pull-right  ml-4 ">Close</button> 
+         
+        </div>
+  
+    </div>
+
+
+
+    </div>
+    <!-- <div class="form-row  mb-2">
+    <div class="col-md-11"> 
+    <button (click)="Close_Click()" mat-raised-button type="submit" class="close-button-style pull-right  ml-4 ">Close</button>                   
+    <button (click)="Save_Books()" [hidden]="Books_Save==false"id="Save_Button" mat-raised-button type="submit" class="save-button-style pull-right mr-1 ml-1" style="margin-right: -19px !important;">Save</button> 
+  
+
+    </div>
+    </div> -->
+    </div>
+</div>
+</form>
+</div>
+
+
+
+
+
+
+
+</div>
+</div>    
+</div>
+
+<div class="row" *ngIf="!Entry_View" >
+<div class="col-md-12 pl-0 pr-0 mt-0 mb-0">
+<div class="dt-card mb-0 pb-1">         
+<div class="dt-card__body mt-1 mb-0 pb-0">
+<form class="mb-0">     
+<!-- <div class="container-fluidprofile"> -->
+<div class="form-row  mb-2">
+<!-- <label class="col-md-0 col-sm-0 col-form-label text-sm-right mr-0">Branch</label>                          
+<div class="col-md-3 col-sm-3 mb-1">
+<input type="text" name="Agent_Name_Search" [(ngModel)]="Agent_Name_Search" class="form-control" placeholder="">
+</div> -->
+
+
+<!-- <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Book Name </label>
+<div class="col-md-4 col-sm-4 mb-1">
+<input type="text"  class="form-control"  id="Books_" name="Books_"  [matAutocomplete]="auto_Books"
+[(ngModel)]="Books_" (click)="Search_Books_Typeahead($event)"(keyup)="Search_Books_Typeahead($event)" /></div>  
+<mat-autocomplete #auto_Books="matAutocomplete" [displayWith]="display_Books">
+    <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+    <ng-container *ngIf="!issLoading">
+    <mat-option *ngFor="let Books of Books_Data_Filter" [value]="Books">
+    <span>{{Books.Books_Name}}</span>
+    </mat-option>
+    </ng-container>
+</mat-autocomplete>   -->
+ 
+
+<!-- <div class="form-row  mb-2  "> -->
+    <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Book Name </label>
+    <div class="col-md-3 col-sm-3 mb-1">
+    <input type="text" name="Search_Name" [(ngModel)]="Search_Name" class="form-control" placeholder="">
+    </div> 
+
+
+    
+
+
+    <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Book No </label>                         
+    <div class="col-md-3 col-sm-3 mb-1">
+    <input type="text" name="Books_No_ " [(ngModel)]="Books_No_ " class="form-control" placeholder="">
+    </div>
+<!-- </div> -->
+
+<!-- <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Book No </label>
+<div class="col-md-3 col-sm-3 mb-1">
+<input type="text"  class="form-control"  id="Books_Search_" name="Books_Search_"  [matAutocomplete]="auto_Booksno"
+[(ngModel)]="Books_Search_" (click)="Search_BooksNo_Typeahead($event)"(keyup)="Search_BooksNo_Typeahead($event)" /></div>  
+<mat-autocomplete #auto_Booksno="matAutocomplete" [displayWith]="display_BooksNo">
+    <mat-option *ngIf="issLoading"><mat-spinner diameter="500"></mat-spinner></mat-option>
+    <ng-container *ngIf="!issLoading">
+    <mat-option *ngFor="let Booksno of BooksNo_Data_Filter" [value]="Booksno">
+    <span>{{Booksno.Books_No}}</span>
+    </mat-option>
+    </ng-container>
+</mat-autocomplete>   -->
+
+<div class="col-md-3 col-sm-2 mt-0" >                    
+<button (click)="Search_Books_Report()"  mat-raised-button type="submit" class="other-button-style pull-left mr-1">Search</button>
+<button (click)="Create_New()"   mat-raised-button type="submit"  class="save-button-style pull-left mr-1 ">Create New</button>
+
+</div>
+
+</div>
+</form>
+</div>
+</div>        
+</div> 
+
+
+<div class="col-md-12  mt-2" style="border: 1;padding-left: 2px;padding-right: 2px;">
+<div class="dt-card mb-0 pb-1 " style="background-color: white;"  >  
+
+<div class="card-body card-body-for-searchedit-lead-section">
+<div class="table-responsive" [style.height.px]="myInnerHeight" style="overflow-y: scroll;">
+<table class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format"  >
+
+    <thead>
+        <th style="width: 10%;"> Book Name</th> 
+        <th style="width: 10%;">Author Name</th>  
+        <th style="width: 10%;" >Book No</th>       
+        
+        <th style="width: 10%;">Rack No</th>
+        <th style="width: 10%;">No of Books</th>
+        <th style="width: 10%;" [hidden]="Books_Edit==false">Edit</th>
+        <th style="width: 10%;" [hidden]="Books_Delete==false">Delete</th>
+      
+    </thead>
+<tbody  *ngFor="let Books_Report_Data_T of Books_Report_Data; let i = index" >
+    <tr>
+        <td class=" col-md-3 icon-pointer">{{Books_Report_Data_T["Books_Name"]}}</td>
+        <td class="col-md-3">{{Books_Report_Data_T["Authors"]}}</td>
+        <td  class="col-md-2">{{Books_Report_Data_T["Books_No"]}}</td> 
+       
+        <td  class="col-md-2">{{Books_Report_Data_T["Rack_No"]}}</td>
+        <td  class="col-md-2">{{Books_Report_Data_T["Book_Count"]}}</td>
+        
+        <td  class="td-padding">
+            
+            <button *ngIf="Books_Report_Data_T.Books_Issued_EntryDate != null" (click)="View_IssuedDetails(Books_Report_Data_T.Books_Id,i)"   mat-raised-button type="submit"  class="save-button-style pull-left mr-1 ">View Issued Details</button>
+            <!-- <button *ngIf="Books_Report_Data_T.Books_Issued_EntryDate == null" [disabled]="true" class="save-button-style pull-left mr-1">View Issued Details</button> -->
+        </td>
+        <td  class="td-padding" [hidden]="Books_Edit==false">
+        <span class="icon-background2 mr-1"     (click)="Edit_Books(Books_Report_Data_T,i)" > <mat-icon class="text-green small" >edit</mat-icon></span>
+        </td>
+        <td class="td-padding" [hidden]="Books_Edit==false"> 
+        <span class="icon-background3 mr-1"   (click)="Delete_Books(Books_Report_Data_T.Books_Id,i)"  > <mat-icon class="text-red small" >close</mat-icon></span>
+        </td>
+    
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="dt-card__body mt-0 "  id="profile"  *ngIf="Issueddetails_View"  >
+    <form class="mb-0">
+       
+    <div class="container-fluidprofile">
+        <div class="dt-card mt-1">
+        <div class="dt-card__body mt-3"  >
+
+
+
+        <div class="col-md-12  mt-2" style="border: 1;">
+          
+            
+            <div class="card-body card-body-for-searchedit-lead-section p-0">
+            <div class="table-responsive" [style.height.px]="myInnerHeightTwo" style="overflow-y: scroll;    overflow-x: hidden;">
+                <div class="col-md-12 col-sm-12" style="    justify-content: end;
+                            display: flex;">
+                                <span class="mr-1" (click)="Close_Click()"
+                                ><mat-icon
+                                style="font-size: 32px; cursor: pointer"
+                                class="text-red small"
+                                >close</mat-icon
+                                ></span
+                                >
+                                </div>
+            <table class="table table-hover colour-change-title-searchsection-table heading-styles-as-gmail-format"  >
+            
+                <thead>
+                    
+
+                    <tr>
+                        <th colspan="5"><h3 class="m-0" style="    font-weight: 600;">Book Issued Details</h3> </th>
+                    </tr> 
+                    
+                    <th> Entry Date</th>   
+                    <th >Student Name</th>       
+                    <th>Contact No</th>
+                    <th>Status</th>
+                    <th >Issued By</th>
+                    <th></th>
+                   
+                  
+                </thead>
+            <tbody  *ngFor="let Books_Report_Data_T of Books_Report_Data; let i = index" >
+                <tr>
+                    <td class=" col-md-1 icon-pointer">{{Books_Report_Data_T["Books_Issued_EntryDate"]}}</td>
+                    <td  class="col-md-2">{{Books_Report_Data_T["Student_Name"]}}</td> 
+                    <td class="col-md-2">{{Books_Report_Data_T["Phone"]}}</td>
+                    <td class="col-md-2">{{Books_Report_Data_T["Return_Status"]}}</td>
+                    <td  class="col-md-3">{{Books_Report_Data_T["ByUserName"]}}</td>
+                    
+                
+                
+                </tr>
+            </tbody>
+            </table>
+            </div>
+            </div>
+            
+           
+            </div>
+
+
+
+
+
+
+
+
+
+
+    
+        </div>
+       
+        </div>
+    </div>
+    </form>
+   
+    </div>
+  
+
+</div>
+
+
+</div>
