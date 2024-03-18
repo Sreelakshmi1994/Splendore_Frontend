@@ -14,7 +14,7 @@
     <div class="dt-card__body mt-1 mb-0 pb-0">
     <form class="mb-0">           
     <div class="form-row" style="padding-left: 10px;">
-    <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Level<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+    <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Course<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
         <div class="col-md-3 col-sm-2 mb-2">
         <input type="num" class="form-control" [(ngModel)]="Course_.Course_Name" name="Course_.Course_Name"  placeholder="">
         </div>
@@ -97,7 +97,7 @@
         <div class="dt-card__body mt-1 mb-0 pb-0">
             <form class="mb-0">  
             <div class="dt-card__heading">
-                <h3 class="mt-0"><i class="icon icon-users icon-fw icon-lg"></i><b style="margin-bottom:20px;">Level Fees</b></h3>
+                <h3 class="mt-0"><i class="icon icon-users icon-fw icon-lg"></i><b style="margin-bottom:20px;">Course Fees</b></h3>
                 <div classs="mb-2"></div><hr class="lineheader">
             </div>
                 <div class="form-row" style="padding-left: 10px;">
@@ -206,19 +206,19 @@
 </div>
 
 
-            <div class="col-md-12 mt-2 pl-0">
+            <!-- <div class="col-md-12 mt-2 pl-0">
                 <div class="dt-card mb-1 pb-1" style="padding-top: 0 !important;">         
                 <div class="dt-card__body mt-1 mb-0 pb-0">
                     <form class="mb-0">  
             <div class="dt-card__heading">
-                 <h3 class="mt-0"><i class="icon icon-users icon-fw icon-lg"></i><b style="margin-bottom:20px;">Level Syllabus</b></h3>
+                 <h3 class="mt-0"><i class="icon icon-users icon-fw icon-lg"></i><b style="margin-bottom:20px;">Course Syllabus</b></h3>
                            <div classs="mb-2"></div>
                            <hr class="lineheader">
              </div>
                     <div class="form-row" style="padding-left: 10px;">
                     <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Syllabus<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
                     <div class="col-md-2 col-sm-2 mb-2" >
-                        <!-- style="margin-left: 42px!important;" -->
+                
                     <input type="text" disable [matAutocomplete]="autoSubject" [(ngModel)]="Subject" id ="Subject" maxlength="4000" name="Subject" 
                     (click)="Search_Subject_Typeahead($event)" (keyup)="Search_Subject_Typeahead($event)" 
                     class="form-control" />
@@ -236,30 +236,7 @@
                     <input type="number" class="form-control" [(ngModel)]="Course_Subject.Minimum_Mark"  name="Course_Subject.Minimum_Mark"  placeholder="">
                     </div>
  
-            
-                <!-- <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Maximum Mark<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
-                <div class="col-md-2 col-sm-2 mb-2">
-                    <input type="number" class="form-control"  [(ngModel)]="Course_Subject.Maximum_Mark"  name="Course_Subject.Maximum_Mark"  placeholder="">
-                    </div>
-                </div>
-
-                    <div class="form-row" style="padding-left: 10px;">
-                    <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Exam Status<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
-                    <div class="col-md-2 col-sm-2 mb-2">
-                        <select [(ngModel)]="Online_Exam_Status" id="Online_Exam_Status" name="Online_Exam_Status"  required class="form-control p-0 pl-1">
-                            <option  *ngFor="let Online_Exam_Status1 of Online_Exam_Status_Data" [ngValue]="Online_Exam_Status1">{{Online_Exam_Status1.Online_Exam_Status_Name}}
-                            </option>
-                        </select>                           
-                     </div>
-
-                     <label class="col-md-0 col-sm-0 col-form-label text-sm-right">No Of Question<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
-                     <div class="col-md-2 col-sm-2 mb-2">
-                        <input type="text" class="form-control" [(ngModel)]="Course_Subject.No_of_Question"  name="Course_Subject.No_of_Question"placeholder="">
-                        </div>
-                <label class="col-md-0 col-sm-0 col-form-label text-sm-right">Exam Duration<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
-                <div class="col-md-2 col-sm-2 mb-2">
-                   <input type="text" class="form-control" [(ngModel)]="Course_Subject.Exam_Duration"  name="Course_Subject.Exam_Duration" placeholder="">
-                   </div> -->
+          
                 <div class="col-md-1" style="float:right;"> 
                     <button  type="submit" (click)="Plus_Course_Subject($event)"  class="other-button-style ">Add </button>           
                 </div>   
@@ -274,7 +251,7 @@
                 <input type='checkbox' class="form-check-input" name="Is_Check" [(ngModel)]="Is_Check"   />
                 <span _ngcontent-xmy-c9="" class="form-check-sign"  style="margin-top: 4px;">
 
-                    <!--   style="    margin-top: -31px; margin-left: 145px;" -->
+
                     <span _ngcontent-xmy-c9="" class="check">
                 </span>
                 </span>
@@ -284,7 +261,7 @@
                 </div> 
                 
                 </div>                   
-            <!-- </div> -->
+   
            </form>
         </div>
         <div class="col-md-12" >
@@ -312,7 +289,7 @@
         </div>
         </div>
     </div>
-</div>
+</div> -->
 
 </div>
 </div>
@@ -344,7 +321,7 @@
             <div class="dt-card__body mt-1 mb-0 pb-0">
                 <form class="mb-0">           
                 <div class="form-row" style="padding-left: 10px;">
-                    <label class="col-md-0 col-sm-0 col-form-label text-sm-right mr-0">Level</label>
+                    <label class="col-md-0 col-sm-0 col-form-label text-sm-right mr-0">Course</label>
                 
                     <div class="col-md-4 col-sm-3 mb-2">  
                         <input type="text" class="form-control" [(ngModel)]="Course_Name_Search" name="Course_Type_Name_Search" placeholder="">

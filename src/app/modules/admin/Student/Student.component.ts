@@ -1131,7 +1131,7 @@ Process_Details_Data: Process_Type[];
       localStorage.removeItem("token");
       this.router.navigateByUrl("/auth/login");
     } else {
-      this.Is_Registered = 2;
+      this.Is_Registered = 1;
       if (this.Student_Id == 0) {
         this.Search_Lead_button();
       }
@@ -2231,18 +2231,19 @@ Process_Details_Data: Process_Type[];
 
      
 
-    if (this.Student_.Enquiry_For == 2) {
-      this.level_tab_view = false;
-      this.application_details_View = true;
-      this.Tab_Click(15);
-      this.Get_ApplicationDetails();
+    
+    // if (this.Student_.Enquiry_For == 2) {
+    //   this.level_tab_view = false;
+    //   this.application_details_View = true;
+    //   this.Tab_Click(15);
+    //   this.Get_ApplicationDetails();
 
-      this.Course_Tab_View = true;
-      this.Course_Tab = true;
-      this.clickview = true;
+    //   this.Course_Tab_View = true;
+    //   this.Course_Tab = true;
+    //   this.clickview = true;
 
-    }
-    else {
+    // }
+    // else {
       this.level_tab_view = true
       // }
 
@@ -2325,7 +2326,7 @@ Process_Details_Data: Process_Type[];
           this.issLoading = false;
         }
       );
-    }
+    // }
 
   }
 
@@ -3430,6 +3431,29 @@ Process_Details_Data: Process_Type[];
         return;
       }
 
+      if(this.Enquiry_For_.Enquiry_For_Id!=2)
+      {
+        if (
+          this.Mode_Of_Study_.Mode_Of_Study_Id == undefined ||
+          this.Mode_Of_Study_.Mode_Of_Study_Id == null ||
+          this.Mode_Of_Study_.Mode_Of_Study_Id == 0 || this.Mode_Of_Study_ ==null || this.Mode_Of_Study_ ==undefined
+        ) {
+          const dialogRef = this.dialogBox.open(DialogBox_Component, {
+            panelClass: "Dialogbox-Class",
+            data: { Message: "Select Mode Of Study", Type: "3" },
+          });
+          return;
+        }
+
+      }
+      else
+      {
+        this.Mode_Of_Study_.Mode_Of_Study_Id=0
+        this.Mode_Of_Study_.Mode_Of_Study_Name=''
+      }
+
+      
+
       // if (
       // this.Student_.Whatsapp == undefined ||
       // this.Student_.Whatsapp == null ||
@@ -3818,6 +3842,7 @@ Process_Details_Data: Process_Type[];
                   panelClass: "Dialogbox-Class",
                   data: { Message: "Registered", Type: "false" },
                 });
+                debugger
                 if (
                   this.Course_Selection_Permission != undefined &&
                   this.Course_Selection_Permission != null
@@ -3897,10 +3922,22 @@ Process_Details_Data: Process_Type[];
         (Save_status) => {
           debugger;
           // if(this.Student_.Enquiry_For_Id==2){
-          if (Number(Save_status[0][0].Student_Id_) > 0) {
+          if ( (Number(Save_status[0][0].Student_Id_) > 0) || Number(Save_status[1][0].Student_Id_) > 0 ) {
+            if(Save_status[1][0])
+{
 
 
-            this.Student_Id_Edit = Number(Save_status[0][0].Student_Id_);
+            if(Number(Save_status[1][0].Student_Id_) > 0)
+            {
+              this.Student_Id_Edit = Number(Save_status[1][0].Student_Id_);
+            }
+          }
+            else
+            {
+              this.Student_Id_Edit = Number(Save_status[0][0].Student_Id_);
+            }
+
+            
 
             this.Student_.Registered = true;
 
@@ -3931,7 +3968,7 @@ Process_Details_Data: Process_Type[];
 
             this.Total_Rows = this.Total_Rows - this.Student_Data.length;
 
-
+            this.Course_Selection_Visibility = true
 
 
             this.Course_Selection_Visibility == true
@@ -5045,8 +5082,8 @@ Process_Details_Data: Process_Type[];
     this.Student_Course_.Duration = "";
     this.Student_Course_.Revision_Duration = 0;
     this.Course_ = null;
-    this.Batch_ = null;
-    this.Faculty_ = null;
+    this.Batch_ = new Batch();
+    this.Faculty_ = new Users();
     this.Student_Fees_Installment_Master_Data = [];
     this.Student_Fees_Installment_Details_Data = [];
     this.Student_Course_Subject_Data = [];
@@ -5186,8 +5223,8 @@ Process_Details_Data: Process_Type[];
     this.Student_Course_.No_Of_Installment = 0;
     // this.Student_Course_.Duration = 0;
     this.Student_Course_.Revision_Duration = 0;
-    this.Batch_ = null;
-    this.Faculty_ = null;
+    this.Batch_ = new Batch();
+    this.Faculty_ = new Users();
     this.Student_Fees_Installment_Master_Data = [];
     this.Student_Course_Subject_Data = [];
     if (
@@ -5941,7 +5978,7 @@ Process_Details_Data: Process_Type[];
     if (this.Course_ == undefined || this.Course_ == null) {
       const dialogRef = this.dialogBox.open(DialogBox_Component, {
         panelClass: "Dialogbox-Class",
-        data: { Message: "Select Level", Type: "3" },
+        data: { Message: "Select Course", Type: "3" },
       });
       return;
     }
@@ -5952,16 +5989,22 @@ Process_Details_Data: Process_Type[];
     ) {
       const dialogRef = this.dialogBox.open(DialogBox_Component, {
         panelClass: "Dialogbox-Class",
-        data: { Message: "Select Level", Type: "3" },
+        data: { Message: "Select Course", Type: "3" },
       });
       return;
     }
-    if (this.Batch_ == undefined || this.Batch_ == null) {
-      const dialogRef = this.dialogBox.open(DialogBox_Component, {
-        panelClass: "Dialogbox-Class",
-        data: { Message: "Select Batch", Type: "3" },
-      });
-      return;
+    if (this.Batch_ == undefined || this.Batch_ == null ||this.Batch_.Batch_Id == null ||
+      this.Batch_.Batch_Id == undefined ||
+      this.Batch_.Batch_Id == 0) {
+      // const dialogRef = this.dialogBox.open(DialogBox_Component, {
+      //   panelClass: "Dialogbox-Class",
+      //   data: { Message: "Select Batch", Type: "3" },
+      // });
+      // return;
+      console.log(' this.Batch_: ',  this.Batch_);
+      this.Batch_['Batch_Id']=0
+      this.Batch_['Batch_Name']=''
+
     }
 
 
@@ -5980,35 +6023,39 @@ Process_Details_Data: Process_Type[];
 
 
 
-    if (
-      this.Batch_.Batch_Id == null ||
-      this.Batch_.Batch_Id == undefined ||
-      this.Batch_.Batch_Id == 0
-    ) {
-      const dialogRef = this.dialogBox.open(DialogBox_Component, {
-        panelClass: "Dialogbox-Class",
-        data: { Message: "Select Batch", Type: "3" },
-      });
-      return;
-    }
-    if (this.Faculty_ == undefined || this.Faculty_ == null) {
-      const dialogRef = this.dialogBox.open(DialogBox_Component, {
-        panelClass: "Dialogbox-Class",
-        data: { Message: "Select Faculty", Type: "3" },
-      });
-      return;
-    }
-    if (
-      this.Faculty_.Users_Id == null ||
+    // if (
+    //   this.Batch_.Batch_Id == null ||
+    //   this.Batch_.Batch_Id == undefined ||
+    //   this.Batch_.Batch_Id == 0
+    // ) {
+    //   const dialogRef = this.dialogBox.open(DialogBox_Component, {
+    //     panelClass: "Dialogbox-Class",
+    //     data: { Message: "Select Batch", Type: "3" },
+    //   });
+    //   return;
+    // }
+    if (this.Faculty_ == undefined || this.Faculty_ == null || this.Faculty_.Users_Id == null ||
       this.Faculty_.Users_Id == undefined ||
-      this.Faculty_.Users_Id == 0
-    ) {
-      const dialogRef = this.dialogBox.open(DialogBox_Component, {
-        panelClass: "Dialogbox-Class",
-        data: { Message: "Select Faculty", Type: "3" },
-      });
-      return;
+      this.Faculty_.Users_Id == 0) {
+      // const dialogRef = this.dialogBox.open(DialogBox_Component, {
+      //   panelClass: "Dialogbox-Class",
+      //   data: { Message: "Select Faculty", Type: "3" },
+      // });
+      // return;
+      this.Faculty_['Users_Id']=0
+      this.Faculty_['Users_Name']=''
     }
+    // if (
+    //   this.Faculty_.Users_Id == null ||
+    //   this.Faculty_.Users_Id == undefined ||
+    //   this.Faculty_.Users_Id == 0
+    // ) {
+    //   const dialogRef = this.dialogBox.open(DialogBox_Component, {
+    //     panelClass: "Dialogbox-Class",
+    //     data: { Message: "Select Faculty", Type: "3" },
+    //   });
+    //   return;
+    // }
     if (this.Installment_Type == undefined || this.Installment_Type == null) {
       const dialogRef = this.dialogBox.open(DialogBox_Component, {
         panelClass: "Dialogbox-Class",
@@ -6040,18 +6087,18 @@ Process_Details_Data: Process_Type[];
       return;
     }
 
-    if (
-      this.Offline_Branch_ == undefined ||
-      this.Offline_Branch_ == null ||
-      this.Offline_Branch_.Agent_Id == undefined ||
-      this.Offline_Branch_.Agent_Id == 0
-    ) {
-      const dialogRef = this.dialogBox.open(DialogBox_Component, {
-        panelClass: "Dialogbox-Class",
-        data: { Message: "Select Offline Branch", Type: "3" },
-      });
-      return;
-    }
+    // if (
+    //   this.Offline_Branch_ == undefined ||
+    //   this.Offline_Branch_ == null ||
+    //   this.Offline_Branch_.Agent_Id == undefined ||
+    //   this.Offline_Branch_.Agent_Id == 0
+    // ) {
+    //   const dialogRef = this.dialogBox.open(DialogBox_Component, {
+    //     panelClass: "Dialogbox-Class",
+    //     data: { Message: "Select Offline Branch", Type: "3" },
+    //   });
+    //   return;
+    // }
 
     // if(this.Student_Course_.End_Date==undefined ||  this.Student_Course_.End_Date == null ){
     //   const dialogRef = this.dialogBox.open(DialogBox_Component, { panelClass: 'Dialogbox-Class', data: { Message: 'Choose End Date', Type: "3" } });
@@ -6310,8 +6357,10 @@ Process_Details_Data: Process_Type[];
     this.Student_Course_.Batch_Name = this.Batch_.Batch_Name;
     this.Student_Course_.Faculty_Id = this.Faculty_.Users_Id;
 
-    this.Student_Course_.Offline_Branch_Id = this.Offline_Branch_.Agent_Id;
-    this.Student_Course_.Offline_Branch = this.Offline_Branch_.Agent_Name;
+    // this.Student_Course_.Offline_Branch_Id = this.Offline_Branch_.Agent_Id;
+    // this.Student_Course_.Offline_Branch = this.Offline_Branch_.Agent_Name;
+      this.Student_Course_.Offline_Branch_Id = 0;
+    this.Student_Course_.Offline_Branch = '';
 
     this.Student_Course_.Installment_Type_Id =
       this.Installment_Type.Installment_Type_Id;

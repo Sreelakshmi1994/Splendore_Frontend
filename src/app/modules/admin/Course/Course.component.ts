@@ -551,7 +551,7 @@ Save_Course()
 {debugger
     if(this.Course_.Course_Name===undefined || this.Course_.Course_Name==null || this.Course_.Course_Name=="")
     {
-    const dialogRef = this.dialogBox.open(DialogBox_Component, { panelClass: 'Dialogbox-Class', data: { Message:'Enter Level Name ',Type: "3" }});
+    const dialogRef = this.dialogBox.open(DialogBox_Component, { panelClass: 'Dialogbox-Class', data: { Message:'Enter Course Name ',Type: "3" }});
     return  
     }
 
@@ -589,13 +589,13 @@ Save_Course()
     //     return;
     // }
    else if (this.Course_Fees_Data.length === undefined || this.Course_Fees_Data.length == null || this.Course_Fees_Data.length == 0) {
-        const dialogRef = this.dialogBox.open(DialogBox_Component, { panelClass: 'Dialogbox-Class', data: { Message: 'Add Atleast One Level Fees ', Type: "3" } });
+        const dialogRef = this.dialogBox.open(DialogBox_Component, { panelClass: 'Dialogbox-Class', data: { Message: 'Add Atleast One Course Fees ', Type: "3" } });
         return
     }
-    else if (this.Course_Subject_Data.length === undefined || this.Course_Subject_Data.length == null || this.Course_Subject_Data.length == 0) {
-        const dialogRef = this.dialogBox.open(DialogBox_Component, { panelClass: 'Dialogbox-Class', data: { Message: 'Add Atleast One Level Syllabus ', Type: "3" } });
-        return
-    }
+    // else if (this.Course_Subject_Data.length === undefined || this.Course_Subject_Data.length == null || this.Course_Subject_Data.length == 0) {
+    //     const dialogRef = this.dialogBox.open(DialogBox_Component, { panelClass: 'Dialogbox-Class', data: { Message: 'Add Atleast One Course Syllabus ', Type: "3" } });
+    //     return
+    // }
    
     var  Is_Check_Value=0
     if (this.Is_Check == true)
@@ -646,7 +646,7 @@ Save_Course()
 
 
      this.Course_.Course_Fees = this.Course_Fees_Data;
-    this.Course_.Course_Subject = this.Course_Subject_Data;
+    this.Course_.Course_Subject = [];
     this.Course_.Is_Check=Is_Check_Value;
     this.Course_.MasterCourse_Id=this.Mastercourse_.MasterCourse_Id;
     this.Course_.MasterCourse_Name=this.Mastercourse_.MasterCourse_Name;
