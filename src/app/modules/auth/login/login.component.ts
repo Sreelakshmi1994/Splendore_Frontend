@@ -329,6 +329,16 @@ debugger;
       else if (Menus[i].Menu_Id == 122)
       this.Push_Menu({ path: '/Employees_List', title: 'Employees List', icon: 'unarchive', class: '', Menu_Id: Menus[i].Menu_Id, 'View': Menus[i].VIew_All, Save: Menus[i].Menu_Save, Edit: Menus[i].Menu_Edit, Delete: Menus[i].Menu_Delete, Menu_Type: Menus[i].Menu_Type });
      
+      else if (Menus[i].Menu_Id == 123)
+      {
+        localStorage.setItem("Navbar_Leads_View_Menus","1");
+
+      this.Push_Menu({ path: '/Student', title: 'Study', icon: 'unarchive', class: '', Menu_Id: Menus[i].Menu_Id, 'View': Menus[i].VIew_All, Save: Menus[i].Menu_Save, Edit: Menus[i].Menu_Edit, Delete: Menus[i].Menu_Delete, Menu_Type: Menus[i].Menu_Type });
+      }
+      else if (Menus[i].Menu_Id == 124)
+      this.Push_Menu({ path: '/Student', title: 'Study Abroad ', icon: 'unarchive', class: '', Menu_Id: Menus[i].Menu_Id, 'View': Menus[i].VIew_All, Save: Menus[i].Menu_Save, Edit: Menus[i].Menu_Edit, Delete: Menus[i].Menu_Delete, Menu_Type: Menus[i].Menu_Type });
+     
+
     }
  
 localStorage.setItem("Routes_Temp",JSON.stringify(ROUTES));

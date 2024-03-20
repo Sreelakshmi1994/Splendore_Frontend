@@ -13,6 +13,7 @@ declare interface RouteInfo {
   Menu_Id:string;
   Save:string;
   Delete:string;
+  
   View:string;
   Edit:string;
   Menu_Type:boolean;
@@ -37,8 +38,12 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
     uname:string;
+    Navbar_Leads_View:number;
+	Navbar_Leads_View1:number;
+	Navbar_Leads_View_Menus:number;
 
-
+	Nav_Title: string;
+	Nav_Title_Show:boolean=false;
     menuItems: any[];
     menuArray: any[];
     constructor(location: Location, public userData: UserData, private element: ElementRef, private router: Router) {
@@ -57,7 +62,7 @@ export class NavbarComponent implements OnInit {
     ngOnInit() {
         debugger
 
-        this.uname=localStorage.getItem('uname');
+        this.uname=localStorage.getItem('uname'); 
         this.menuItems = ROUTES.filter(menuItem => menuItem);
         this.listTitles = ROUTES.filter(listTitle => listTitle);
     
@@ -73,6 +78,7 @@ const navbar: HTMLElement = this.element.nativeElement;
                 this.mobile_menu_visible = 0;
             }
         });
+        
     }
 
     sidebarOpen() {
@@ -202,4 +208,45 @@ const navbar: HTMLElement = this.element.nativeElement;
         }
         return 'Dashboard';
     }
+    
+	Study_click()
+		{
+			this.Nav_Title='Study'
+			this.Nav_Title_Show=true;
+debugger
+
+
+			this.router.navigateByUrl('/Student');
+			// localStorage.setItem("Navbar_Leads_View",'1');
+			
+			// localStorage.setItem("Navbar_Leads_View_Menus","1");
+			let currentUrl = this.router.url;
+			this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+				this.router.navigate(['/Student']);
+			});
+
+			this.getTitle()
+
+		}
+
+
+		Job_click()
+		{
+			this.Nav_Title='Study Abroad'
+			this.Nav_Title_Show=true;
+debugger
+			this.router.navigateByUrl('/Student');
+			// localStorage.setItem("Navbar_Leads_View",'2');
+		
+			// localStorage.setItem("Navbar_Leads_View_Menus","2");
+			let currentUrl = this.router.url;
+			this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+				this.router.navigate(['/Student']);
+			});
+
+
+			this.getTitle()
+
+
+		}
 }

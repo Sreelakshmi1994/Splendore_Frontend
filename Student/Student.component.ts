@@ -30,6 +30,17 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import * as _moment from 'moment';
 import { default as _rollupMoment } from 'moment';
+import { Ielts } from 'app/models/Ielts';
+import { ApplicationStatus } from 'app/models/ApplicationStatus';
+import { Agent } from 'http';
+import { Intake_Year } from 'app/models/Intake_Year';
+import { Fees } from 'app/models/Fees';
+import { ApplicationdetailsHistory } from 'app/models/ApplicationdetailsHistory';
+import { Applicationdocument } from 'app/models/Applicationdocument';
+import { Reference } from '@angular/compiler/src/render3/r3_ast';
+import { Currency } from 'app/models/Currency';
+import { Intake } from 'app/models/Intake';
+import { Enquiry_For } from 'app/models/Enquiry_For';
 const moment = _rollupMoment || _moment;
 export const MY_FORMATS = {
     parse: { dateInput: 'DD/MM/YYYY', },
@@ -149,6 +160,9 @@ export class StudentComponent implements OnInit {
 
     Page_Start: number = 0;
     Page_End: number = 0;
+    Navbar_Leads_View:number;
+	Navbar_Leads_View_Menus:number
+
     Page_Length: number = 10;
     Page_Length_: number = 10;
     Black_Start: number = 1;
@@ -196,6 +210,7 @@ export class StudentComponent implements OnInit {
     Fees_Click_Status:boolean = false;
     Mark_Click_Status:boolean = false;
     date_Temp:Date=new Date();
+    Enquiry_For_Search: Enquiry_For = new Enquiry_For();
 
     Course_Id_Edit: number = 0;
     Student_Course_Id_Edit :number = 0;
@@ -219,6 +234,45 @@ export class StudentComponent implements OnInit {
     Mode:Mode=new Mode();
     Mode_Temp:Mode=new Mode();
     Mode_Data:Mode[]
+    Enquiry_For_: Enquiry_For = new Enquiry_For();
+	Enquiry_For_Temp: Enquiry_For = new Enquiry_For();
+	Enquiry_For_Data: Enquiry_For[];
+ 
+	Intake_Mode_: Intake = new Intake();
+	Intake_Mode_Temp: Intake = new Intake();
+	Intake_Mode_Data: Intake[];
+
+	Currency_: Currency = new Currency();
+	Currency_Temp: Currency = new Currency();
+	Currency_Data: Currency[];
+    Name_Show:string;
+ 
+	FeesrecepitDetails_Data: Fees[];
+	ApplicationdetailsHistory_Data: ApplicationdetailsHistory[];
+	Applicationdocument_Data: Applicationdocument[];
+
+ 
+	Intake_Year_Mode_: Intake_Year = new Intake_Year();
+	Intake_Year_Mode_Temp: Intake_Year = new Intake_Year();
+	Intake_Year_Mode_Data: Intake_Year[];
+
+	Agent_Mode_: Agent = new Agent();
+	Agent_Mode_Temp: Agent = new Agent();
+	Agent_Mode_Data: Agent[];
+
+	Application_Status_Mode_: ApplicationStatus = new ApplicationStatus();
+	Application_Status_Mode_Temp: ApplicationStatus = new ApplicationStatus();
+	Application_Status_Mode_Data: ApplicationStatus[];
+ 
+	 
+	Ielts_: Ielts = new Ielts();
+	Ielts_Temp: Ielts = new Ielts();
+	Ielts_Data: Ielts[];
+
+	Ielts_Mode_: Ielts = new Ielts();
+	Ielts_Mode_Temp: Ielts = new Ielts();
+	Ielts_Mode_Data: Ielts[];
+
 
     Installment_Type:Installment_Type=new Installment_Type;
     Installment_Type_Temp:Installment_Type=new Installment_Type;
@@ -236,6 +290,31 @@ constructor(public Student_Service_:Student_Service, private route: ActivatedRou
 ngOnInit() 
 {
     this.Login_User = Number(localStorage.getItem("Login_User"));
+    
+		this.Navbar_Leads_View = Number(localStorage.getItem("Navbar_Leads_View"));
+		// this.Navbar_Leads_View_t = Number(localStorage.getItem("Navbar_Leads_View"));
+		localStorage.getItem('Nav_Title')
+		this.Navbar_Leads_View_Menus= Number(localStorage.getItem('Navbar_Leads_View_Menus'));
+
+		this.Navbar_Leads_View = Number(localStorage.getItem("Navbar_Leads_View"));
+		debugger
+		if (this.Navbar_Leads_View_Menus == 1) {
+			this.Name_Show = 'Study';
+			// this.Nav_Title_Show = true;
+			localStorage.setItem('Navbar_Leads_View', '1');
+		} else if (this.Navbar_Leads_View_Menus == 2) {
+			this.Name_Show = 'Job';
+			// this.Nav_Title_Show = true;
+			localStorage.setItem('Navbar_Leads_View', '2');
+		}  
+
+// alert(this.Navbar_Leads_View)
+
+		if(this.Navbar_Leads_View==1)
+		{this.Name_Show='Student'}
+		else if(this.Navbar_Leads_View==2)
+		{this.Name_Show='Student'}
+		 
     this.Permissions = Get_Page_Permission(14);
     this.Registration_Permissions = Get_Page_Permission(17);
     this.Remove_Registration_Permissions = Get_Page_Permission(18);
@@ -290,6 +369,8 @@ Page_Load()
     this.Load_Mode();
     this.Clr_Receipt_Voucher();
     this.Load_Installment_Type();
+    
+		this.Get_Student_PageLoadData_Dropdowns();
     this.Entry_View = false;
     this.Receipt_History_View=false;
     this.profile_View = true;
@@ -1440,6 +1521,238 @@ Get_Course_Student(Course_Id)
             this.issLoading = false;
             const dialogRef = this.dialogBox.open(DialogBox_Component, { panelClass: 'Dialogbox-Class', data: { Message: 'Error Occured', Type: "2" } });
         });
+}
+Get_Student_PageLoadData_Dropdowns() {
+    debugger
+    this.Student_Service_.Get_Student_PageLoadData_Dropdowns().subscribe(
+        (Rows) => {
+            debugger
+            
+            // this.Passport_Mode_Data = Rows[0].slice();
+            // this.Passport_Mode_Temp.Passport_Id = 0;
+            // this.Passport_Mode_Temp.Passport_Name = "Select";
+            // this.Passport_Mode_Data.unshift(
+            //     Object.assign({}, this.Passport_Mode_Temp)
+            // );
+            // this.Passport_Mode_ = this.Passport_Mode_Data[0];
+
+            this.Ielts_Mode_Data = Rows[1].slice();
+            this.Ielts_Mode_Temp.Ielts_Id = 0;
+            this.Ielts_Mode_Temp.Ielts_Name = "Select";
+            this.Ielts_Mode_Data.unshift(Object.assign({}, this.Ielts_Mode_Temp));
+            this.Ielts_Mode_ = this.Ielts_Mode_Data[0];
+
+            // this.Intake_Mode_Data = Rows[2].slice();
+            // this.Intake_Mode_Temp.Intake_Id = 0;
+            // this.Intake_Mode_Temp.Intake_Name = "Select";
+            // this.Intake_Mode_Data.unshift(Object.assign({}, this.Intake_Mode_Temp));
+            // this.Intake_Mode_ = this.Intake_Mode_Data[0];
+            // this.Intake_Search = this.Intake_Mode_Data[0];
+
+            this.Enquiry_For_Data = Rows[3].slice();
+            this.Enquiry_For_Temp.Enquiry_For_Id = 0;
+            this.Enquiry_For_Temp.Enquiry_For_Name = "Select";
+            this.Enquiry_For_Data.unshift(Object.assign({}, this.Enquiry_For_Temp));
+
+            
+if (this.Navbar_Leads_View ==1)
+{
+this.Enquiry_For_ = this.Enquiry_For_Data[3];
+}
+
+else if (this.Navbar_Leads_View ==2)
+{
+    this.Enquiry_For_ = this.Enquiry_For_Data[2];
+}			
+
+
+if (this.Navbar_Leads_View ==1)
+{
+this.Enquiry_For_Search = this.Enquiry_For_Data[3];
+}
+
+else if (this.Navbar_Leads_View ==2)
+{
+    this.Enquiry_For_Search = this.Enquiry_For_Data[2];
+}			
+ 
+
+            // this.Enquiry_For_Search = this.Enquiry_For_Data[0];
+
+
+
+
+ 
+            // this.Intake_Year_Mode_Data = Rows[5].slice();
+            // this.Intake_Year_Mode_Temp.Intake_Year_Id = 0;
+            // this.Intake_Year_Mode_Temp.Intake_Year_Name = "Select";
+            // this.Intake_Year_Mode_Data.unshift(
+            //     Object.assign({}, this.Intake_Year_Mode_Temp)
+            // );
+            // this.Intake_Year_Mode_ = this.Intake_Year_Mode_Data[0];
+            // // this.Intake_Year_Search = this.Intake_Year_Mode_Data[0];
+
+            // // this.Agent_Mode_Data = Rows[6].slice();
+            // // this.Agent_Mode_Temp.Agent_Id = 0;
+            // // this.Agent_Mode_Temp.Agent_Name = "Select";
+            // // this.Agent_Mode_Data.unshift(Object.assign({}, this.Agent_Mode_Temp));
+            // // this.Agent_Mode_ = this.Agent_Mode_Data[0];
+            // // this.Agent_Search = this.Agent_Mode_Data[0];
+
+            // this.Application_Status_Mode_Data = Rows[7].slice();
+            // this.Application_Status_Mode_Temp.Application_status_Id = 0;
+            // this.Application_Status_Mode_Temp.Application_Status_Name = "Select";
+            // this.Application_Status_Mode_Data.unshift(
+            //     Object.assign({}, this.Application_Status_Mode_Temp)
+            // );
+            // this.Application_Status_Mode_ = this.Application_Status_Mode_Data[0];
+
+            // this.Marital_Status_Data = Rows[8].slice();
+            // this.Marital_Status_Temp.Marital_Status_Id = 0;
+            // this.Marital_Status_Temp.Marital_Status_Name = "Select";
+            // this.Marital_Status_Data.unshift(
+            //     Object.assign({}, this.Marital_Status_Temp)
+            // );
+            // this.Marital_Status_ = this.Marital_Status_Data[0];
+
+            // this.Visa_Type_Data = Rows[9].slice();
+            // this.Visa_Type_Temp.Visa_Type_Id = 0;
+            // this.Visa_Type_Temp.Visa_Type_Name = "Select";
+            // this.Visa_Type_Data.unshift(Object.assign({}, this.Visa_Type_Temp));
+            // this.Visa_Type_ = this.Visa_Type_Data[0];
+
+            // this.IELTS_Type_Data = Rows[10].slice();
+            // this.IELTS_Type_Temp.Ielts_Type = 0;
+            // this.IELTS_Type_Temp.Ielts_Type_Name = "Select";
+            // this.IELTS_Type_Data.unshift(Object.assign({}, this.IELTS_Type_Temp));
+            // this.IELTS_Type_ = this.IELTS_Type_Data[0];
+
+            // this.enquiry_mode_Data = Rows[11].slice();
+            // this.enquiry_mode_Temp.Enquiry_Mode_Id = 0;
+            // this.enquiry_mode_Temp.Enquiry_Mode_Name = "Select";
+            // this.enquiry_mode_Data.unshift(
+            //     Object.assign({}, this.enquiry_mode_Temp)
+            // );
+            // this.enquiry_mode_ = this.enquiry_mode_Data[0];
+
+            // this.To_Account_Data = Rows[12].slice();
+            // this.To_Account_Temp.Client_Accounts_Id = 0;
+            // this.To_Account_Temp.Client_Accounts_Name = "Select";
+            // this.To_Account_Data.unshift(Object.assign({}, this.To_Account_Temp));
+            // this.To_Account_ = this.To_Account_Data[0];
+
+            // this.Bph_Status_Data = Rows[13].slice();
+            // this.Bph_Status_Temp.Bph_Status_Id = 0;
+            // this.Bph_Status_Temp.Bph_Status_Name = "Select";
+            // this.Bph_Status_Data.unshift(Object.assign({}, this.Bph_Status_Temp));
+            // this.Bph_Status_ = this.Bph_Status_Data[0];
+
+            // this.class_Data = Rows[14].slice();
+            // this.class_Temp.Class_Id = 0;
+            // this.class_Temp.Class_Name = "Select";
+            // this.class_Data.unshift(Object.assign({}, this.class_Temp));
+            // this.class_ = this.class_Data[0];
+            // this.Class_Search = this.class_Data[0];
+
+            // this.Sort_By_Data = Rows[15].slice();
+            // this.Sort_By_Temp.Sort_By_Id = 0;
+            // this.Sort_By_Temp.Sort_By_Name = "Select";
+            // this.Sort_By_Data.unshift(Object.assign({}, this.Sort_By_Temp));
+            // this.Sort_By_Search = this.Sort_By_Data[0];
+
+            // this.Task_Status_Data = Rows[16].slice();
+            // this.Task_Status_Temp.Task_Status_Id = 0;
+            // this.Task_Status_Temp.Status_Name = "Select";
+            // this.Task_Status_Data.unshift(Object.assign({}, this.Task_Status_Temp));
+            // this.Task_Status_ = this.Task_Status_Data[0];
+
+            // this.Currency_Data = Rows[17].slice();
+            // this.Currency_Temp.Currency_Id = 0;
+            // this.Currency_Temp.Currency_Name = "Select";
+            // this.Currency_Data.unshift(Object.assign({}, this.Currency_Temp));
+            // this.Currency_ = this.Currency_Data[0];
+
+            // this.Reference_Data = Rows[19].slice();
+            // this.Reference_Temp.Reference_Id = 0;
+            // this.Reference_Temp.Reference_Name = "Select";
+            // this.Reference_Data.unshift(this.Reference_Temp);
+            // this.Reference_Search = Object.assign({}, this.Reference_Temp);
+            // this.Reference_Search = this.Reference_Data[0];
+
+            // this.Job_Posting_Data = Rows[20].slice();
+            // this.Job_Posting_Temp.Job_Posting_Id = 0;
+            // this.Job_Posting_Temp.Job_Name = "Select";
+            // this.Job_Posting_Data.unshift(Object.assign({}, this.Job_Posting_Temp));
+            // this.Job_Posting_ = this.Job_Posting_Data[0];
+
+
+
+            // this.Requirement_Data = Rows[21].slice();
+            // this.Requirement_Temp.Requirement_Id = 0;
+            // this.Requirement_Temp.Requirement_Name = "Select";
+            // this.Requirement_Data.unshift(Object.assign({}, this.Requirement_Temp));
+            // this.Requirement_ = this.Requirement_Data[0];
+
+            
+
+
+
+            // this.Visa_Category_Data = Rows[26].slice();
+            // this.Visa_Category_Data_Temp.Visa_Category_Id = 0;
+            // this.Visa_Category_Data_Temp.Visa_Category_Name = "Select";
+            // this.Visa_Category_Data.unshift(Object.assign({}, this.Visa_Category_Data_Temp));
+            // this.Visa_category_ = this.Visa_Category_Data[0];
+
+
+            // this.Interview_Status_Data = Rows[28].slice();
+            // this.Interview_Status_Temp.Interview_Status_Id = 0;
+            // this.Interview_Status_Temp.Interview_Status_Name = "Select";
+            // this.Interview_Status_Data.unshift(Object.assign({}, this.Interview_Status_Temp));
+            // this.Interview_Status_ = this.Interview_Status_Data[0];
+
+            
+            // this.Country_Type_Data = Rows[30].slice();
+            // this.Country_Type_Temp.Country_Type_Id = 0;
+            // this.Country_Type_Temp.Country_Type_Name = "Select";
+            // this.Country_Type_Data.unshift(Object.assign({}, this.Country_Type_Temp));
+            // this.Country_Type_ = this.Country_Type_Data[0];
+
+
+            // this.Visa_questionaire_Data = Rows[31].slice();
+            // this.Visa_questionaire_Temp.Visa_questionaire_Id = 0;
+            // this.Visa_questionaire_Temp.Visa_questionaire_Name = "Select";
+            // this.Visa_questionaire_Data.unshift(Object.assign({}, this.Visa_questionaire_Temp));
+            // this.Visa_questionaire_ = this.Visa_questionaire_Data[0];
+
+
+
+            // this.Search_Lead_button();
+
+            // this.Reference_Data.unshift(Object.assign({}, this.Reference_Temp));
+            // this.Reference_ = this.Reference_Data[0];
+
+            
+            // this.Enquiry_Source_Data = Rows[6].slice();
+            // this.Enquiry_Source_Data_Temp.Enquiry_Source_Id = 0;
+            // this.Enquiry_Source_Data_Temp.Enquiry_Source_Name = "All";
+
+            // this.Enquiry_Source_Data.unshift(this.Enquiry_Source_Data_Temp);
+            // this.Search_Enquiry_Source_ = Object.assign({}, this.Enquiry_Source_Data_Temp);
+            // this.Search_Enquiry_Source_ = this.Enquiry_Source_Data[0];
+
+
+
+            // if (this.Student_Id_localStorage > "0") {
+            //     this.Edit_Student({ Student_Id: this.Student_Id_localStorage }, 1, 1);
+            // }
+        },
+        (Rows) => {
+            const dialogRef = this.dialogBox.open(DialogBox_Component, {
+                panelClass: "Dialogbox-Class",
+                data: { Message: "Error Occured", Type: "2" },
+            });
+        }
+    );
 }
 Get_Student_Course(Student_Id)
 {

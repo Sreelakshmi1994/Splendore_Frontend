@@ -174,6 +174,10 @@ debugger
 			postData
 		);
 	}
+	Get_Student_PageLoadData_Dropdowns():Observable<any>
+	{
+	return this.http.get(environment.BasePath +'Student/Get_Student_PageLoadData_Dropdowns/');
+	}
 	Search_Student(
 		Search_FromDate,
 		Search_ToDate,

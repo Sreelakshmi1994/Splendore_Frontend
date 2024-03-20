@@ -15,6 +15,30 @@
   </button> 
 
 <ul _ngcontent-irw-c3="" class="inline-menu ng-star-inserted"   *ngIf="isDesktopMenu()"> 
+  
+
+<li class="nav-item dropdown" *ngIf="menuArray[122] > -1">
+  <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLink" (click)="Study_click()"
+    data-toggle="dropdown" [routerLink]="[menuItems[menuArray[122]].path]" aria-haspopup="true"aria-expanded="false">
+    <span class="label-name-crect-stck-ad-nw-sctn-unt">
+      <!-- <i class="fa fa-file-text" style="color:#c96778" aria-hidden="true"></i></span> -->
+      <i class="fa fa-user" style="color:#07ab94" aria-hidden="true"></i></span>
+
+      <i>Study</i>						
+  </a>				
+</li>
+
+
+<li class="nav-item dropdown" *ngIf="menuArray[123] > -1">
+  <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLink" (click)="Job_click()"
+    data-toggle="dropdown" [routerLink]="[menuItems[menuArray[123]].path]" aria-haspopup="true"aria-expanded="false">
+    <span class="label-name-crect-stck-ad-nw-sctn-unt">
+      <!-- <i class="fa fa-file-text" style="color:#c96778" aria-hidden="true"></i></span> -->
+      <i class="fa fa-suitcase" style="color:#07739f" aria-hidden="true"></i></span>
+
+      <i>Study Abroad</i>						
+  </a>				
+</li>
 
 <li class="nav-item dropdown" *ngIf="menuArray[13]>-1" >
   <!-- <a class="dropdown-item" href="javascript:void(0)" *ngIf="menuArray[13]>-1" [routerLink]="[menuItems[menuArray[13]].path]" >{{[menuItems[menuArray[13]].title]}}</a > -->
