@@ -126,8 +126,10 @@ debugger
 			postData.append("Processing_Agent_Id", Main_Array.Student.Processing_Agent_Id);
 
 			postData.append("Documents_Remark", Main_Array.Student.Documents_Remark);
+			postData.append("Course_data", JSON.stringify(Main_Array.Course_data));
+			postData.append("Course_details", Main_Array.Student.Course_details);
 
-
+			 
 		}
 
 		if (Main_Array.Followup != null) {
@@ -161,6 +163,7 @@ debugger
 			postData.append("To_User_Name", Main_Array.Followup.To_User_Name);
 			postData.append("By_User_Name", Main_Array.Followup.By_User_Name);
 		}
+		 
 		var i = 0;
 		if (ImageFile_Photo != undefined) {
 			for (const img of ImageFile_Photo) {
@@ -590,7 +593,15 @@ debugger
 			{ params: Search_Data }
 		);
 	}
-
+	Get_Mastercourse_Instalment_Details(Course_Id): Observable<any> {debugger
+		var Search_Data = { 
+			Course_Id: Course_Id,
+		};
+		return this.http.get(
+			environment.BasePath + "Student/Get_Mastercourse_Instalment_Details/",
+			{ params: Search_Data }
+		);
+	}
 	Load_Exam_Status() {
 		return this.http.get(environment.BasePath + "Student/Load_Exam_Status/");
 	}

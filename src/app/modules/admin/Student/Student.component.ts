@@ -86,6 +86,9 @@ import { Process_Type } from "app/models/Process_Type";
 import { Document_Type } from "app/models/Document_Type";
 import { Student_Document_Type } from "app/models/Student_Document_Type";
 import { Student_Document_Type_Master } from "app/models/Student_Document_Type_Master";
+import { Course_Fees } from "app/models/Course_Fees";
+import { Fees_Type } from "app/models/Fees_Type";
+import { Course_Type } from "app/models/Course_Type";
 //import { debug } from 'console';
 // import { userInfo } from 'os';
 // import { debug } from 'console';
@@ -325,7 +328,8 @@ export class StudentComponent implements OnInit {
   followup_count: number = 0;
   nextflag: number;
   Search_Name: "";
-
+  Course_Fees_Index: number = -1;
+  Course_Subject_Index: number = -1;
   Change_Level_Data: boolean = false;
 
 
@@ -611,6 +615,7 @@ Process_Details_Data: Process_Type[];
   ApplicationDetails_Search_Temp: Applicationdetails = new Applicationdetails();
   ApplicationDetails_: Applicationdetails = new Applicationdetails();
   ApplicationDetails_Data: Applicationdetails[];
+  MasterCourse_Id:number;
   Course_Link_Button: boolean = false;
   Save_Student_Approved_Status: number;
   ApplicationDocument_Array: Applicationdocument[];
@@ -736,7 +741,18 @@ Process_Details_Data: Process_Type[];
   Application_Fees_Tab_Save: boolean = false;
   Application_Fees_Tab_Delete: boolean = false;
   Application_Fees_Tab_View: boolean = false;
+  Course_Fees: Course_Fees = new Course_Fees();
+  Course_Fees_Data: Course_Fees[]
 
+   
+  Course_Type: Course_Type = new Course_Type;
+  Course_Type_Search: Course_Type = new Course_Type;
+  Course_Type_Temp: Course_Type = new Course_Type;
+  Course_Type_Data: Course_Type[]
+
+  Fees_Type: Fees_Type = new Fees_Type;
+  Fees_Type_Temp: Fees_Type = new Fees_Type;
+  Fees_Type_Data: Fees_Type[]
   backbutton_view: boolean = false;
 
   stu_id_tab = 0;
@@ -1067,7 +1083,10 @@ Process_Details_Data: Process_Type[];
   German_Course_: Course = new Course();
   German_Course_Temp: Course = new Course();
   German_Course_Data: Course[];
-
+  Navbar_Leads_View:number;
+	Navbar_Leads_View_Menus:number
+  Name_Show:string;
+  Course_Id: number;
 
   constructor(
     public Batch_Service_: Batch_Service,
@@ -1078,6 +1097,32 @@ Process_Details_Data: Process_Type[];
     public dialogBox: MatDialog
   ) { }
   ngOnInit() {
+    debugger
+    this.Login_User = Number(localStorage.getItem("Login_User"));
+    
+		this.Navbar_Leads_View = Number(localStorage.getItem("Navbar_Leads_View"));
+		// this.Navbar_Leads_View_t = Number(localStorage.getItem("Navbar_Leads_View"));
+		localStorage.getItem('Nav_Title')
+		this.Navbar_Leads_View_Menus= Number(localStorage.getItem('Navbar_Leads_View_Menus'));
+
+		this.Navbar_Leads_View = Number(localStorage.getItem("Navbar_Leads_View"));
+		debugger
+		if (this.Navbar_Leads_View_Menus == 1) {
+			this.Name_Show = 'Study';
+			// this.Nav_Title_Show = true;
+			localStorage.setItem('Navbar_Leads_View', '1');
+		} else if (this.Navbar_Leads_View_Menus == 2) {
+			this.Name_Show = 'Job';
+			// this.Nav_Title_Show = true;
+			localStorage.setItem('Navbar_Leads_View', '2');
+		}  
+
+// alert(this.Navbar_Leads_View)
+debugger
+		if(this.Navbar_Leads_View==1)
+		{this.Name_Show='Student'}
+		else if(this.Navbar_Leads_View==2)
+		{this.Name_Show='Student'}
     debugger
     this.Student_Id_localStorage = localStorage.getItem("Student_Id");
     this.User_Mobile = Number(localStorage.getItem("Mobile"));
@@ -1905,6 +1950,12 @@ Process_Details_Data: Process_Type[];
           this.Mastercourse_Temp.MasterCourse_Name = "Select";
           this.Mastercourse_Data.unshift(this.Mastercourse_Temp);
           this.Mastercourse_ = this.Mastercourse_Data[0];
+
+          this.Course_Data = Rows[1];
+          this.Course_Temp.Course_Id = 0;
+          this.Course_Temp.Course_Name = "Select";
+          this.Course_Data.unshift(this.Course_Temp);
+          this.Course_ = this.Course_Data[0];
           this.issLoading = false;
         }
       },
@@ -2546,8 +2597,8 @@ Process_Details_Data: Process_Type[];
     if (this.Branch_Data != null && this.Branch_Data != undefined)
       this.Offline_Branch_ = this.Branch_Data[0];
 
-    if (this.Enquiry_For_Data != null && this.Enquiry_For_Data != undefined)
-      this.Enquiry_For_ = this.Enquiry_For_Data[0];
+    // if (this.Enquiry_For_Data != null && this.Enquiry_For_Data != undefined)
+    //   this.Enquiry_For_ = this.Enquiry_For_Data[0];
 
 
     if (this.Processing_Agent_Data != null && this.Processing_Agent_Data != undefined)
@@ -2915,6 +2966,7 @@ Process_Details_Data: Process_Type[];
     this.Search_Student();
   }
   Search_Student() {
+    debugger
     var value = 1,
       Register_Value = 2,
       Status_Id = 0,
@@ -2990,18 +3042,18 @@ Process_Details_Data: Process_Type[];
         batch_Id = this.Batch_Student_Search.Batch_Id;
 
 
+        debugger
+    // if (
+    //   this.Enquiry_For_ != undefined &&
+    //   this.Enquiry_For_ != null
+    // )
+    //   if (
+    //     this.Enquiry_For_.Enquiry_For_Id != undefined &&
+    //     this.Enquiry_For_.Enquiry_For_Id != null
+    //   )
+        Enquiry_For_Id = this.Navbar_Leads_View;
 
-    if (
-      this.Enquiry_For_ != undefined &&
-      this.Enquiry_For_ != null
-    )
-      if (
-        this.Enquiry_For_.Enquiry_For_Id != undefined &&
-        this.Enquiry_For_.Enquiry_For_Id != null
-      )
-        Enquiry_For_Id = this.Enquiry_For_.Enquiry_For_Id;
-
-
+        debugger
 
     if (this.Search_Status != undefined && this.Search_Status != null)
       if (
@@ -3276,8 +3328,8 @@ Process_Details_Data: Process_Type[];
       this.Student_.Gender = this.Gender_.Gender_Id;
       // this.Student_.District_Id = this.District_.State_District_Id;
       // this.Student_.District_Name = this.District_.District_Name;
-      // this.Student_.Course_Id = this.Course_Student.Course_Id;
-      // this.Student_.Course_Name = this.Course_Student.Course_Name;
+      this.Student_.Course_Id = this.Course_.Course_Id;
+      this.Student_.Course_Name = this.Course_.Course_Name;
       this.Student_.Qualification_Id = this.Qualification_.Qualification_Id;
       this.Student_.Qualification_Name = this.Qualification_.Qualification_Name;
       this.Student_.Enquiry_Source = this.Enquiry_Source_.Enquiry_Source_Id;
@@ -3286,8 +3338,8 @@ Process_Details_Data: Process_Type[];
       this.Student_.MasterCourse_Name = this.Mastercourse_.MasterCourse_Name;
 
 
-      this.Student_.Enquiry_For = this.Enquiry_For_.Enquiry_For_Id;
-      this.Student_.Enquiry_For_Name = this.Enquiry_For_.Enquiry_For_Name;
+      this.Student_.Enquiry_For = this.Navbar_Leads_View;
+      // this.Student_.Enquiry_For_Name = this.Enquiry_For_.Enquiry_For_Name;
 
       this.Student_.Admission_Branch_Id = this.Admission_Branch_.Agent_Id;
       this.Student_.Admission_Branch = this.Admission_Branch_.Agent_Name;
@@ -3380,22 +3432,22 @@ Process_Details_Data: Process_Type[];
       }
 
        
-      if (
-        this.Enquiry_For_ == undefined ||
-        this.Enquiry_For_ == null ||
-        this.Enquiry_For_.Enquiry_For_Id == undefined ||
-        this.Enquiry_For_.Enquiry_For_Id == 0
-      ) {
-        const dialogRef = this.dialogBox.open(DialogBox_Component, {
-          panelClass: "Dialogbox-Class",
-          data: { Message: "Select Enquired For", Type: "3" },
-        });
-        return;
-      }
+      // if (
+      //   this.Enquiry_For_ == undefined ||
+      //   this.Enquiry_For_ == null ||
+      //   this.Enquiry_For_.Enquiry_For_Id == undefined ||
+      //   this.Enquiry_For_.Enquiry_For_Id == 0
+      // ) {
+      //   const dialogRef = this.dialogBox.open(DialogBox_Component, {
+      //     panelClass: "Dialogbox-Class",
+      //     data: { Message: "Select Enquired For", Type: "3" },
+      //   });
+      //   return;
+      // }
 
 
 
-      if (
+      if  (
         this.Student_.Student_Name == undefined ||
         this.Student_.Student_Name == null ||
         this.Student_.Student_Name == ""
@@ -3407,15 +3459,15 @@ Process_Details_Data: Process_Type[];
         return;
       }
 
-      if (
-        this.Mastercourse_ == undefined ||
-        this.Mastercourse_ == null ||
-        this.Mastercourse_.MasterCourse_Id == undefined ||
-        this.Mastercourse_.MasterCourse_Id == 0
-      ) {
+      if (this.Navbar_Leads_View == 1 && (
+        this.Course_ == undefined ||
+        this.Course_ == null ||
+        this.Course_.Course_Id == undefined ||
+        this.Course_.Course_Id == 0
+      )) {
         const dialogRef = this.dialogBox.open(DialogBox_Component, {
           panelClass: "Dialogbox-Class",
-          data: { Message: "Select Master Course", Type: "3" },
+          data: { Message: "Select    Course", Type: "3" },
         });
         return;
       }
@@ -3431,21 +3483,21 @@ Process_Details_Data: Process_Type[];
         return;
       }
 
-      if(this.Enquiry_For_.Enquiry_For_Id!=2)
-      {
-        if (
-          this.Mode_Of_Study_.Mode_Of_Study_Id == undefined ||
-          this.Mode_Of_Study_.Mode_Of_Study_Id == null ||
-          this.Mode_Of_Study_.Mode_Of_Study_Id == 0 || this.Mode_Of_Study_ ==null || this.Mode_Of_Study_ ==undefined
-        ) {
-          const dialogRef = this.dialogBox.open(DialogBox_Component, {
-            panelClass: "Dialogbox-Class",
-            data: { Message: "Select Mode Of Study", Type: "3" },
-          });
-          return;
-        }
+      // if(this.Enquiry_For_.Enquiry_For_Id!=2)
+      // {
+      //   if (
+      //     this.Mode_Of_Study_.Mode_Of_Study_Id == undefined ||
+      //     this.Mode_Of_Study_.Mode_Of_Study_Id == null ||
+      //     this.Mode_Of_Study_.Mode_Of_Study_Id == 0 || this.Mode_Of_Study_ ==null || this.Mode_Of_Study_ ==undefined
+      //   ) {
+      //     const dialogRef = this.dialogBox.open(DialogBox_Component, {
+      //       panelClass: "Dialogbox-Class",
+      //       data: { Message: "Select Mode Of Study", Type: "3" },
+      //     });
+      //     return;
+      //   }
 
-      }
+      // }
       else
       {
         this.Mode_Of_Study_.Mode_Of_Study_Id=0
@@ -3639,7 +3691,9 @@ Process_Details_Data: Process_Type[];
       Student: this.Fill_Student(),
 
       Followup: this.Fill_Followup(),
+      Course_data:this.Course_Fees_Data
     };
+      
     if (Main_Array.Student == null && Main_Array.Followup == null) {
       const dialogRef = this.dialogBox.open(DialogBox_Component, {
         panelClass: "Dialogbox-Class",
@@ -4778,7 +4832,7 @@ Process_Details_Data: Process_Type[];
 
   Edit_Student(Student_Id_Temp, Mail_Status_, Status, index) {
 
-     
+     debugger
     //alert(Mail_Status_)
     // this.Clr_Student();
     this.Student_EditIndex = index;
@@ -4841,12 +4895,13 @@ Process_Details_Data: Process_Type[];
     // this.Save_Agent_.Client_Accounts_Id=Student_e.Agent_Id;
     this.issLoading = true;
     //Student_e.Student_Id
+    debugger
     this.Student_Service_.Get_Student(Student_Id_Temp).subscribe(
       (Rows) => {
-         
+        debugger
         this.Student_ = Object.assign({}, Rows[0][0]);
         console.log(Rows[0][0]);
-
+        this.Course_Fees_Data=Rows[1];
         this.Student_Name = this.Student_.Student_Name;
         this.Registration = this.Student_.Registered;
          
@@ -4898,13 +4953,13 @@ Process_Details_Data: Process_Type[];
 
 
          
-        for (var i = 0; i < this.Enquiry_For_Data.length; i++) {
-          if (
-            this.Student_.Enquiry_For_Id ==
-            this.Enquiry_For_Data[i].Enquiry_For_Id
-          )
-            this.Enquiry_For_ = this.Enquiry_For_Data[i];
-        }
+        // for (var i = 0; i < this.Enquiry_For_Data.length; i++) {
+        //   if (
+        //     this.Student_.Enquiry_For_Id ==
+        //     this.Enquiry_For_Data[i].Enquiry_For_Id
+        //   )
+        //     this.Enquiry_For_ = this.Enquiry_For_Data[i];
+        // }
 
 
 
@@ -4978,10 +5033,10 @@ Process_Details_Data: Process_Type[];
         }
 
 
-        for (var i = 0; i < this.Enquiry_For_Data.length; i++) {
-          if (this.Student_.Enquiry_For == this.Enquiry_For_Data[i].Enquiry_For_Id)
-            this.Enquiry_For_ = this.Enquiry_For_Data[i];
-        }
+        // for (var i = 0; i < this.Enquiry_For_Data.length; i++) {
+        //   if (this.Student_.Enquiry_For == this.Enquiry_For_Data[i].Enquiry_For_Id)
+        //     this.Enquiry_For_ = this.Enquiry_For_Data[i];
+        // }
 
         this.State_District_Temp.State_District_Id = this.Student_.District_Id;
         this.State_District_Temp.District_Name = this.Student_.District_Name;
@@ -5970,6 +6025,68 @@ Process_Details_Data: Process_Type[];
     );
   }
 
+  Mastercourse_Instalment_Change(Course_) {
+    debugger
+    console.log(Course_);
+    
+      this.Course_.Course_Id= Course_.Course_Id;
+  this.Student_Fees_Installment_Master_Data = [];
+    this.Student_Fees_Installment_Master_Temp = new Student_Fees_Installment_Master();
+    // this.Student_Fees_Installment_Master_Temp.Course_Fees_Id = 1;
+    // this.Student_Fees_Installment_Master_Temp.Fees_Type_Id = 1;
+    this.Student_Fees_Installment_Master_Temp.Student_Fees_Installment_Details = [];
+
+    debugger
+   this.Course_Id=this.Course_.Course_Id
+    this.Student_Fees_Installment_Master_Data.push(
+      Object.assign({}, this.Student_Fees_Installment_Master_Temp)
+    );
+    // this.date_Temp = this.Student_Course_.Start_Date;
+    debugger
+    this.Get_Mastercourse_Instalment_Details();
+    // this.Load_Instalmentfn();
+  }
+
+  Get_Mastercourse_Instalment_Details() {debugger
+     
+    this.Student_Service_.Get_Mastercourse_Instalment_Details(
+       
+      this.Course_Id
+    ).subscribe(
+      (Rows) => {
+        debugger
+        if (Rows != null) {
+          this.Student_Fees_Installment_Details_Data = Rows[0];
+          // this.date_Temp = new Date(
+          //   moment(this.Student_Course_.Start_Date).format("YYYY-MM-DD")
+          // );
+
+          for ( var j = 0; j < this.Student_Fees_Installment_Details_Data.length; j++ ) {
+            // this.date_Temp = this.Add_Date(
+            //   new Date(
+            //     moment(this.Student_Course_.Start_Date).format("YYYY-MM-DD")
+            //   ),
+            //   Number(
+            //     this.Student_Fees_Installment_Details_Data[j].Instalment_Period
+            //   )
+            // );
+            // this.Student_Fees_Installment_Details_Data[j].Instalment_Date = this.date_Temp;
+         
+        // this.Is_Associate= Number( this.Student_Fees_Installment_Details_Data[j].Is_Associate ) 
+        
+        
+        
+          }
+
+          this.issLoading = false;
+        }
+      },
+      (Rows) => {
+        this.issLoading = false;
+      }
+    );
+  }
+   
   Feesinstallment_change() { }
 
   Save_Student_Course() {
@@ -6700,7 +6817,28 @@ else
     );
   }
 
-
+  Clr_Course_Fees()
+  {
+ this.Course_Fees.Course_Fees_Id=0;
+ this.Course_Fees.Course_Id=0;
+ this.Course_Fees.Amount=0;
+ // this.Course_Fees.Is_Associat
+ this.Course_Fees.Tax=0;
+ this.Course_Fees.Is_Agent=false;
+ 
+ this.Course_Fees.Is_Associate=false;
+ this.Course_Fees.No_Of_Instalment="";
+ this.Course_Fees.Instalment_Period=0;
+ 
+ if (this.Fees_Type_Data != undefined && this.Fees_Type_Data != null)
+     this.Fees_Type = this.Fees_Type_Data[0];
+ 
+ }
+ Delete_Course_Fees(Course_Fees:Course_Fees,index)
+ {
+     this.Course_Fees_Data.splice(index, 1);
+  this.Clr_Course_Fees();
+ }
 
   Load_Exam() {
     this.issLoading = true;
@@ -7484,6 +7622,25 @@ debugger
       }
     );
   }
+  Edit_Course_Fees(Course_Fees_e:Course_Fees,index)
+{   debugger
+    this.Course_Fees_Index=index;
+    this.Course_Fees = Object.assign({}, Course_Fees_e); 
+
+    // if (this.Fees_Type_Data != undefined && this.Fees_Type_Data != null)
+    //     this.Fees_Type = this.Fees_Type_Data[0];
+
+    for (var i = 0; i < this.Fees_Type_Data.length; i++) {
+        if (this.Fees_Type_Data[i].Fees_Type_Id == this.Course_Fees.Fees_Type_Id) {
+            this.Fees_Type = this.Fees_Type_Data[i];
+        }
+    }
+
+
+    // if(this.)
+
+
+}
 
   Search_Interview_Report_Tab() {
     var look_In_Date_Value = 0;
@@ -9876,6 +10033,18 @@ debugger
     this.Course_Service_.Load_Course_DropDowns().subscribe(Rows => {
 
       if (Rows != null) {
+        this.Course_Type_Data = Rows[0];
+        this.Course_Type_Temp.Course_Type_Id = 0;
+        this.Course_Type_Temp.Course_Type_Name = "Select";
+        this.Course_Type_Data.unshift(this.Course_Type_Temp);
+        this.Course_Type = this.Course_Type_Data[0]
+        this.Course_Type_Search = this.Course_Type_Data[0]
+
+        this.Fees_Type_Data = Rows[1];
+        this.Fees_Type_Temp.Fees_Type_Id = 0;
+        this.Fees_Type_Temp.Fees_Type_Name = "Select";
+        this.Fees_Type_Data.unshift(this.Fees_Type_Temp);
+        this.Fees_Type = this.Fees_Type_Data[0]
 
         this.Intake_Mode_Data = Rows[4];
         this.Intake_Mode_Temp.Intake_Id = 0;
@@ -9911,7 +10080,57 @@ debugger
   }
 
 
-
+  Plus_Course_Fees(event)
+  {
+  
+      debugger
+      if (this.Fees_Type.Fees_Type_Id == undefined || this.Fees_Type.Fees_Type_Id == null || this.Fees_Type.Fees_Type_Id == 0 || this.Fees_Type==null )
+      {
+          const dialogRef = this.dialogBox.open(DialogBox_Component, { panelClass: 'Dialogbox-Class', data: { Message:'Select Fees ',Type:"3"}});
+          return
+      }
+      else if (this.Course_Fees.Amount == undefined || this.Course_Fees.Amount == null || this.Course_Fees.Amount==0 )
+      {
+          const dialogRef = this.dialogBox.open(DialogBox_Component, { panelClass: 'Dialogbox-Class', data: { Message:'Enter the Amount',Type:"3"}});
+          return
+      } 
+      // else if (this.Course_Fees.Tax == undefined || this.Course_Fees.Tax == null)
+      // {
+      //     const dialogRef = this.dialogBox.open(DialogBox_Component, { panelClass: 'Dialogbox-Class', data: { Message:'Enter the Tax',Type:"3"}});
+      //     return
+      // } 
+      // else if (this.Course_Fees.No_Of_Instalment == undefined || this.Course_Fees.No_Of_Instalment == null || this.Course_Fees.No_Of_Instalment=="" )
+      // {
+      //     const dialogRef = this.dialogBox.open(DialogBox_Component, { panelClass: 'Dialogbox-Class', data: { Message:'Enter the No Of Instalment',Type:"3"}});
+      //     return
+      // } 
+      
+      else if (this.Course_Fees.Instalment_Period == undefined || this.Course_Fees.Instalment_Period == null  )
+      {
+          const dialogRef = this.dialogBox.open(DialogBox_Component, { panelClass: 'Dialogbox-Class', data: { Message:'Enter the Instalment Period',Type:"3"}});
+          return
+      } 
+  
+      if (this.Course_Fees_Data == undefined)
+          this.Course_Fees_Data = [];
+      this.Course_Fees.Fees_Type_Id = this.Fees_Type.Fees_Type_Id
+      this.Course_Fees.Fees_Type_Name = this.Fees_Type.Fees_Type_Name
+      this.Course_Fees.Tax=0
+  
+  
+  
+   
+  
+  
+      if (this.Course_Fees_Index >= 0) {
+          this.Course_Fees_Data[this.Course_Fees_Index] = Object.assign({}, this.Course_Fees)// this.Sales_Details_;
+          }
+          else {
+          this.Course_Fees_Data.push(Object.assign({}, this.Course_Fees));
+          }
+      this.Course_Fees_Index=-1;
+      this.Clr_Course_Fees();
+  }
   Search_Country_Typeahead(event: any) {
     var Value = "";
     if (event.target.value == "") Value = "";

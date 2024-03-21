@@ -573,7 +573,7 @@
 	>
 	<!-- <mat-icon  style="font-size: 32px;cursor: pointer;float: right;" class="text-red small" (click)="Close_Click()" >close</mat-icon> -->
 	
-	<div class="form-row mb-2">
+	<!-- <div class="form-row mb-2">
 	<label
 	class="col-md-1 col-sm-1 col-form-label text-sm-right"
 	>Enquiry Source<span
@@ -600,8 +600,8 @@
 	</option>
 	</select>
 	</div>
-	<div class="col-md-1 col-sm-1"></div>
-	<label
+	<div class="col-md-1 col-sm-1"></div> -->
+	<!-- <label
 	class="col-md-1 col-sm-1 col-form-label text-sm-right"
 	>Enquired For<span
 	style="
@@ -611,8 +611,8 @@
 	"
 	>*</span
 	></label
-	>
-	<div class="col-md-4 col-sm-4 mb-1">
+	> -->
+	<!-- <div class="col-md-4 col-sm-4 mb-1">
 	<select
 	[(ngModel)]="Enquiry_For_"
 	name="Student_.Enquiry_For"
@@ -626,9 +626,9 @@
 	{{ Enquiry_For.Enquiry_For_Name }}
 	</option>
 	</select>
-	</div>
+	</div> -->
 	
-	</div>
+	<!-- </div> -->
 
 
 
@@ -692,9 +692,9 @@
 	/>
 	</div>
 	<div class="col-md-1 col-sm-1"></div>
-	<label
+	<label  
 		class="col-md-1 col-sm-1 col-form-label text-sm-right"
-		>Master Course<span
+		>  Enquiry Source<span
 		style="
 		color: #ef071e;
 		font-size: 22px;
@@ -703,20 +703,21 @@
 		>*</span
 		></label
 		>
-		<div class="col-md-4 col-sm-4 mb-1">
-		<select
-		[(ngModel)]="Mastercourse_"
-		name="Mastercourse_"
-		required
-		class="form-control p-0 pl-1"
-		>
-		<option
-		*ngFor="let Mastercourse_T of Mastercourse_Data"
-		[ngValue]="Mastercourse_T"
-		>
-		{{ Mastercourse_T.MasterCourse_Name }}
-		</option>
-		</select>
+		<div class="col-md-4 col-sm-4 mb-1"  >
+			<select
+	[(ngModel)]="Enquiry_Source_"
+	name="Student_.Enquiry_Source"
+	required
+	class="form-control p-0 pl-1"
+	>
+	<option
+	*ngFor="let Enquiry_Source of Enquiry_Source_Data"
+	[ngValue]="Enquiry_Source"
+	>
+	{{ Enquiry_Source.Enquiry_Source_Name }}
+	</option>
+	</select>
+		 
 		</div>
 	
 	</div>
@@ -1432,6 +1433,63 @@
 		</select>
 		</div>
 		
+	<div class="col-md-1 col-sm-1"></div>
+	<label *ngIf="Navbar_Leads_View == 1"
+		class="col-md-1 col-sm-1 col-form-label text-sm-right"
+		>  Course<span
+		style="
+		color: #ef071e;
+		font-size: 22px;
+		vertical-align: -webkit-baseline-middle;
+		"
+		>*</span
+		></label
+		>
+		<div class="col-md-4 col-sm-4 mb-1" *ngIf="Navbar_Leads_View == 1">
+			 
+		<select
+		[(ngModel)]="Course_"
+		(ngModelChange)="Mastercourse_Instalment_Change(Course_)"
+		name="Course_"   
+		required  
+		class="form-control p-0 pl-1"
+		>
+		<option
+		*ngFor="let Course_T of Course_Data"
+		[ngValue]="Course_T"
+		>
+		{{ Course_T.Course_Name }}
+		</option>
+		</select>
+		</div>
+
+
+
+
+		<label *ngIf="Navbar_Leads_View == 2"
+		class="col-md-1 col-sm-1 col-form-label text-sm-right"
+		>  Course<span
+		style="
+		color: #ef071e;
+		font-size: 22px;
+		vertical-align: -webkit-baseline-middle;
+		"
+		>*</span
+		></label
+		>
+		<div class="col-md-4 col-sm-4 mb-1" *ngIf="Navbar_Leads_View == 2">
+			 
+			<input
+			type="text"
+			[(ngModel)]="Student_.Course_details"
+			name="Student_.Course_details"
+			class="form-control"
+			placeholder=""
+			maxlength="300"
+			/>
+		</div>
+		
+		
 		</div>
 	
 
@@ -1505,6 +1563,73 @@
 	</div> -->
 	</div>
 	</div>
+
+	<div *ngIf="Navbar_Leads_View == 1" class="table-responsive" style="overflow-y: scroll;" [style.height.px]="myInnerHeightTwo">
+        <table class="table table-hover table-for-sale-search-section-diary">
+        <thead class="thead">
+        <th>Fees</th>   
+        <th>Amount</th>    
+        
+        <th>Installment Period</th>
+     
+        </thead>
+        <tbody class="bk_tb_bg" *ngFor="let Course_Fees_ of Student_Fees_Installment_Details_Data; let i = index">
+        <td class="td-padding">{{Course_Fees_["Fees_Type_Name"]}}</td>
+        <td class="td-padding">{{Course_Fees_["Amount"]}}</td> 
+        <td class="td-padding">{{Course_Fees_["Instalment_Period"]}}</td> 
+           
+        </tbody>
+        </table>
+        </div>
+		<div class="form-row" *ngIf="Navbar_Leads_View == 2" style="padding-left: 10px;">
+			<label class="col-md-0 col-sm-0 col-form-label text-sm-right">Fees Type<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+			<div class="col-md-2 col-sm-2 mb-2">
+			<select [(ngModel)]="Fees_Type" id="Fees_Type" name="Fees_Type" required class="form-control p-0 pl-1">
+			<option *ngFor="let Fees_Type_ of Fees_Type_Data" [ngValue]="Fees_Type_">{{Fees_Type_.Fees_Type_Name}}
+			</option>
+			</select>                           
+			</div>
+			<label class="col-md-0 col-sm-0 col-form-label text-sm-right">Amount<span style="color:#ef071e; font-size: 22px; vertical-align: -webkit-baseline-middle;">*</span></label>
+			<div class="col-md-2 col-sm-2 mb-2">
+			<input type="number" class="form-control" [(ngModel)]="Course_Fees.Amount"  name="Course_Fees.Amount"  placeholder="">
+			</div>
+			 
+			<label class="col-md-0 col-sm-0 col-form-label text-sm-right">Installment  Period</label>
+			<div class="col-md-1 col-sm-2 mb-2">
+			<input type="number" class="form-control"   [(ngModel)]="Course_Fees.Instalment_Period"  name="Course_Fees.Instalment_Period" placeholder="">
+			</div>
+ 
+			<div class="col-md-1" class="addbutton-style addbutton-style-new"> 
+				<button  type="submit" (click)="Plus_Course_Fees($event)"  class="other-button-style ">Add</button>     
+			</div>
+			</div>
+			<div *ngIf="Navbar_Leads_View == 2"  class="table-responsive" style="overflow-y: scroll;" [style.height.px]="myInnerHeightTwo">
+				<table class="table table-hover table-for-sale-search-section-diary">
+				<thead class="thead">
+				<th>Fees</th>   
+				<th>Amount</th>    
+				<!-- <th>Tax</th>    -->
+				<!-- <th>No Of Instalment</th> -->
+				<th>Installment Period</th>
+				<th [hidden]="Course_Edit==false">Edit</th>
+				<th [hidden]="Course_Delete==false">Delete</th>
+				</thead>
+				<tbody class="bk_tb_bg" *ngFor="let Course_Fees_ of Course_Fees_Data; let i = index">
+				<td class="td-padding">{{Course_Fees_["Fees_Type_Name"]}}</td>
+				<td class="td-padding">{{Course_Fees_["Amount"]}}</td>
+				<!-- <td class="td-padding">{{Course_Fees_["Tax"]}}</td> -->
+				<!-- <td class="td-padding">{{Course_Fees_["No_Of_Instalment"]}}</td>        -->
+				<td class="td-padding">{{Course_Fees_["Instalment_Period"]}}</td> 
+					<td  class="td-padding">
+					<span class="icon-background2 mr-1"     (click)="Edit_Course_Fees(Course_Fees_,i)" > <mat-icon class="text-green small" >edit</mat-icon></span>
+					</td>
+					<td class="td-padding"> 
+					<span class="icon-background3 mr-1"   (click)="Delete_Course_Fees(Course_Fees_,i)"  > <mat-icon class="text-red small" >close</mat-icon></span>
+					</td>
+				</tbody>
+				</table>
+				</div>
+
 	</div>
 	</form>
 	</div>

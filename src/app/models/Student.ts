@@ -14,6 +14,7 @@ DOB:string;
 Gender:number;
 State_Id:number;
 District_Id:number;
+Course_details:string;
 District_Name:string;
 Course_Id:number;
 Course_Name:string;

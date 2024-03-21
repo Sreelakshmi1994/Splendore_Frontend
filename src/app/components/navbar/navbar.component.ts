@@ -219,7 +219,7 @@ debugger
 			this.router.navigateByUrl('/Student');
 			// localStorage.setItem("Navbar_Leads_View",'1');
 			
-			// localStorage.setItem("Navbar_Leads_View_Menus","1");
+			localStorage.setItem("Navbar_Leads_View_Menus","1");
 			let currentUrl = this.router.url;
 			this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
 				this.router.navigate(['/Student']);
@@ -238,7 +238,7 @@ debugger
 			this.router.navigateByUrl('/Student');
 			// localStorage.setItem("Navbar_Leads_View",'2');
 		
-			// localStorage.setItem("Navbar_Leads_View_Menus","2");
+			localStorage.setItem("Navbar_Leads_View_Menus","2");
 			let currentUrl = this.router.url;
 			this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
 				this.router.navigate(['/Student']);
