@@ -1100,12 +1100,10 @@ Process_Details_Data: Process_Type[];
     debugger
     this.Login_User = Number(localStorage.getItem("Login_User"));
     
-		this.Navbar_Leads_View = Number(localStorage.getItem("Navbar_Leads_View"));
 		// this.Navbar_Leads_View_t = Number(localStorage.getItem("Navbar_Leads_View"));
 		localStorage.getItem('Nav_Title')
 		this.Navbar_Leads_View_Menus= Number(localStorage.getItem('Navbar_Leads_View_Menus'));
-
-		this.Navbar_Leads_View = Number(localStorage.getItem("Navbar_Leads_View"));
+ 
 		debugger
 		if (this.Navbar_Leads_View_Menus == 1) {
 			this.Name_Show = 'Study';
@@ -1116,6 +1114,8 @@ Process_Details_Data: Process_Type[];
 			// this.Nav_Title_Show = true;
 			localStorage.setItem('Navbar_Leads_View', '2');
 		}  
+    
+		this.Navbar_Leads_View = Number(localStorage.getItem("Navbar_Leads_View"));
 
 // alert(this.Navbar_Leads_View)
 debugger
@@ -1471,6 +1471,7 @@ debugger
     this.Load_Exam();
     this.Lod_ExamType();
     this.Student_Course_.End_Date_Check = false;
+    this.Search_Lead_button();
 
     //alert("2")
   }
@@ -2505,6 +2506,7 @@ debugger
     this.Student_.Student_Id = 0;
     this.Student_.Student_Name = "";
     this.Student_.Address1 = "";
+    this.Student_.Course_details = "";
     this.Student_.Address2 = "";
     this.Student_.Address3 = "";
     this.Student_.Address4 = "";
@@ -3483,21 +3485,21 @@ debugger
         return;
       }
 
-      // if(this.Enquiry_For_.Enquiry_For_Id!=2)
-      // {
-      //   if (
-      //     this.Mode_Of_Study_.Mode_Of_Study_Id == undefined ||
-      //     this.Mode_Of_Study_.Mode_Of_Study_Id == null ||
-      //     this.Mode_Of_Study_.Mode_Of_Study_Id == 0 || this.Mode_Of_Study_ ==null || this.Mode_Of_Study_ ==undefined
-      //   ) {
-      //     const dialogRef = this.dialogBox.open(DialogBox_Component, {
-      //       panelClass: "Dialogbox-Class",
-      //       data: { Message: "Select Mode Of Study", Type: "3" },
-      //     });
-      //     return;
-      //   }
+      if(this.Navbar_Leads_View==1)
+      {
+        if (
+          this.Mode_Of_Study_.Mode_Of_Study_Id == undefined ||
+          this.Mode_Of_Study_.Mode_Of_Study_Id == null ||
+          this.Mode_Of_Study_.Mode_Of_Study_Id == 0 || this.Mode_Of_Study_ ==null || this.Mode_Of_Study_ ==undefined
+        ) {
+          const dialogRef = this.dialogBox.open(DialogBox_Component, {
+            panelClass: "Dialogbox-Class",
+            data: { Message: "Select Mode Of Study", Type: "3" },
+          });
+          return;
+        }
 
-      // }
+      }
       else
       {
         this.Mode_Of_Study_.Mode_Of_Study_Id=0
@@ -5031,6 +5033,35 @@ debugger
           if (this.Student_.State_Id == this.State_Data[i].State_Id)
             this.State_ = this.State_Data[i];
         }
+        debugger
+        for (var i = 0; i < this.Course_Data.length; i++) {
+          if (this.Student_.Course_Id == this.Course_Data[i].Course_Id)
+            this.Course_ = this.Course_Data[i];
+          }
+          debugger
+          console.log(this.Course_);
+          console.log(this.Course_Id);
+          
+          
+            this.Course_Id= this.Course_.Course_Id
+    this.Student_Service_.Get_Mastercourse_Instalment_Details(
+       
+      this.Course_Id
+    ).subscribe(
+      (Rows) => {
+        debugger
+        if (Rows != null) {
+          this.Student_Fees_Installment_Details_Data = Rows[0];
+         
+
+          this.issLoading = false;
+        }
+      },
+      (Rows) => {
+        this.issLoading = false;
+      }
+    );
+        
 
 
         // for (var i = 0; i < this.Enquiry_For_Data.length; i++) {
@@ -5042,9 +5073,9 @@ debugger
         this.State_District_Temp.District_Name = this.Student_.District_Name;
         this.District_ = Object.assign(this.State_District_Temp);
 
-        this.Course_Temp.Course_Id = this.Student_.Course_Id;
-        this.Course_Temp.Course_Name = this.Student_.Course_Name;
-        this.Course_Student = Object.assign(this.Course_Temp);
+        // this.Course_Temp.Course_Id = this.Student_.Course_Id;
+        // this.Course_Temp.Course_Name = this.Student_.Course_Name;
+        // this.Course_Student = Object.assign(this.Course_Temp);
 
          
 

@@ -1359,7 +1359,7 @@
 
 	<div class="form-row mb-2">
 		
-		<label *ngIf="Enquiry_For_.Enquiry_For_Id!=2" 
+		<label *ngIf="Navbar_Leads_View==1" 
 			class="col-md-1 col-sm-1 col-form-label text-sm-right"
 			> Mode Of Study<span
 			style="
@@ -1370,7 +1370,7 @@
 			>*</span
 			></label
 			>
-			<div class="col-md-4 col-sm-4 mb-1" *ngIf="Enquiry_For_.Enquiry_For_Id!=2" >
+			<div class="col-md-4 col-sm-4 mb-1" *ngIf="Navbar_Leads_View==1"  >
 			<select
 			[(ngModel)]="Mode_Of_Study_"
 			name="Student_.Mode_Of_Study_"
@@ -7876,8 +7876,8 @@ Register Candidate
 		
 		</td>
 
-
-	<td class="col-md-4">{{ Student_Data_d["Course_Name"] }}</td>
+		<td class="col-md-4" *ngIf="Navbar_Leads_View==1">{{ Student_Data_d["Course_Name"] }}</td>
+	<td class="col-md-4" *ngIf="Navbar_Leads_View==2">{{ Student_Data_d["Course_details"] }}</td>
 	<td class="col-md-4">{{ Student_Data_d["Batch_Name"] }}</td>
 	<td>
 	<button

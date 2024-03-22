@@ -81,7 +81,7 @@ debugger
 			postData.append("Enquiry_Source", Main_Array.Student.Enquiry_Source);
 			// postData.append("State_Id", Main_Array.Student.State_Id);
 			postData.append("District_Id", Main_Array.Student.District_Id);
-			// postData.append("Course_Id", Main_Array.Student.Course_Id);
+			postData.append("Course_Id", Main_Array.Student.Course_Id);
 			postData.append("Qualification_Id", Main_Array.Student.Qualification_Id);
 			// postData.append("District_Name", Main_Array.Student.District_Name);
 			postData.append("Course_Name", Main_Array.Student.Course_Name);
